@@ -421,9 +421,9 @@ public final class PRMSDispatcher extends JFrame {
         final int dashbarProfileWidth = 801;
         final int dashbarProfileLocationX = 199;
         final int dashbarProfileLocationY = 126;
-        
+
         JPanel dashbarProfile = new JPanel();
-        
+
         // Dashbar Officer Profile Components.
         // Officer Profile Dashbar Name.
         final int officerProfileTextHeight = 30;
@@ -441,7 +441,6 @@ public final class PRMSDispatcher extends JFrame {
         officerProfileText.setText("OFFICER PROFILE");
         officerProfileText.setVisible(true);
 
-        
         // Dashbar Officer Profile (JPanel) Decorations.
         dashbarProfile.setBounds(dashbarProfileLocationX, dashbarProfileLocationY, dashbarProfileWidth, dashbarProfileHeight);
         add(dashbarProfile, new AbsoluteConstraints(dashbarProfileLocationX, dashbarProfileLocationY, dashbarProfileWidth, dashbarProfileHeight));
@@ -449,26 +448,28 @@ public final class PRMSDispatcher extends JFrame {
         dashbarProfile.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
         dashbarProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         dashbarProfile.setVisible(false);
-        
+
         // dOPBackground (JLabel) Declarations.
         final int dOPBackgroundHeight = 568;
         final int dOPBackgroundWidth = 795;
         final int dOPBackgroundLocationX = 3;
         final int dOPBackgroundLocationY = 3;
-        
+
         JLabel dOPBackground = new JLabel();
+
+        // dOPBackground (JLAbel) Decorations.
         dOPBackground.setBounds(dOPBackgroundLocationX, dOPBackgroundLocationY, dOPBackgroundWidth, dOPBackgroundHeight);
         dashbarProfile.add(dOPBackground, new AbsoluteConstraints(dOPBackgroundLocationX, dOPBackgroundLocationY, dOPBackgroundWidth, dOPBackgroundHeight));
         dOPBackground.setForeground(new java.awt.Color(0, 0, 0));
         dOPBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dOPBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        
+
         ImageIcon icon3 = new ImageIcon("src\\res\\carbonbackgound.jpg");
         Image profileBackground = icon3.getImage();
         Image imgScale3 = profileBackground.getScaledInstance(dBHBackground.getWidth(), dBHBackground.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon3 = new ImageIcon(imgScale3);
         dOPBackground.setIcon(scaledIcon3);
-        
+
         // </editor-fold>
         // </editor-fold>
         // </editor-fold>  
@@ -560,16 +561,16 @@ public final class PRMSDispatcher extends JFrame {
                 mainTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
         });
-        
+
         profileTab.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                
+
                 profileTab.setBackground(new java.awt.Color(255, 255, 255));
                 profileTabText.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -580,7 +581,7 @@ public final class PRMSDispatcher extends JFrame {
                 homeTabIndicator.setVisible(false);
                 databaseTabIndicator.setVisible(false);
                 profileTabIndicator.setVisible(true);
-                
+
             }
 
             @Override

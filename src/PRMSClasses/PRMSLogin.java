@@ -6,5 +6,4 @@ public class PRMSLogin {
            PRMSDispatcher Dispatcher = new PRMSDispatcher();
            Dispatcher.setVisible(true);
     }
-    
 }
