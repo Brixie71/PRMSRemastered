@@ -46,6 +46,8 @@ public final class PRMSDispatcher extends JFrame {
         // CENTER POPUP MAIN WINDOW.
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimension.width / 2 - this.getWidth() / 2, dimension.height / 2 - this.getHeight() / 2);
+        
+        // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="<<< JPanel Declarations.">              
         // <editor-fold defaultstate="collapsed" desc="<<< Navigation Bar Components.">
@@ -139,13 +141,14 @@ public final class PRMSDispatcher extends JFrame {
         dBDTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         // Database Tab Text (JLabel) Declarations and Decorations.
-        JLabel mainTabText = new JLabel();
-        mainTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
-        dBDTab.add(mainTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
-        mainTabText.setForeground(new java.awt.Color(255, 255, 255));
-        mainTabText.setFont(new java.awt.Font("Cambria", 1, 14));
-        mainTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mainTabText.setText("Database");
+        JLabel databaseTabText = new JLabel();
+        
+        databaseTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
+        dBDTab.add(databaseTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
+        databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
+        databaseTabText.setFont(new java.awt.Font("Cambria", 1, 14));
+        databaseTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        databaseTabText.setText("Database");
 
         // Database Tab Indicator (JPanel) Declarations.
         final int databaseTabIndicatorHeight = 46;
@@ -198,6 +201,50 @@ public final class PRMSDispatcher extends JFrame {
         profileTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
         profileTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         profileTabIndicator.setVisible(false);
+        
+        // About Software Tab (JPanel) Declarations.
+        
+        final int aboutTabLocationX = 6;
+        final int aboutTabLocationY = 222;
+        
+        JPanel aboutTab = new JPanel();
+        
+        // About Software Tab (JPanel) Decorations.
+        
+        aboutTab.setBounds(aboutTabLocationX, aboutTabLocationY, navigationTabWidth, navigationTabHeight);
+        navigationBar.add(aboutTab, new AbsoluteConstraints(aboutTabLocationX, aboutTabLocationY, navigationTabWidth, navigationTabHeight));
+        aboutTab.setBackground(new java.awt.Color(21, 21, 21));
+        aboutTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        aboutTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        
+        // About Software Tab (JText) Declarations and Decorations.
+        
+        JLabel aboutTabText = new JLabel();
+        
+        aboutTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
+        aboutTab.add(aboutTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
+        aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
+        aboutTabText.setFont(new java.awt.Font("Cambria", 1, 14));
+        aboutTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        aboutTabText.setText("About");
+        
+        // About Software Tab Indicator(JPanel) Declarations.
+        
+        final int aboutTabIndicatorLocationX = 178;
+        final int aboutTabIndicatorLocationY = 2;
+        final int aboutTabIndicatorWidth = 10;
+        final int aboutTabIndicatorHeigth = 46;
+        
+        JPanel aboutTabIndicator = new JPanel();
+        
+        // About Software Tab Indicator (JPanel) Decorations.
+        
+        aboutTabIndicator.setBounds(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth);
+        aboutTab.add(aboutTabIndicator,new AbsoluteConstraints(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth));
+        aboutTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
+        aboutTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        aboutTabIndicator.setVisible(false);
+        
 
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="<<< Title Bar Components.">                     
@@ -395,7 +442,7 @@ public final class PRMSDispatcher extends JFrame {
         dashbarDatabase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
         dashbarDatabase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        // dBMBackground (JLabel) Declaration.
+        // dBDBackground (JLabel) Declaration.
         final int dBDBackgroundHeight = 568;
         final int dBDBackgroundWidth = 795;
         final int dBDBackgroundLocationX = 3;
@@ -403,7 +450,7 @@ public final class PRMSDispatcher extends JFrame {
 
         JLabel dBDBackground = new JLabel();
 
-        // dBHBackground (JLabel) Decorations.
+        // dBDBackground (JLabel) Decorations.
         dBDBackground.setBounds(dBHBackgroundLocationX, dBHBackgroundLocationY, dBHBackgroundWidth, dBHBackgroundHeight);
         dashbarDatabase.add(dBDBackground, new AbsoluteConstraints(dBDBackgroundLocationX, dBDBackgroundLocationY, dBDBackgroundWidth, dBDBackgroundHeight));
         dBDBackground.setForeground(new java.awt.Color(0, 0, 0));
@@ -469,10 +516,70 @@ public final class PRMSDispatcher extends JFrame {
         Image imgScale3 = profileBackground.getScaledInstance(dBHBackground.getWidth(), dBHBackground.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon3 = new ImageIcon(imgScale3);
         dOPBackground.setIcon(scaledIcon3);
+        
+        // Dashbar About Software (JPanel) Declarations.
+        
+        final int dashbarAboutLocationX = 199;
+        final int dashbarAboutLocationY = 126;
+        final int dashbarAboutWidth = 801;
+        final int dashbarAboutHeight = 574;
+        
+        JPanel dashbarAbout = new JPanel();
+        
+        // Dashbar About Components.
+        
+        final int dashbarAboutTextX = 645;
+        final int dashbarAboutTextY = 548;
+        final int dashbarAboutTextWidth = 200;
+        final int dashbarAboutTextHeight = 30;
+        
+        JLabel aboutDashBarText = new JLabel();
+        
+        aboutDashBarText.setBounds(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight);
+        dashbarAbout.add(aboutDashBarText, new AbsoluteConstraints(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight));
+        aboutDashBarText.setForeground(new java.awt.Color(255, 255, 255));
+        aboutDashBarText.setFont(new java.awt.Font("Impact", 0, 14));
+        aboutDashBarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        aboutDashBarText.setText("ABOUT");
+        aboutDashBarText.setVisible(true);
+        
+        // Dashbar About Software (JPanel) Decorations.
+        dashbarAbout.setBounds(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight);
+        add(dashbarAbout, new AbsoluteConstraints(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight));
+        dashbarAbout.setBackground(new java.awt.Color(0, 0, 32));
+        dashbarAbout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
+        dashbarAbout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        dashbarAbout.setVisible(false);
+
+        // DashBar AboutBackground (JLabel) Declarations.
+        final int aboutBackgroundHeight = 568;
+        final int aboutBackgroundWidth = 795;
+        final int aboutBackgroundLocationX = 3;
+        final int aboutBackgroundLocationY = 3;
+
+        JLabel aboutBackground = new JLabel();
+
+        // DashBar AboutBackground (JLAbel) Decorations.
+        aboutBackground.setBounds(aboutBackgroundLocationX, aboutBackgroundLocationY, aboutBackgroundWidth, aboutBackgroundHeight);
+        dashbarAbout.add(aboutBackground, new AbsoluteConstraints(aboutBackgroundLocationX, aboutBackgroundLocationY, aboutBackgroundWidth, aboutBackgroundHeight));
+        aboutBackground.setForeground(new java.awt.Color(0, 0, 0));
+        aboutBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        aboutBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ImageIcon icon4 = new ImageIcon("src\\res\\carbonbackgound.jpg");
+        Image getAboutBackground = icon4.getImage();
+        Image imgScale4 = getAboutBackground.getScaledInstance(aboutBackground.getWidth(), aboutBackground.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon4 = new ImageIcon(imgScale4);
+        aboutBackground.setIcon(scaledIcon4);
+        
+        
+        
+        
+        
 
         // </editor-fold>
-        // </editor-fold>
-        // </editor-fold>  
+        // </editor-fold> 
+        
         setVisible(true);
         navigationBar.setVisible(true);
         navigationBarLabel.setVisible(true);
@@ -496,17 +603,19 @@ public final class PRMSDispatcher extends JFrame {
                 dashBarHome.setVisible(true);
                 dashbarDatabase.setVisible(false);
                 dashbarProfile.setVisible(false);
+                dashbarAbout.setVisible(false);
 
                 homeTabIndicator.setVisible(true);
                 databaseTabIndicator.setVisible(false);
                 profileTabIndicator.setVisible(false);
+                aboutTabIndicator.setVisible(false);
 
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                dBHTab.setBackground(new java.awt.Color(100, 100, 100));
-                homeTabText.setForeground(new java.awt.Color(0, 0, 0));
+                dBHTab.setBackground(new java.awt.Color(21, 21, 21));
+                homeTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
 
             @Override
@@ -531,34 +640,36 @@ public final class PRMSDispatcher extends JFrame {
             public void mousePressed(MouseEvent e) {
 
                 dBDTab.setBackground(new java.awt.Color(255, 255, 255));
-                mainTabText.setForeground(new java.awt.Color(0, 0, 0));
+                databaseTabText.setForeground(new java.awt.Color(0, 0, 0));
 
                 dashBarHome.setVisible(false);
                 dashbarDatabase.setVisible(true);
                 dashbarProfile.setVisible(false);
+                dashbarAbout.setVisible(false);
 
                 homeTabIndicator.setVisible(false);
                 databaseTabIndicator.setVisible(true);
                 profileTabIndicator.setVisible(false);
+                aboutTabIndicator.setVisible(false);
 
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                dBDTab.setBackground(new java.awt.Color(100, 100, 100));
-                mainTabText.setForeground(new java.awt.Color(0, 0, 0));
+                dBDTab.setBackground(new java.awt.Color(21, 21, 21));
+                databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 dBDTab.setBackground(new java.awt.Color(100, 100, 100));
-                mainTabText.setForeground(new java.awt.Color(0, 0, 0));
+                databaseTabText.setForeground(new java.awt.Color(0, 0, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 dBDTab.setBackground(new java.awt.Color(21, 21, 21));
-                mainTabText.setForeground(new java.awt.Color(255, 255, 255));
+                databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
         });
 
@@ -577,17 +688,19 @@ public final class PRMSDispatcher extends JFrame {
                 dashBarHome.setVisible(false);
                 dashbarDatabase.setVisible(false);
                 dashbarProfile.setVisible(true);
+                dashbarAbout.setVisible(false);
 
                 homeTabIndicator.setVisible(false);
                 databaseTabIndicator.setVisible(false);
                 profileTabIndicator.setVisible(true);
+                aboutTabIndicator.setVisible(false);
 
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                profileTab.setBackground(new java.awt.Color(100, 100, 100));
-                profileTabText.setForeground(new java.awt.Color(0, 0, 0));
+                profileTab.setBackground(new java.awt.Color(21, 21, 21));
+                profileTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
 
             @Override
@@ -600,6 +713,47 @@ public final class PRMSDispatcher extends JFrame {
             public void mouseExited(MouseEvent e) {
                 profileTab.setBackground(new java.awt.Color(21, 21, 21));
                 profileTabText.setForeground(new java.awt.Color(255, 255, 255));
+            }
+        });
+        
+        aboutTab.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                aboutTab.setBackground(new java.awt.Color(255, 255, 255));
+                aboutTabText.setForeground(new java.awt.Color(0, 0, 0));
+
+                dashBarHome.setVisible(false);
+                dashbarDatabase.setVisible(false);
+                dashbarProfile.setVisible(false);
+                dashbarAbout.setVisible(true);
+
+                homeTabIndicator.setVisible(false);
+                databaseTabIndicator.setVisible(false);
+                profileTabIndicator.setVisible(false);
+                aboutTabIndicator.setVisible(true);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                aboutTab.setBackground(new java.awt.Color(21, 21, 21));
+                aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                aboutTab.setBackground(new java.awt.Color(100, 100, 100));
+                aboutTabText.setForeground(new java.awt.Color(0, 0, 0));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                aboutTab.setBackground(new java.awt.Color(21, 21, 21));
+                aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
         });
 
