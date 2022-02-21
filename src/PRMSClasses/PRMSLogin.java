@@ -19,11 +19,45 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
 public class PRMSLogin extends JFrame {
     
+    // Java Swing Components Declarations.
+    
+    private JPanel loginPane, loginBackground;
+    private JLabel loginTitle, personelPicture, usernameText, passwordText, loginPaneBackground;
+    private JLabel companyLogo, companyName, cNameShadow, programName, pNameShadow;
+    private JTextField userInput;
+    private JPasswordField passwordInput;
+    private JButton loginButton;
+    
     public PRMSLogin(){
         MainGUIComponents();
+        
+        
+        
+        
     }
     
     private void MainGUIComponents(){
+        
+        // Calling Method for Java Swing Components.
+        
+        loginBackground = new JPanel();
+        loginPane = new JPanel();
+        
+        loginPaneBackground = new JLabel();
+        loginTitle = new JLabel();
+        personelPicture = new JLabel();
+        usernameText = new JLabel();
+        passwordText = new JLabel();
+        companyLogo = new JLabel();
+        companyName = new JLabel();
+        cNameShadow = new JLabel();
+        programName = new JLabel();
+        pNameShadow = new JLabel();
+        
+        userInput = new JTextField();
+        passwordInput = new JPasswordField();
+        loginButton = new JButton();
+        
         
         // JFrame Declaration
         final int FrameSizeX = 800;
@@ -52,26 +86,20 @@ public class PRMSLogin extends JFrame {
         final int loginPaneLocationY    = 10;
         final int loginPaneWidth        = 380;
         final int loginPaneHeight       = 470;
-        
-        JPanel loginPane = new JPanel();
-        
+       
         // Login Pane (JPanel) Decoration.
         
         loginPane.setBounds(loginPaneLocationX, loginPaneLocationY, loginPaneWidth, loginPaneHeight);
         add(loginPane, new AbsoluteConstraints(loginPaneLocationX, loginPaneLocationY, loginPaneWidth, loginPaneHeight));
         loginPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         loginPane.setVisible(true);
-        
-            // Login Title (JLabel) Declarations.
+
+            // Login Title (JLabel) Decorations.
 
             final int loginTitleLocationX   = 161;
             final int loginTitleLocationY   = 20;
             final int loginTitleWidth       = 100;
             final int loginTitleHeight      = 30;
-
-            JLabel loginTitle = new JLabel();
-
-            // Login Title (JLabel) Decorations.
 
             loginTitle.setBounds(loginTitleLocationX, loginTitleLocationY, loginTitleWidth, loginTitleHeight);
             loginPane.add(loginTitle, new AbsoluteConstraints(loginTitleLocationX, loginTitleLocationY, loginTitleWidth, loginTitleHeight));
@@ -80,16 +108,13 @@ public class PRMSLogin extends JFrame {
             loginTitle.setText("LOGIN");
             loginTitle.setVisible(true);
             
-            // Personel Picture (JLabel) Declarations.
+            // Personel Picture (JLabel) Decorations.
             
             final int personelPictureLocationX = 125;
             final int personelPictureLocationY = 70;
             final int personelPictureWidth     = 130;
             final int personelPictureHeight    = 130;
-            
-            JLabel personelPicture = new JLabel();
-            
-            // Personel Picture (JLabel) Decorations.
+
             personelPicture.setBounds(personelPictureLocationX, personelPictureLocationY, personelPictureWidth, personelPictureHeight);
             loginPane.add(personelPicture, new AbsoluteConstraints(personelPictureLocationX, personelPictureLocationY, personelPictureWidth, personelPictureHeight));
             personelPicture.setBackground(new java.awt.Color(255,255,255));
@@ -98,22 +123,18 @@ public class PRMSLogin extends JFrame {
             personelPicture.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             personelPicture.setVisible(true);
 
-            ImageIcon findPersonelPicture = new ImageIcon("src\\res\\icons8_user_130px_1.png");
+            ImageIcon findPersonelPicture = new ImageIcon("src\\res\\icons8_user_130px.png");
             Image importPersonelPicture = findPersonelPicture.getImage();
             Image scalePersonelPicture= importPersonelPicture.getScaledInstance(personelPicture.getWidth(), personelPicture.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon scaledPersonelPicture = new ImageIcon(scalePersonelPicture);
             personelPicture.setIcon(scaledPersonelPicture);
             
-            // Username Text (JLabel) Declarations.
+            // Username Text (JLabel) Decorations.
             
             final int usernameTextLocationX = 30;
             final int usernameTextLocationY = 270;
             final int usernameTextWidth     = 130;
             final int usernameTextHeight    = 35;
-            
-            JLabel usernameText = new JLabel();
-            
-            // Username Text (JLabel) Decorations.
             
             usernameText.setBounds(usernameTextLocationX, usernameTextLocationY, usernameTextWidth, usernameTextHeight);
             loginPane.add(usernameText, new AbsoluteConstraints(usernameTextLocationX, usernameTextLocationY, usernameTextWidth, usernameTextHeight));
@@ -122,16 +143,12 @@ public class PRMSLogin extends JFrame {
             usernameText.setText("USERNAME  :");
             usernameText.setVisible(true);
             
-            // Username Input (JTextField) Declarations.
+            // Username Input (JTextField) Decorations.
             
             final int userInputLocationX = 120;
             final int userInputLocationY = 270;
             final int userInputWidth     = 225;
             final int userInputHeight    = 35;
-            
-            JTextField userInput = new JTextField();
-            
-            // Username Input (JTextField).
             
             userInput.setBounds(userInputLocationX, userInputLocationY, userInputWidth, userInputHeight);
             loginPane.add(userInput, new AbsoluteConstraints(userInputLocationX, userInputLocationY, userInputWidth, userInputHeight));
@@ -142,16 +159,12 @@ public class PRMSLogin extends JFrame {
             userInput.setFont(new java.awt.Font("Tahoma", 0, 14));
             userInput.setVisible(true);
             
-            // Password Text (JLabel) Declarations.
+            // Password Text (JLabel) Decorations.
             
             final int passwordTextLocationX = 30;
             final int passwordTextLocationY = 320;
             final int passwordTextWidth     = 130;
             final int passwordTextHeight    = 35;
-            
-            JLabel passwordText = new JLabel();
-            
-            // Password Text (JLabel) Decorations.
             
             passwordText.setBounds(passwordTextLocationX, passwordTextLocationY, passwordTextWidth, passwordTextHeight);
             loginPane.add(passwordText, new AbsoluteConstraints(passwordTextLocationX, passwordTextLocationY, passwordTextWidth, passwordTextHeight));
@@ -160,16 +173,12 @@ public class PRMSLogin extends JFrame {
             passwordText.setText("PASSWORD :");
             passwordText.setVisible(true);
             
-            // Password Input (JPasswordField) Declarations.
+            // Password Input (JPasswordField) Decorations.
             
             final int passwordInputLocationX = 120;
             final int passwordInputLocationY = 320;
             final int passwordInputWidth     = 225;
             final int passwordInputHeight    = 35;
-            
-            JPasswordField passwordInput = new JPasswordField();
-            
-            // Password Input (JPasswordField) Decorations.
             
             passwordInput.setBounds(passwordInputLocationX, passwordInputLocationY, passwordInputWidth, passwordInputHeight);
             loginPane.add(passwordInput, new AbsoluteConstraints(passwordInputLocationX, passwordInputLocationY, passwordInputWidth, passwordInputHeight));
@@ -186,9 +195,7 @@ public class PRMSLogin extends JFrame {
             final int loginButtonLocationY = 380;
             final int loginButtonWidth     = 100;
             final int loginButtonHeight    = 40;
-            
-            JButton loginButton = new JButton();
-            
+
             // Login Button (JButton) Decorations.
             
             loginButton.setBounds(loginButtonLocationX, loginButtonLocationY, loginButtonWidth, loginButtonHeight);
@@ -205,19 +212,13 @@ public class PRMSLogin extends JFrame {
             loginButton.setForeground(new java.awt.Color(0,0,0));
             loginButton.setText("LOGIN");
             loginButton.setVisible(true);
-            
-            
-            
-                // Login Pane Background (JLabel) Declarations.
+
+                // Login Pane Background (JLabel) Decorations.
 
                 final int loginPaneBackgroundLocationX  = 0;
                 final int loginPaneBackgroundLocationY  = 0;
                 final int loginPaneBackgroundWidth      = 380;
                 final int loginPaneBackgroundHeight     = 470;
-
-                JLabel loginPaneBackground = new JLabel();
-
-                // Login Pane Background (JLabel) Decorations.
 
                 loginPaneBackground.setBounds(loginPaneBackgroundLocationX, loginPaneBackgroundLocationY, loginPaneBackgroundWidth, loginPaneBackgroundHeight);
                 loginPane.add(loginPaneBackground, new AbsoluteConstraints(loginPaneBackgroundLocationX, loginPaneBackgroundLocationY, loginPaneBackgroundWidth, loginPaneBackgroundHeight));
@@ -233,20 +234,15 @@ public class PRMSLogin extends JFrame {
                 ImageIcon scaledIcon = new ImageIcon(imgScale);
                 loginPaneBackground.setIcon(scaledIcon);
                 
-        
-      
-        
-        // Company Logo (JLabel) Declarations.
+                
+
+        // Company Logo (JLabel) Decorations.
         
         final int companyLogoLocationX = 415;
         final int companyLogoLocationY = 40;
         final int companyLogoWidth = 370;
         final int companyLogoHeight = 370;
-        
-        JLabel companyLogo = new JLabel();
-        
-        // Company Logo (JLabel) Decorations.
-        
+
         companyLogo.setBounds(companyLogoLocationX, companyLogoLocationY, companyLogoWidth, companyLogoHeight);
         add(companyLogo, new AbsoluteConstraints(companyLogoLocationX, companyLogoLocationY, companyLogoWidth, companyLogoHeight));
         companyLogo.setBackground(null);
@@ -260,21 +256,15 @@ public class PRMSLogin extends JFrame {
         ImageIcon scaledLogo = new ImageIcon(scaleLogo);
         companyLogo.setIcon(scaledLogo);
         
-        // Company Name (JLabel) Declarations.
+        // Company Name (JLabel) Decorations.
         Font IronShark;
 
         final int companyNameLocationX = 410;
         final int companyNameLocationY = 315;
         final int companyNameWidth = 380;
         final int companyNameHeight = 30;
-        
-        JLabel companyName = new JLabel();
 
         final int cNameShadowLocationY = 320;
-
-        JLabel cNameShadow = new JLabel();
-        
-        // Company Name (JLabel) Declarations.
 
         companyName.setBounds(companyNameLocationX, companyNameLocationY, companyNameWidth, companyNameHeight);
         add(companyName, new AbsoluteConstraints(companyNameLocationX, companyNameLocationY, companyNameWidth, companyNameHeight));
@@ -310,13 +300,9 @@ public class PRMSLogin extends JFrame {
         final int programNameLocationY = 350;
         final int programNameWidth = 370;
         final int programNameHeight = 30;
-        
-        JLabel programName = new JLabel();
 
         final int pNameShadowLocationY = 355;
 
-        JLabel pNameShadow = new JLabel();
-        
         // Program Name (JLabel) Declarations.
 
         programName.setBounds(programNameLocationX, programNameLocationY, programNameWidth, programNameHeight);
@@ -337,17 +323,13 @@ public class PRMSLogin extends JFrame {
         pNameShadow.setText("POLICE RECORD MANAGEMENT SYSTEM");
         pNameShadow.setVisible(true);
         
-        // Login Background (JPanel) Declaration.
+        // Login Background (JPanel) Decorations.
         
         final int loginBackgroundLocationX  = 0;
         final int loginBackgroundLocationY  = 0;
         final int loginBackgroundWidth      = 800;
         final int lofinBackgroundHeigth     = 490;
-        
-        JPanel loginBackground = new JPanel();
-        
-        // Login Background (JPanel) Decorations.
-        
+
         loginBackground.setBounds(loginBackgroundLocationX, loginBackgroundLocationY, loginBackgroundWidth, lofinBackgroundHeigth);
         add(loginBackground, new AbsoluteConstraints(loginBackgroundLocationX, loginBackgroundLocationY, loginBackgroundWidth, lofinBackgroundHeigth));
         loginBackground.setBackground(new java.awt.Color(0, 0, 50));
@@ -366,9 +348,7 @@ public class PRMSLogin extends JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 loginBackgroundMousePressed(evt);
             }
-        });
-        
-        
+        });        
         
         pack();
         setLocationRelativeTo(null);
@@ -396,5 +376,4 @@ public class PRMSLogin extends JFrame {
         PRMSLogin Open = new PRMSLogin();
         Open.setVisible(true);
     }
-    
 }

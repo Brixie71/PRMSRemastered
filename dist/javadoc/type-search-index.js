@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"PRMSClasses","l":"PRMSDispatcher"},{"p":"PRMSClasses","l":"PRMSLogin"},{"p":"PRMSClasses","l":"PRMSOfficer"}];updateSearchResults();
