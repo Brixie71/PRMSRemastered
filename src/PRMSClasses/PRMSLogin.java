@@ -6,6 +6,8 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -30,10 +32,6 @@ public class PRMSLogin extends JFrame {
     
     public PRMSLogin(){
         MainGUIComponents();
-        
-        
-        
-        
     }
     
     private void MainGUIComponents(){
@@ -123,7 +121,7 @@ public class PRMSLogin extends JFrame {
             personelPicture.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             personelPicture.setVisible(true);
 
-            ImageIcon findPersonelPicture = new ImageIcon("src\\res\\icons8_user_130px.png");
+            ImageIcon findPersonelPicture = new ImageIcon("src\\PRMS Files\\icons\\USER-ICON.png");
             Image importPersonelPicture = findPersonelPicture.getImage();
             Image scalePersonelPicture= importPersonelPicture.getScaledInstance(personelPicture.getWidth(), personelPicture.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon scaledPersonelPicture = new ImageIcon(scalePersonelPicture);
@@ -152,6 +150,7 @@ public class PRMSLogin extends JFrame {
             
             userInput.setBounds(userInputLocationX, userInputLocationY, userInputWidth, userInputHeight);
             loginPane.add(userInput, new AbsoluteConstraints(userInputLocationX, userInputLocationY, userInputWidth, userInputHeight));
+            userInput.setBackground(new java.awt.Color(0,0,0,0));
             userInput.setForeground(new java.awt.Color(255,255,255));
             userInput.setOpaque(false);
             userInput.setCaretColor(new java.awt.Color(255,255,255));
@@ -182,8 +181,9 @@ public class PRMSLogin extends JFrame {
             
             passwordInput.setBounds(passwordInputLocationX, passwordInputLocationY, passwordInputWidth, passwordInputHeight);
             loginPane.add(passwordInput, new AbsoluteConstraints(passwordInputLocationX, passwordInputLocationY, passwordInputWidth, passwordInputHeight));
-            passwordInput.setForeground(new java.awt.Color(255,255,255));
+            passwordInput.setBackground(new java.awt.Color(0,0,0,0));
             passwordInput.setOpaque(false);
+            passwordInput.setForeground(new java.awt.Color(255,255,255));
             passwordInput.setCaretColor(new java.awt.Color(255,255,255));
             passwordInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255,255,255)));
             passwordInput.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -200,18 +200,47 @@ public class PRMSLogin extends JFrame {
             
             loginButton.setBounds(loginButtonLocationX, loginButtonLocationY, loginButtonWidth, loginButtonHeight);
             loginPane.add(loginButton, new AbsoluteConstraints(loginButtonLocationX, loginButtonLocationY, loginButtonWidth, loginButtonHeight));
-            loginButton.setBackground(new java.awt.Color(237, 242, 244));
+            loginButton.setBackground(new java.awt.Color(248, 249, 250));
             loginButton.setFont(new java.awt.Font("Impact", 0, 16));
-            loginButton.setDefaultCapable(false);
-            loginButton.setDoubleBuffered(true);
             loginButton.setFocusPainted(false);
-            loginButton.setRolloverEnabled(true);
-            loginButton.setRequestFocusEnabled(true);
             loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             loginButton.setHorizontalTextPosition(javax.swing.SwingConstants.TRAILING);
+            loginButton.setOpaque(false);
             loginButton.setForeground(new java.awt.Color(0,0,0));
             loginButton.setText("LOGIN");
             loginButton.setVisible(true);
+
+            loginButton.setContentAreaFilled(true);
+            loginButton.setBorderPainted(false);
+            loginButton.setIconTextGap(-2);
+
+            loginButton.addMouseListener(new MouseAdapter(){
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                loginButton.setBackground(new java.awt.Color(0, 0, 0));
+                loginButton.setForeground(new java.awt.Color(255,255,255));
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                loginButton.setBackground(new java.awt.Color(248, 249, 250));
+                loginButton.setForeground(new java.awt.Color(0,0,0));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e){
+                loginButton.setBackground(new java.awt.Color(150,150,150));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e){
+                loginButton.setBackground(new java.awt.Color(248, 249, 250));
+                loginButton.setForeground(new java.awt.Color(0,0,0));
+            }
+
+            });
 
                 // Login Pane Background (JLabel) Decorations.
 
@@ -228,7 +257,7 @@ public class PRMSLogin extends JFrame {
                 loginPaneBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
                 loginPaneBackground.setVisible(true);
 
-                ImageIcon icon = new ImageIcon("src\\res\\carbonbackground.jpg");
+                ImageIcon icon = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
                 Image homeBackground = icon.getImage();
                 Image imgScale = homeBackground.getScaledInstance(loginPaneBackground.getWidth(), loginPaneBackground.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon scaledIcon = new ImageIcon(imgScale);
@@ -250,7 +279,7 @@ public class PRMSLogin extends JFrame {
         companyLogo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         companyLogo.setVisible(true);
         
-        ImageIcon findLogo = new ImageIcon("src\\res\\Brion Technological Systems3.png");
+        ImageIcon findLogo = new ImageIcon("src\\PRMS Files\\logo\\BTSLogo1.png");
         Image importLogo = findLogo.getImage();
         Image scaleLogo = importLogo.getScaledInstance(companyLogo.getWidth(), companyLogo.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledLogo = new ImageIcon(scaleLogo);
@@ -278,9 +307,9 @@ public class PRMSLogin extends JFrame {
 
         try {
 
-            IronShark = Font.createFont(Font.TRUETYPE_FONT, new File("src\\res\\Iron-Shark.ttf")).deriveFont(18f);
+            IronShark = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")).deriveFont(18f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\res\\Iron-Shark.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")));
 
         } catch (IOException | FontFormatException e) {
 
@@ -373,7 +402,20 @@ public class PRMSLogin extends JFrame {
     }
     
     public static void main(String[] args) {
+        
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PRMSRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }/*/ /*/
+        
         PRMSLogin Open = new PRMSLogin();
         Open.setVisible(true);
+        
     }
 }

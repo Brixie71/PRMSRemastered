@@ -1,22 +1,19 @@
 package PRMSClasses;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Toolkit;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
 public final class PRMSDispatcher extends JFrame {
+
+    // FRAME DRAGGER
+    int xMouse;
+    int yMouse;
 
     public PRMSDispatcher() {
         MainGUIWindow();
@@ -25,7 +22,7 @@ public final class PRMSDispatcher extends JFrame {
 
     private void MainGUIWindow() {
 
-        // <editor-fold defaultstate="collapsed" desc="<<< JFrame Container.">              
+        // <editor-fold defaultstate="collapsed" desc="<<< JFrame Container.">
         // JFrame Declaration
         final int FrameSizeX = 1000;
         final int FrameSizeY = 700;
@@ -46,10 +43,10 @@ public final class PRMSDispatcher extends JFrame {
         // CENTER POPUP MAIN WINDOW.
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimension.width / 2 - this.getWidth() / 2, dimension.height / 2 - this.getHeight() / 2);
-        
+
         // </editor-fold>
 
-        // <editor-fold defaultstate="collapsed" desc="<<< JPanel Declarations.">              
+        // <editor-fold defaultstate="collapsed" desc="<<< JPanel Declarations.">
         // <editor-fold defaultstate="collapsed" desc="<<< Navigation Bar Components.">
         // Navigation Bar (JPanel) Declarations.
         final int navigationPanelHeight = 574;
@@ -142,7 +139,7 @@ public final class PRMSDispatcher extends JFrame {
 
         // Database Tab Text (JLabel) Declarations and Decorations.
         JLabel databaseTabText = new JLabel();
-        
+
         databaseTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
         dBDTab.add(databaseTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
         databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,53 +198,53 @@ public final class PRMSDispatcher extends JFrame {
         profileTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
         profileTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         profileTabIndicator.setVisible(false);
-        
+
         // About Software Tab (JPanel) Declarations.
-        
+
         final int aboutTabLocationX = 6;
         final int aboutTabLocationY = 222;
-        
+
         JPanel aboutTab = new JPanel();
-        
+
         // About Software Tab (JPanel) Decorations.
-        
+
         aboutTab.setBounds(aboutTabLocationX, aboutTabLocationY, navigationTabWidth, navigationTabHeight);
         navigationBar.add(aboutTab, new AbsoluteConstraints(aboutTabLocationX, aboutTabLocationY, navigationTabWidth, navigationTabHeight));
         aboutTab.setBackground(new java.awt.Color(21, 21, 21));
         aboutTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         aboutTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        
+
         // About Software Tab (JText) Declarations and Decorations.
-        
+
         JLabel aboutTabText = new JLabel();
-        
+
         aboutTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
         aboutTab.add(aboutTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
         aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
         aboutTabText.setFont(new java.awt.Font("Cambria", 1, 14));
         aboutTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         aboutTabText.setText("About");
-        
+
         // About Software Tab Indicator(JPanel) Declarations.
-        
+
         final int aboutTabIndicatorLocationX = 178;
         final int aboutTabIndicatorLocationY = 2;
         final int aboutTabIndicatorWidth = 10;
         final int aboutTabIndicatorHeigth = 46;
-        
+
         JPanel aboutTabIndicator = new JPanel();
-        
+
         // About Software Tab Indicator (JPanel) Decorations.
-        
+
         aboutTabIndicator.setBounds(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth);
-        aboutTab.add(aboutTabIndicator,new AbsoluteConstraints(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth));
+        aboutTab.add(aboutTabIndicator, new AbsoluteConstraints(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth));
         aboutTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
         aboutTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         aboutTabIndicator.setVisible(false);
-        
+
 
         // </editor-fold>
-        // <editor-fold defaultstate="collapsed" desc="<<< Title Bar Components.">                     
+        // <editor-fold defaultstate="collapsed" desc="<<< Title Bar Components.">
         // Title Bar (JPanel) Declaration
         final int titlePanelHeight = 128;
         final int titlePanelWidth = 1000;
@@ -291,7 +288,7 @@ public final class PRMSDispatcher extends JFrame {
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ImageIcon logoGetter = new ImageIcon("src\\res\\Brion-Tactical-Systems.png");
+        ImageIcon logoGetter = new ImageIcon("src\\PRMS Files\\logo\\BTSLogo1.png");
         Image getLogo = logoGetter.getImage();
         Image scaleLogo = getLogo.getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon displayLogo = new ImageIcon(scaleLogo);
@@ -323,9 +320,9 @@ public final class PRMSDispatcher extends JFrame {
 
         try {
 
-            IronShark = Font.createFont(Font.TRUETYPE_FONT, new File("src\\res\\Iron-Shark.ttf")).deriveFont(20f);
+            IronShark = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")).deriveFont(20f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\res\\Iron-Shark.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")));
 
         } catch (IOException | FontFormatException e) {
 
@@ -356,7 +353,7 @@ public final class PRMSDispatcher extends JFrame {
         programName.setVisible(true);
 
         // </editor-fold>
-        // <editor-fold defaultstate="collapsed" desc="<<< Dashbar Components.">   
+        // <editor-fold defaultstate="collapsed" desc="<<< Dashbar Components.">
         // Dashbar Home (JPanel) Declarations.
         final int dashBarHeight = 574;
         final int dashBarWidth = 801;
@@ -404,7 +401,7 @@ public final class PRMSDispatcher extends JFrame {
         dBHBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dBHBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ImageIcon icon = new ImageIcon("src\\res\\carbonbackgound.jpg");
+        ImageIcon icon = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
         Image homeBackground = icon.getImage();
         Image imgScale = homeBackground.getScaledInstance(dBHBackground.getWidth(), dBHBackground.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScale);
@@ -457,7 +454,7 @@ public final class PRMSDispatcher extends JFrame {
         dBDBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dBDBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ImageIcon icon2 = new ImageIcon("src\\res\\carbonbackgound.jpg");
+        ImageIcon icon2 = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
         Image databaseBackground = icon2.getImage();
         Image imgScale2 = databaseBackground.getScaledInstance(dBHBackground.getWidth(), dBHBackground.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon2 = new ImageIcon(imgScale2);
@@ -511,30 +508,30 @@ public final class PRMSDispatcher extends JFrame {
         dOPBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dOPBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ImageIcon icon3 = new ImageIcon("src\\res\\carbonbackgound.jpg");
+        ImageIcon icon3 = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
         Image profileBackground = icon3.getImage();
         Image imgScale3 = profileBackground.getScaledInstance(dBHBackground.getWidth(), dBHBackground.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon3 = new ImageIcon(imgScale3);
         dOPBackground.setIcon(scaledIcon3);
-        
+
         // Dashbar About Software (JPanel) Declarations.
-        
+
         final int dashbarAboutLocationX = 199;
         final int dashbarAboutLocationY = 126;
         final int dashbarAboutWidth = 801;
         final int dashbarAboutHeight = 574;
-        
+
         JPanel dashbarAbout = new JPanel();
-        
+
         // Dashbar About Components.
-        
+
         final int dashbarAboutTextX = 645;
         final int dashbarAboutTextY = 548;
         final int dashbarAboutTextWidth = 200;
         final int dashbarAboutTextHeight = 30;
-        
+
         JLabel aboutDashBarText = new JLabel();
-        
+
         aboutDashBarText.setBounds(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight);
         dashbarAbout.add(aboutDashBarText, new AbsoluteConstraints(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight));
         aboutDashBarText.setForeground(new java.awt.Color(255, 255, 255));
@@ -542,7 +539,7 @@ public final class PRMSDispatcher extends JFrame {
         aboutDashBarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         aboutDashBarText.setText("ABOUT");
         aboutDashBarText.setVisible(true);
-        
+
         // Dashbar About Software (JPanel) Decorations.
         dashbarAbout.setBounds(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight);
         add(dashbarAbout, new AbsoluteConstraints(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight));
@@ -566,20 +563,16 @@ public final class PRMSDispatcher extends JFrame {
         aboutBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         aboutBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ImageIcon icon4 = new ImageIcon("src\\res\\carbonbackgound.jpg");
+        ImageIcon icon4 = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
         Image getAboutBackground = icon4.getImage();
         Image imgScale4 = getAboutBackground.getScaledInstance(aboutBackground.getWidth(), aboutBackground.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon4 = new ImageIcon(imgScale4);
         aboutBackground.setIcon(scaledIcon4);
-        
-        
-        
-        
-        
+
 
         // </editor-fold>
-        // </editor-fold> 
-        
+        // </editor-fold>
+
         setVisible(true);
         navigationBar.setVisible(true);
         navigationBarLabel.setVisible(true);
@@ -596,7 +589,7 @@ public final class PRMSDispatcher extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                                                    //  R    G    B 
+                //  R    G    B
                 dBHTab.setBackground(new java.awt.Color(255, 255, 255));
                 homeTabText.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -715,11 +708,11 @@ public final class PRMSDispatcher extends JFrame {
                 profileTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
         });
-        
-        aboutTab.addMouseListener(new MouseListener(){
+
+        aboutTab.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+
             }
 
             @Override
@@ -761,10 +754,6 @@ public final class PRMSDispatcher extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    // FRAME DRAGGER
-    int xMouse;
-    int yMouse;
-
     private void titleBarMouseDragged(java.awt.event.MouseEvent evt) {
         // JFRAME DRAGGER
         int x = evt.getXOnScreen();
@@ -777,5 +766,22 @@ public final class PRMSDispatcher extends JFrame {
         // JFRAME DRAGGER PART 2
         xMouse = evt.getX();
         yMouse = evt.getY();
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PRMSRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }/*/ /*/
+
+        PRMSDispatcher Open = new PRMSDispatcher();
+        Open.setVisible(true);
     }
 }
