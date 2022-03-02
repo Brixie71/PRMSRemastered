@@ -83,7 +83,7 @@ public final class PRMSDispatcher extends JFrame {
         nBLText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
         navigationBarLabel.add(nBLText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
         nBLText.setForeground(new java.awt.Color(0, 0, 0));
-        nBLText.setFont(new java.awt.Font("Verdana", 1, 14));
+        nBLText.setFont(new java.awt.Font("Verdana", Font.BOLD, 14));
         nBLText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nBLText.setText("Navigation Bar");
 
@@ -105,7 +105,7 @@ public final class PRMSDispatcher extends JFrame {
         homeTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
         dBHTab.add(homeTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
         homeTabText.setForeground(new java.awt.Color(255, 255, 255));
-        homeTabText.setFont(new java.awt.Font("Cambria", 1, 14));
+        homeTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
         homeTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         homeTabText.setText("Home");
 
@@ -143,7 +143,7 @@ public final class PRMSDispatcher extends JFrame {
         databaseTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
         dBDTab.add(databaseTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
         databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
-        databaseTabText.setFont(new java.awt.Font("Cambria", 1, 14));
+        databaseTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
         databaseTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         databaseTabText.setText("Database");
 
@@ -180,7 +180,7 @@ public final class PRMSDispatcher extends JFrame {
         profileTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
         profileTab.add(profileTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
         profileTabText.setForeground(new java.awt.Color(255, 255, 255));
-        profileTabText.setFont(new java.awt.Font("Cambria", 1, 14));
+        profileTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
         profileTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         profileTabText.setText("Officer Profile");
 
@@ -221,7 +221,7 @@ public final class PRMSDispatcher extends JFrame {
         aboutTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
         aboutTab.add(aboutTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
         aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
-        aboutTabText.setFont(new java.awt.Font("Cambria", 1, 14));
+        aboutTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
         aboutTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         aboutTabText.setText("About");
 
@@ -311,12 +311,12 @@ public final class PRMSDispatcher extends JFrame {
         companyName.setBounds(companyNameLocationX, companyNameLocationY, companyNameWidth, companyNameHeight);
         titleBar.add(companyName, new AbsoluteConstraints(companyNameLocationX, companyNameLocationY, companyNameWidth, companyNameHeight));
         companyName.setForeground(new java.awt.Color(255, 208, 0));
-        companyName.setFont(new java.awt.Font("Iron Shark", 0, 20));
+        companyName.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 20));
 
         cNameShadow.setBounds(companyNameLocationX, cNameShadowLocationY, companyNameWidth, companyNameHeight);
         titleBar.add(cNameShadow, new AbsoluteConstraints(companyNameLocationX, cNameShadowLocationY, companyNameWidth, companyNameHeight));
         cNameShadow.setForeground(new java.awt.Color(0, 0, 0));
-        cNameShadow.setFont(new java.awt.Font("Iron Shark", 0, 20));
+        cNameShadow.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 20));
 
         try {
 
@@ -325,7 +325,7 @@ public final class PRMSDispatcher extends JFrame {
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")));
 
         } catch (IOException | FontFormatException e) {
-
+            e.printStackTrace();
         }
 
         companyName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -347,7 +347,7 @@ public final class PRMSDispatcher extends JFrame {
         programName.setBounds(programNameLocationX, programNameLocationY, programNameWidth, programNameHeight);
         titleBar.add(programName, new AbsoluteConstraints(programNameLocationX, programNameLocationY, programNameWidth, programNameHeight));
         programName.setForeground(new java.awt.Color(255, 255, 255));
-        programName.setFont(new java.awt.Font("Impact", 0, 25));
+        programName.setFont(new java.awt.Font("Impact", Font.PLAIN, 25));
         programName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         programName.setText("POLICE RECORD MANAGEMENT SYSTEM");
         programName.setVisible(true);
@@ -389,7 +389,7 @@ public final class PRMSDispatcher extends JFrame {
         homeText.setBounds(homeTextX, homeTextY, homeTextWidth, homeTextHeight);
         dashBarHome.add(homeText, new AbsoluteConstraints(homeTextX, homeTextY, homeTextWidth, homeTextHeight));
         homeText.setForeground(new java.awt.Color(255, 255, 255));
-        homeText.setFont(new java.awt.Font("Impact", 0, 14));
+        homeText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
         homeText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         homeText.setText("HOME");
         homeText.setVisible(true);
@@ -427,7 +427,7 @@ public final class PRMSDispatcher extends JFrame {
         databaseText.setBounds(databaseTextX, databaseTextY, databaseTextWidth, databaseTextHeight);
         dashbarDatabase.add(databaseText, new AbsoluteConstraints(databaseTextX, databaseTextY, databaseTextWidth, databaseTextHeight));
         databaseText.setForeground(new java.awt.Color(255, 255, 255));
-        databaseText.setFont(new java.awt.Font("Impact", 0, 14));
+        databaseText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
         databaseText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         databaseText.setText("DATABASE");
         databaseText.setVisible(true);
@@ -480,7 +480,7 @@ public final class PRMSDispatcher extends JFrame {
         officerProfileText.setBounds(officerProfileTextX, officerProfileTextY, officerProfileTextWidth, officerProfileTextHeight);
         dashbarProfile.add(officerProfileText, new AbsoluteConstraints(officerProfileTextX, officerProfileTextY, officerProfileTextWidth, officerProfileTextHeight));
         officerProfileText.setForeground(new java.awt.Color(255, 255, 255));
-        officerProfileText.setFont(new java.awt.Font("Impact", 0, 14));
+        officerProfileText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
         officerProfileText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         officerProfileText.setText("OFFICER PROFILE");
         officerProfileText.setVisible(true);
@@ -535,7 +535,7 @@ public final class PRMSDispatcher extends JFrame {
         aboutDashBarText.setBounds(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight);
         dashbarAbout.add(aboutDashBarText, new AbsoluteConstraints(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight));
         aboutDashBarText.setForeground(new java.awt.Color(255, 255, 255));
-        aboutDashBarText.setFont(new java.awt.Font("Impact", 0, 14));
+        aboutDashBarText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
         aboutDashBarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         aboutDashBarText.setText("ABOUT");
         aboutDashBarText.setVisible(true);
@@ -771,8 +771,8 @@ public final class PRMSDispatcher extends JFrame {
     public static void main(String[] args) {
 
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+            for ( javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels() ) {
+                if ( "Nimbus".equals(info.getName()) ) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
