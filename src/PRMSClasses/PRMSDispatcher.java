@@ -589,7 +589,7 @@ public final class PRMSDispatcher extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                //  R    G    B
+                //                                       R    G    B
                 dBHTab.setBackground(new java.awt.Color(255, 255, 255));
                 homeTabText.setForeground(new java.awt.Color(0, 0, 0));
 

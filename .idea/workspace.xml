@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e64826b-a7ac-49c0-a929-e28d412dea36" name="Changes" comment="">
+    <list default="true" id="8c2d3f34-e882-468d-aaf8-c42096bc7a3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PRMSRemastered.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PRMSRemastered.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSDispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSDispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSDispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSDispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSOfficer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSOfficer$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSOfficer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PRMSClasses/PRMSDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PRMSClasses/PRMSLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSOfficer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PRMSClasses/PRMSRegister.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,37 +38,23 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="25pOVeewmTOkNoUT9PgN7avDPNR" />
+  <component name="ProjectId" id="25rSLhWiR45r8UbeymlxzhfuF8B" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
-  <component name="RunManager" selected="Application.PRMSDispatcher">
-    <configuration name="PRMSDispatcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="PRMSClasses.PRMSDispatcher" />
-      <module name="PRMSRemastered" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="PRMSClasses.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="PRMSLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PRMSClasses.PRMSLogin" />
       <module name="PRMSRemastered" />
@@ -62,7 +70,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PRMSDispatcher" />
         <item itemvalue="Application.PRMSLogin" />
       </list>
     </recent_temporary>
@@ -70,12 +77,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5e64826b-a7ac-49c0-a929-e28d412dea36" name="Changes" comment="" />
-      <created>1646220586423</created>
+      <changelist id="8c2d3f34-e882-468d-aaf8-c42096bc7a3b" name="Changes" comment="" />
+      <created>1646283657553</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1646220586423</updated>
-      <workItem from="1646220590790" duration="3057000" />
+      <updated>1646283657553</updated>
+      <workItem from="1646283659006" duration="2142000" />
     </task>
     <servers />
   </component>

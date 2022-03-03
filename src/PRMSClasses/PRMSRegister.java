@@ -1,17 +1,12 @@
 
 package PRMSClasses;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
-
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
 public class PRMSRegister extends JFrame {
     
@@ -60,7 +55,7 @@ public class PRMSRegister extends JFrame {
                 firstName.setBounds(firstNameLocationX, firstNameLocationY, firstNameWidth, firstNameHeight);
                 add(firstName, new AbsoluteConstraints(firstNameLocationX, firstNameLocationY, firstNameWidth, firstNameHeight));
                 firstName.setForeground(new java.awt.Color(0, 0, 0));
-                firstName.setFont(new java.awt.Font("Tahoma", 0, 14));
+                firstName.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 firstName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 firstName.setText("FIRST NAME      :");
@@ -84,7 +79,7 @@ public class PRMSRegister extends JFrame {
                         firstNameInput.setOpaque(false);
                         firstNameInput.setCaretColor(new java.awt.Color(0,0,0));
                         firstNameInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        firstNameInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        firstNameInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         firstNameInput.setVisible(true);
                 
                 
@@ -103,7 +98,7 @@ public class PRMSRegister extends JFrame {
                 middleName.setBounds(middleNameLocationX, middleNameLocationY, middleNameWidth, middleNameHeight);
                 add(middleName, new AbsoluteConstraints(middleNameLocationX, middleNameLocationY, middleNameWidth, middleNameHeight));
                 middleName.setForeground(new java.awt.Color(0, 0, 0));
-                middleName.setFont(new java.awt.Font("Tahoma", 0, 14));
+                middleName.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 middleName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 middleName.setText("MIDDLE NAME   :");
@@ -127,7 +122,7 @@ public class PRMSRegister extends JFrame {
                         middleNameInput.setOpaque(false);
                         middleNameInput.setCaretColor(new java.awt.Color(0,0,0));
                         middleNameInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        middleNameInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        middleNameInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         middleNameInput.setVisible(true);
         
         // Last Name Label (JLabel) Declarations.
@@ -144,7 +139,7 @@ public class PRMSRegister extends JFrame {
                 lastName.setBounds(lastNameLocationX, lastNameLocationY, lastNameWidth, lastNameHeight);
                 add(lastName, new AbsoluteConstraints(lastNameLocationX, lastNameLocationY, lastNameWidth, lastNameHeight));
                 lastName.setForeground(new java.awt.Color(0, 0, 0));
-                lastName.setFont(new java.awt.Font("Tahoma", 0, 14));
+                lastName.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 lastName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 lastName.setText("LAST NAME       :");
@@ -168,7 +163,7 @@ public class PRMSRegister extends JFrame {
                         lastNameInput.setOpaque(false);
                         lastNameInput.setCaretColor(new java.awt.Color(0,0,0));
                         lastNameInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        lastNameInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        lastNameInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         lastNameInput.setVisible(true);
             
         
@@ -186,7 +181,7 @@ public class PRMSRegister extends JFrame {
                 gender.setBounds(genderLocationX, genderLocationY, genderWidth, genderHeight);
                 add(gender, new AbsoluteConstraints(genderLocationX, genderLocationY, genderWidth, genderHeight));
                 gender.setForeground(new java.awt.Color(0, 0, 0));
-                gender.setFont(new java.awt.Font("Tahoma", 0, 14));
+                gender.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 gender.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 gender.setText("GENDER            :");
@@ -210,7 +205,7 @@ public class PRMSRegister extends JFrame {
                         genderInput.setOpaque(false);
                         genderInput.setCaretColor(new java.awt.Color(0,0,0));
                         genderInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        genderInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        genderInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         genderInput.setVisible(true);
         
         // Religion Label (JLabel) Declarations.
@@ -227,7 +222,7 @@ public class PRMSRegister extends JFrame {
                 religion.setBounds(religionLocationX, religionLocationY, religionWidth, religionHeight);
                 add(religion, new AbsoluteConstraints(religionLocationX, religionLocationY, religionWidth, religionHeight));
                 religion.setForeground(new java.awt.Color(0, 0, 0));
-                religion.setFont(new java.awt.Font("Tahoma", 0, 14));
+                religion.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 religion.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 religion.setText("RELIGION          :");
@@ -251,7 +246,7 @@ public class PRMSRegister extends JFrame {
                         religionInput.setOpaque(false);
                         religionInput.setCaretColor(new java.awt.Color(0,0,0));
                         religionInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        religionInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        religionInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         religionInput.setVisible(true);
                         
         // Nationality Label (JLabel) Declarations.
@@ -268,7 +263,7 @@ public class PRMSRegister extends JFrame {
                 nationality.setBounds(nationalityLocationX, nationalityLocationY, nationalityWidth, nationalityHeight);
                 add(nationality, new AbsoluteConstraints(nationalityLocationX, nationalityLocationY, nationalityWidth, nationalityHeight));
                 nationality.setForeground(new java.awt.Color(0, 0, 0));
-                nationality.setFont(new java.awt.Font("Tahoma", 0, 14));
+                nationality.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 nationality.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 nationality.setText("NATIONALITY   :");
@@ -292,7 +287,7 @@ public class PRMSRegister extends JFrame {
                         nationalityInput.setOpaque(false);
                         nationalityInput.setCaretColor(new java.awt.Color(0,0,0));
                         nationalityInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        nationalityInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        nationalityInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         nationalityInput.setVisible(true);
             
         // Username Label (JLabel) Declarations.
@@ -309,7 +304,7 @@ public class PRMSRegister extends JFrame {
                 username.setBounds(usernameLocationX, usernameLocationY, usernameWidth, usernameHeight);
                 add(username, new AbsoluteConstraints(usernameLocationX, usernameLocationY, usernameWidth, usernameHeight));
                 username.setForeground(new java.awt.Color(0, 0, 0));
-                username.setFont(new java.awt.Font("Tahoma", 0, 14));
+                username.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 username.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 username.setText("USERNAME        :");
@@ -333,7 +328,7 @@ public class PRMSRegister extends JFrame {
                         usernameInput.setOpaque(false);
                         usernameInput.setCaretColor(new java.awt.Color(0,0,0));
                         usernameInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        usernameInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        usernameInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         usernameInput.setVisible(true);
             
         // Email Label (JLabel) Declarations.
@@ -350,7 +345,7 @@ public class PRMSRegister extends JFrame {
                 email.setBounds(emailLocationX, emailLocationY, emailWidth, emailHeight);
                 add(email, new AbsoluteConstraints(emailLocationX, emailLocationY, emailWidth, emailHeight));
                 email.setForeground(new java.awt.Color(0, 0, 0));
-                email.setFont(new java.awt.Font("Tahoma", 0, 14));
+                email.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 email.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 email.setText("EMAIL              :");
@@ -374,7 +369,7 @@ public class PRMSRegister extends JFrame {
                         emailInput.setOpaque(false);
                         emailInput.setCaretColor(new java.awt.Color(0,0,0));
                         emailInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        emailInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        emailInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         emailInput.setVisible(true);
         
         // Password Label (JLabel) Declarations.
@@ -391,7 +386,7 @@ public class PRMSRegister extends JFrame {
                 passwordLocation.setBounds(passwordLocationX, passwordLocationY, passwordWidth, passwordHeight);
                 add(passwordLocation, new AbsoluteConstraints(passwordLocationX, passwordLocationY, passwordWidth, passwordHeight));
                 passwordLocation.setForeground(new java.awt.Color(0, 0, 0));
-                passwordLocation.setFont(new java.awt.Font("Tahoma", 0, 14));
+                passwordLocation.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 passwordLocation.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 passwordLocation.setText("PASSWORD      :");
@@ -415,7 +410,7 @@ public class PRMSRegister extends JFrame {
                         passwordInput.setOpaque(false);
                         passwordInput.setCaretColor(new java.awt.Color(0,0,0));
                         passwordInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        passwordInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        passwordInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         passwordInput.setVisible(true);
 
         // Confirm Pass Label (JLabel) Declarations.
@@ -432,7 +427,7 @@ public class PRMSRegister extends JFrame {
                 confirmPass.setBounds(confirmPassLocationX, confirmPassLocationY, confirmPassWidth, confirmPassHeight);
                 add(confirmPass, new AbsoluteConstraints(confirmPassLocationX, confirmPassLocationY, confirmPassWidth, confirmPassHeight));
                 confirmPass.setForeground(new java.awt.Color(0, 0, 0));
-                confirmPass.setFont(new java.awt.Font("Tahoma", 0, 14));
+                confirmPass.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
 
                 confirmPass.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 confirmPass.setText("CONFIRM PASSWORD :");
@@ -456,7 +451,7 @@ public class PRMSRegister extends JFrame {
                         confirmPasswordInput.setOpaque(false);
                         confirmPasswordInput.setCaretColor(new java.awt.Color(0,0,0));
                         confirmPasswordInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0,0,0)));
-                        confirmPasswordInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                        confirmPasswordInput.setFont(new java.awt.Font("Tahoma", Font.PLAIN, 14));
                         confirmPasswordInput.setVisible(true);
    
         // Register Title (JLabel) Declarations.
@@ -473,7 +468,7 @@ public class PRMSRegister extends JFrame {
         registerTitle.setBounds(registerTitleLocationX, registerTitleLocationY, registerTitleWidth, registerTitleHeight);
         add(registerTitle, new AbsoluteConstraints(registerTitleLocationX, registerTitleLocationY, registerTitleWidth, registerTitleHeight));
         registerTitle.setForeground(new java.awt.Color(0, 0, 0));
-        registerTitle.setFont(new java.awt.Font("Impact", 0, 30));
+        registerTitle.setFont(new java.awt.Font("Impact", Font.PLAIN, 30));
         
         registerTitle.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         registerTitle.setText("REGISTER ACCOUNT");
@@ -493,7 +488,7 @@ public class PRMSRegister extends JFrame {
         registerButton.setBounds(registerButtonLocationX, registerButtonLocationY, registerButtonWidth, registerButtonHeigth);
         add(registerButton, new AbsoluteConstraints(registerButtonLocationX, registerButtonLocationY, registerButtonWidth, registerButtonHeigth));
         registerButton.setBackground(new java.awt.Color(248, 249, 250));
-        registerButton.setFont(new java.awt.Font("Impact", 0, 16));
+        registerButton.setFont(new java.awt.Font("Impact", Font.PLAIN, 16));
         registerButton.setFocusPainted(false);
         registerButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         registerButton.setHorizontalTextPosition(javax.swing.SwingConstants.TRAILING);
