@@ -9,13 +9,13 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-public final class PRMSDispatcher extends JFrame {
+public final class PMDSDispatch extends JFrame {
 
     // FRAME DRAGGER
     int xMouse;
     int yMouse;
 
-    public PRMSDispatcher() {
+    public PMDSDispatch() {
         MainGUIWindow();
 
     }
@@ -778,10 +778,10 @@ public final class PRMSDispatcher extends JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PRMSRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PMDSDispatch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }/*/ /*/
 
-        PRMSDispatcher Open = new PRMSDispatcher();
+        PMDSDispatch Open = new PMDSDispatch();
         Open.setVisible(true);
     }
 }

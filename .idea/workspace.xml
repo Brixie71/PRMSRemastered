@@ -3,29 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8c2d3f34-e882-468d-aaf8-c42096bc7a3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRMSRemastered.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PRMSRemastered.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSDispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSDispatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/PRMSClasses/PRMSRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSDispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSDispatcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSOfficer$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSOfficer$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSOfficer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PRMSRemastered/PRMSClasses/PRMSRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PRMSClasses/PRMSDispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PRMSClasses/PRMSLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSOfficer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PRMSClasses/PRMSRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PRMSClasses/PRMSRegister.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646283657553</updated>
-      <workItem from="1646283659006" duration="2142000" />
+      <workItem from="1646283659006" duration="2618000" />
     </task>
     <servers />
   </component>

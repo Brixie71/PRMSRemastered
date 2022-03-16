@@ -10,6 +10,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,18 +22,19 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
-public class PRMSLogin extends JFrame {
+public class PMDSLogin extends JFrame {
     
     // Java Swing Components Declarations.
     
     private JPanel loginPane, loginBackground;
     private JLabel loginTitle, personelPicture, usernameText, passwordText, loginPaneBackground;
     private JLabel companyLogo, companyName, cNameShadow, programName, pNameShadow;
-    private JTextField userInput;
-    private JPasswordField passwordInput;
-    private JButton loginButton, registerButton;
+    protected JTextField userInput;
+    protected JPasswordField passwordInput;
+    protected JButton loginButton;
+    protected JButton registerButton;
 
-    public PRMSLogin(){
+    public PMDSLogin(){
         MainGUIComponents();
     }
 
@@ -71,14 +74,14 @@ public class PRMSLogin extends JFrame {
         //JFrame Decoration.
         setUndecorated(true);
         setOpacity(1.0f);
-        setTitle("PRMS : Brion Tactical Systems");
+        setTitle("PMDS : Brion Tactical Systems");
         setLayout(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // CENTER POPUP MAIN WINDOW.
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dimension.width / 2 - this.getWidth() / 2, dimension.height / 2 - this.getHeight() / 2);
+        setLocation(dimension.width / 2 - this.getWidth() / 2, dimension.height / 2 - this.getHeight() / 2);
 
         // Login Pane (JPanel) Declarations.
 
@@ -221,7 +224,7 @@ public class PRMSLogin extends JFrame {
             public void mousePressed(MouseEvent e) {
                 loginButton.setBackground(new java.awt.Color(0, 0, 0));
                 loginButton.setForeground(new java.awt.Color(255,255,255));
-
+                
             }
 
             @Override
@@ -242,7 +245,7 @@ public class PRMSLogin extends JFrame {
             }
 
             });
-
+            
             // Register Button (JButton) Declarations.
 
             final int registerButtonLocationX = 50;
@@ -268,34 +271,34 @@ public class PRMSLogin extends JFrame {
             registerButton.setBorderPainted(false);
             registerButton.setIconTextGap(-2);
 
-        registerButton.addMouseListener(new MouseAdapter(){
+            registerButton.addMouseListener(new MouseAdapter(){
 
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    registerButton.setBackground(new java.awt.Color(0, 0, 0));
-                    registerButton.setForeground(new java.awt.Color(255,255,255));
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        registerButton.setBackground(new java.awt.Color(0, 0, 0));
+                        registerButton.setForeground(new java.awt.Color(255,255,255));
 
-                }
+                    }
 
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    registerButton.setBackground(new java.awt.Color(248, 249, 250));
-                    registerButton.setForeground(new java.awt.Color(0,0,0));
-                }
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        registerButton.setBackground(new java.awt.Color(248, 249, 250));
+                        registerButton.setForeground(new java.awt.Color(0,0,0));
+                    }
 
-                @Override
-                public void mouseEntered(MouseEvent e){
+                    @Override
+                    public void mouseEntered(MouseEvent e){
 
-                    registerButton.setBackground(new java.awt.Color(150,150,150));
-                }
+                        registerButton.setBackground(new java.awt.Color(150,150,150));
+                    }
 
-                @Override
-                public void mouseExited(MouseEvent e){
-                    registerButton.setBackground(new java.awt.Color(248, 249, 250));
-                    registerButton.setForeground(new java.awt.Color(0,0,0));
-                }
+                    @Override
+                    public void mouseExited(MouseEvent e){
+                        registerButton.setBackground(new java.awt.Color(248, 249, 250));
+                        registerButton.setForeground(new java.awt.Color(0,0,0));
+                    }
 
-            });
+                });
 
                 // Login Pane Background (JLabel) Decorations.
 
@@ -400,11 +403,11 @@ public class PRMSLogin extends JFrame {
         pNameShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
 
         programName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        programName.setText("POLICE RECORD MANAGEMENT SYSTEM");
+        programName.setText("POLICE MOBILE AND DISPATCH SYSTEM");
         programName.setVisible(true);
 
         pNameShadow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pNameShadow.setText("POLICE RECORD MANAGEMENT SYSTEM");
+        pNameShadow.setText("POLICE MOBILE AND DISPATCH SYSTEM");
         pNameShadow.setVisible(true);
 
         // Login Background (JPanel) Decorations.
@@ -456,7 +459,7 @@ public class PRMSLogin extends JFrame {
         yMouse = evt.getY();
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -466,11 +469,10 @@ public class PRMSLogin extends JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PRMSRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PMDSLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }/*/ /*/
-
-        PRMSLogin Open = new PRMSLogin();
+        
+        PMDSLogin Open = new PMDSLogin();
         Open.setVisible(true);
-
     }
 }
