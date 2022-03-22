@@ -11,8 +11,6 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,10 +32,7 @@ public final class PMDSDispatch extends JFrame {
     
     // </editor-fold>
     
-    // FRAME DRAGGER
-    int xMouse;
-    int yMouse;
-
+    
     public PMDSDispatch() {
         MainGUIWindow();
 
@@ -123,10 +118,10 @@ public final class PMDSDispatch extends JFrame {
             final int navigationPanelLocationY = 126;
 
             navigationBar.setBounds(navigationPanelLocationX, navigationPanelLocationY, navigationPanelWidth, navigationPanelHeight);
-            add(navigationBar, new AbsoluteConstraints(navigationPanelLocationX, navigationPanelLocationY, navigationPanelWidth, navigationPanelHeight));
+            add(navigationBar);
             navigationBar.setBackground(new java.awt.Color(0, 0, 32));
             navigationBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
-            navigationBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            navigationBar.setLayout(null);
 
             // Navigation Bar Label (JPanel) Decorations.
                 final int navigationTabHeight = 50;
@@ -135,14 +130,14 @@ public final class PMDSDispatch extends JFrame {
                 final int navigationTabLocationY = 6;
 
                 navigationBarLabel.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
-                navigationBar.add(navigationBarLabel, new AbsoluteConstraints(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight));
+                navigationBar.add(navigationBarLabel);
                 navigationBarLabel.setBackground(new java.awt.Color(255, 208, 0));
                 navigationBarLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                navigationBarLabel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                navigationBarLabel.setLayout(null);
 
                 // nBLText (JLabel) Decorations.
-                    nBLText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
-                    navigationBarLabel.add(nBLText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
+                    nBLText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
+                    navigationBarLabel.add(nBLText);
                     nBLText.setForeground(new java.awt.Color(0, 0, 0));
                     nBLText.setFont(new java.awt.Font("Verdana", Font.BOLD, 14));
                     nBLText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -153,14 +148,14 @@ public final class PMDSDispatch extends JFrame {
                     final int dBHTabY = 60;
 
                     dBHTab.setBounds(dBHTAbX, dBHTabY, navigationTabWidth, navigationTabHeight);
-                    navigationBar.add(dBHTab, new AbsoluteConstraints(dBHTAbX, dBHTabY, navigationTabWidth, navigationTabHeight));
+                    navigationBar.add(dBHTab);
                     dBHTab.setBackground(new java.awt.Color(21, 21, 21));
-                    dBHTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-                    dBHTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                    dBHTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                    dBHTab.setLayout(null);
 
                     // Home Tab Text(JLabel) Decorations.
-                        homeTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
-                        dBHTab.add(homeTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
+                        homeTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
+                        dBHTab.add(homeTabText);
                         homeTabText.setForeground(new java.awt.Color(255, 255, 255));
                         homeTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
                         homeTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -173,7 +168,7 @@ public final class PMDSDispatch extends JFrame {
                             final int homeTabIndicatorLocationY = 2;
 
                             homeTabIndicator.setBounds(homeTabIndicatorLocationX, homeTabIndicatorLocationY, homeTabIndicatorWidth, homeTabIndicatorHeight);
-                            dBHTab.add(homeTabIndicator, new AbsoluteConstraints(homeTabIndicatorLocationX, homeTabIndicatorLocationY, homeTabIndicatorWidth, homeTabIndicatorHeight));
+                            dBHTab.add(homeTabIndicator);
                             homeTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
                             homeTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             homeTabIndicator.setVisible(true);
@@ -183,14 +178,14 @@ public final class PMDSDispatch extends JFrame {
                     final int dBDTabY = 114;
 
                     dBDTab.setBounds(dBDTabX, dBDTabY, navigationTabWidth, navigationTabHeight);
-                    navigationBar.add(dBDTab, new AbsoluteConstraints(dBDTabX, dBDTabY, navigationTabWidth, navigationTabHeight));
+                    navigationBar.add(dBDTab);
                     dBDTab.setBackground(new java.awt.Color(21, 21, 21));
-                    dBDTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-                    dBDTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                    dBDTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                    dBDTab.setLayout(null);
 
                     // Database Tab Text (JLabel) Decorations.      
-                    databaseTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
-                    dBDTab.add(databaseTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
+                    databaseTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
+                    dBDTab.add(databaseTabText);
                     databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
                     databaseTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
                     databaseTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,7 +199,7 @@ public final class PMDSDispatch extends JFrame {
 
                         // Database Tab Indicator (JPanel) Decorations.
                             databaseTabIndicator.setBounds(databaseTabIndicatorLocationX, databaseTabIndicatorLocationY, databaseTabIndicatorWidth, databaseTabIndicatorHeight);
-                            dBDTab.add(databaseTabIndicator, new AbsoluteConstraints(databaseTabIndicatorLocationX, databaseTabIndicatorLocationY, databaseTabIndicatorWidth, databaseTabIndicatorHeight));
+                            dBDTab.add(databaseTabIndicator);
                             databaseTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
                             databaseTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             databaseTabIndicator.setVisible(false);
@@ -214,14 +209,14 @@ public final class PMDSDispatch extends JFrame {
                     final int profileTabY = 168;
 
                     profileTab.setBounds(profileTabX, profileTabY, navigationTabWidth, navigationTabHeight);
-                    navigationBar.add(profileTab, new AbsoluteConstraints(profileTabX, profileTabY, navigationTabWidth, navigationTabHeight));
+                    navigationBar.add(profileTab);
                     profileTab.setBackground(new java.awt.Color(21, 21, 21));
-                    profileTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-                    profileTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                    profileTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                    profileTab.setLayout(null);
 
                     // Officer Profile Tab Text (JLabel) Decorations.
-                        profileTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
-                        profileTab.add(profileTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
+                        profileTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
+                        profileTab.add(profileTabText);
                         profileTabText.setForeground(new java.awt.Color(255, 255, 255));
                         profileTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
                         profileTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -234,7 +229,7 @@ public final class PMDSDispatch extends JFrame {
                             final int profileTabIndicatorLocationY = 2;
 
                             profileTabIndicator.setBounds(profileTabIndicatorLocationX, profileTabIndicatorLocationY, profileTabIndicatorWidth, profileTabIndicatorHeight);
-                            profileTab.add(profileTabIndicator, new AbsoluteConstraints(profileTabIndicatorLocationX, profileTabIndicatorLocationY, profileTabIndicatorWidth, profileTabIndicatorHeight));
+                            profileTab.add(profileTabIndicator);
                             profileTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
                             profileTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             profileTabIndicator.setVisible(false);
@@ -245,15 +240,15 @@ public final class PMDSDispatch extends JFrame {
                     final int aboutTabLocationY = 222;
 
                     aboutTab.setBounds(aboutTabLocationX, aboutTabLocationY, navigationTabWidth, navigationTabHeight);
-                    navigationBar.add(aboutTab, new AbsoluteConstraints(aboutTabLocationX, aboutTabLocationY, navigationTabWidth, navigationTabHeight));
+                    navigationBar.add(aboutTab);
                     aboutTab.setBackground(new java.awt.Color(21, 21, 21));
-                    aboutTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-                    aboutTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                    aboutTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                    aboutTab.setLayout(null);
 
                     // About Software Tab (JText) Decorations.
 
-                        aboutTabText.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
-                        aboutTab.add(aboutTabText, new AbsoluteConstraints(0, 0, navigationTabWidth, navigationTabHeight));
+                        aboutTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
+                        aboutTab.add(aboutTabText);
                         aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
                         aboutTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
                         aboutTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -267,7 +262,7 @@ public final class PMDSDispatch extends JFrame {
                             final int aboutTabIndicatorHeigth = 46;
 
                             aboutTabIndicator.setBounds(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth);
-                            aboutTab.add(aboutTabIndicator, new AbsoluteConstraints(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth));
+                            aboutTab.add(aboutTabIndicator);
                             aboutTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
                             aboutTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             aboutTabIndicator.setVisible(false);
@@ -282,10 +277,10 @@ public final class PMDSDispatch extends JFrame {
             final int titlePanelLocationY = 0;
 
             titleBar.setBounds(titlePanelLocationX, titlePanelLocationY, titlePanelWidth, titlePanelHeight);
-            add(titleBar, new AbsoluteConstraints(titlePanelLocationX, titlePanelLocationY, titlePanelWidth, titlePanelHeight));
+            add(titleBar);
             titleBar.setBackground(new java.awt.Color(0, 0, 32));
             titleBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
-            titleBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            titleBar.setLayout(null);
 
             // Title Bar Frame dragging Declaration.
             titleBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -307,10 +302,10 @@ public final class PMDSDispatch extends JFrame {
                 final int logoLocationY = 5;
 
                 logo.setBounds(logoLocationX, logoLocationY, logoWidth, logoHeight);
-                titleBar.add(logo, new AbsoluteConstraints(logoLocationX, logoLocationY, logoWidth, logoHeight));
+                titleBar.add(logo);
                 logo.setForeground(new java.awt.Color(0, 0, 0));
                 logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                logo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                logo.setLayout(null);
 
                 ImageIcon logoGetter = new ImageIcon("src\\PRMS Files\\logo\\BTSLogo1.png");
                 Image getLogo = logoGetter.getImage();
@@ -327,12 +322,12 @@ public final class PMDSDispatch extends JFrame {
                 final int cNameShadowLocationY = 54;
 
                 companyName.setBounds(companyNameLocationX, companyNameLocationY, companyNameWidth, companyNameHeight);
-                titleBar.add(companyName, new AbsoluteConstraints(companyNameLocationX, companyNameLocationY, companyNameWidth, companyNameHeight));
+                titleBar.add(companyName);
                 companyName.setForeground(new java.awt.Color(255, 208, 0));
                 companyName.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 20));
 
                 cNameShadow.setBounds(companyNameLocationX, cNameShadowLocationY, companyNameWidth, companyNameHeight);
-                titleBar.add(cNameShadow, new AbsoluteConstraints(companyNameLocationX, cNameShadowLocationY, companyNameWidth, companyNameHeight));
+                titleBar.add(cNameShadow);
                 cNameShadow.setForeground(new java.awt.Color(0, 0, 0));
                 cNameShadow.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 20));
 
@@ -361,7 +356,7 @@ public final class PMDSDispatch extends JFrame {
                 final int programNameLocationY = 70;
 
                 programName.setBounds(programNameLocationX, programNameLocationY, programNameWidth, programNameHeight);
-                titleBar.add(programName, new AbsoluteConstraints(programNameLocationX, programNameLocationY, programNameWidth, programNameHeight));
+                titleBar.add(programName);
                 programName.setForeground(new java.awt.Color(255, 255, 255));
                 programName.setFont(new java.awt.Font("Impact", Font.PLAIN, 25));
                 programName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
@@ -380,10 +375,10 @@ public final class PMDSDispatch extends JFrame {
                 final int dashBarLocationY = 126;
 
                 dashBarHome.setBounds(dashBarLocationX, dashBarLocationY, dashBarWidth, dashBarHeight);
-                add(dashBarHome, new AbsoluteConstraints(dashBarLocationX, dashBarLocationY, dashBarWidth, dashBarHeight));
+                add(dashBarHome);
                 dashBarHome.setBackground(new java.awt.Color(0, 0, 32));
                 dashBarHome.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
-                dashBarHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                dashBarHome.setLayout(null);
 
             // Home Dashbar Name (JLabel) Decorations.
                 final int homeTextHeight = 30;
@@ -392,7 +387,7 @@ public final class PMDSDispatch extends JFrame {
                 final int homeTextY = 548;
 
                 homeText.setBounds(homeTextX, homeTextY, homeTextWidth, homeTextHeight);
-                dashBarHome.add(homeText, new AbsoluteConstraints(homeTextX, homeTextY, homeTextWidth, homeTextHeight));
+                dashBarHome.add(homeText);
                 homeText.setForeground(new java.awt.Color(255, 255, 255));
                 homeText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
                 homeText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -406,10 +401,10 @@ public final class PMDSDispatch extends JFrame {
                 final int dBHBackgroundLocationY = 3;
 
                 dBHBackground.setBounds(dBHBackgroundLocationX, dBHBackgroundLocationY, dBHBackgroundWidth, dBHBackgroundHeight);
-                dashBarHome.add(dBHBackground, new AbsoluteConstraints(dBHBackgroundLocationX, dBHBackgroundLocationY, dBHBackgroundWidth, dBHBackgroundHeight));
+                dashBarHome.add(dBHBackground);
                 dBHBackground.setForeground(new java.awt.Color(0, 0, 0));
                 dBHBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                dBHBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                dBHBackground.setLayout(null);
 
                 ImageIcon icon = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
                 Image homeBackground = icon.getImage();
@@ -426,7 +421,7 @@ public final class PMDSDispatch extends JFrame {
                 final int databaseTextY = 548;
 
                 databaseText.setBounds(databaseTextX, databaseTextY, databaseTextWidth, databaseTextHeight);
-                dashbarDatabase.add(databaseText, new AbsoluteConstraints(databaseTextX, databaseTextY, databaseTextWidth, databaseTextHeight));
+                dashbarDatabase.add(databaseText);
                 databaseText.setForeground(new java.awt.Color(255, 255, 255));
                 databaseText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
                 databaseText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -440,10 +435,10 @@ public final class PMDSDispatch extends JFrame {
                 final int dashbarDatabaseLocationY = 126;
 
                 dashbarDatabase.setBounds(dashbarDatabaseLocationX, dashbarDatabaseLocationY, dashbarDatabaseWidth, dashbarDatabaseHeight);
-                add(dashbarDatabase, new AbsoluteConstraints(dashbarDatabaseLocationX, dashbarDatabaseLocationY, dashbarDatabaseWidth, dashbarDatabaseHeight));
+                add(dashbarDatabase);
                 dashbarDatabase.setBackground(new java.awt.Color(0, 0, 32));
                 dashbarDatabase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
-                dashbarDatabase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                dashbarDatabase.setLayout(null);
 
             // dBDBackground (JLabel) Decorations.
                 final int dBDBackgroundHeight = 568;
@@ -451,11 +446,11 @@ public final class PMDSDispatch extends JFrame {
                 final int dBDBackgroundLocationX = 3;
                 final int dBDBackgroundLocationY = 3;
 
-                dBDBackground.setBounds(dBHBackgroundLocationX, dBHBackgroundLocationY, dBHBackgroundWidth, dBHBackgroundHeight);
-                dashbarDatabase.add(dBDBackground, new AbsoluteConstraints(dBDBackgroundLocationX, dBDBackgroundLocationY, dBDBackgroundWidth, dBDBackgroundHeight));
+                dBDBackground.setBounds(dBDBackgroundLocationX, dBDBackgroundLocationY, dBDBackgroundWidth, dBDBackgroundHeight);
+                dashbarDatabase.add(dBDBackground);
                 dBDBackground.setForeground(new java.awt.Color(0, 0, 0));
                 dBDBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                dBDBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                dBDBackground.setLayout(null);
 
                 ImageIcon icon2 = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
                 Image databaseBackground = icon2.getImage();
@@ -472,7 +467,7 @@ public final class PMDSDispatch extends JFrame {
                 final int officerProfileTextY = 548;
 
                 officerProfileText.setBounds(officerProfileTextX, officerProfileTextY, officerProfileTextWidth, officerProfileTextHeight);
-                dashbarProfile.add(officerProfileText, new AbsoluteConstraints(officerProfileTextX, officerProfileTextY, officerProfileTextWidth, officerProfileTextHeight));
+                dashbarProfile.add(officerProfileText);
                 officerProfileText.setForeground(new java.awt.Color(255, 255, 255));
                 officerProfileText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
                 officerProfileText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -486,10 +481,10 @@ public final class PMDSDispatch extends JFrame {
                 final int dashbarProfileLocationY = 126;
 
                 dashbarProfile.setBounds(dashbarProfileLocationX, dashbarProfileLocationY, dashbarProfileWidth, dashbarProfileHeight);
-                add(dashbarProfile, new AbsoluteConstraints(dashbarProfileLocationX, dashbarProfileLocationY, dashbarProfileWidth, dashbarProfileHeight));
+                add(dashbarProfile);
                 dashbarProfile.setBackground(new java.awt.Color(0, 0, 32));
                 dashbarProfile.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
-                dashbarProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                dashbarProfile.setLayout(null);
                 dashbarProfile.setVisible(false);
 
             // dOPBackground (JLAbel) Decorations.
@@ -499,10 +494,10 @@ public final class PMDSDispatch extends JFrame {
                 final int dOPBackgroundLocationY = 3;
 
                 dOPBackground.setBounds(dOPBackgroundLocationX, dOPBackgroundLocationY, dOPBackgroundWidth, dOPBackgroundHeight);
-                dashbarProfile.add(dOPBackground, new AbsoluteConstraints(dOPBackgroundLocationX, dOPBackgroundLocationY, dOPBackgroundWidth, dOPBackgroundHeight));
+                dashbarProfile.add(dOPBackground);
                 dOPBackground.setForeground(new java.awt.Color(0, 0, 0));
                 dOPBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                dOPBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                dOPBackground.setLayout(null);
 
                 ImageIcon icon3 = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
                 Image profileBackground = icon3.getImage();
@@ -519,7 +514,7 @@ public final class PMDSDispatch extends JFrame {
                 final int dashbarAboutTextHeight = 30;
 
                 aboutDashBarText.setBounds(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight);
-                dashbarAbout.add(aboutDashBarText, new AbsoluteConstraints(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight));
+                dashbarAbout.add(aboutDashBarText);
                 aboutDashBarText.setForeground(new java.awt.Color(255, 255, 255));
                 aboutDashBarText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
                 aboutDashBarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -534,10 +529,10 @@ public final class PMDSDispatch extends JFrame {
                 final int dashbarAboutHeight = 574;
 
                 dashbarAbout.setBounds(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight);
-                add(dashbarAbout, new AbsoluteConstraints(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight));
+                add(dashbarAbout);
                 dashbarAbout.setBackground(new java.awt.Color(0, 0, 32));
                 dashbarAbout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
-                dashbarAbout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                dashbarAbout.setLayout(null);
                 dashbarAbout.setVisible(false);
 
             // DashBar AboutBackground (JLAbel) Decorations.
@@ -547,10 +542,10 @@ public final class PMDSDispatch extends JFrame {
                 final int aboutBackgroundLocationY = 3;
 
                 aboutBackground.setBounds(aboutBackgroundLocationX, aboutBackgroundLocationY, aboutBackgroundWidth, aboutBackgroundHeight);
-                dashbarAbout.add(aboutBackground, new AbsoluteConstraints(aboutBackgroundLocationX, aboutBackgroundLocationY, aboutBackgroundWidth, aboutBackgroundHeight));
+                dashbarAbout.add(aboutBackground);
                 aboutBackground.setForeground(new java.awt.Color(0, 0, 0));
                 aboutBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                aboutBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+                aboutBackground.setLayout(null);
 
                 ImageIcon icon4 = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
                 Image getAboutBackground = icon4.getImage();
@@ -742,6 +737,10 @@ public final class PMDSDispatch extends JFrame {
         pack();
         setLocationRelativeTo(null);
     }
+    
+    // FRAME DRAGGER
+    int xMouse;
+    int yMouse;
 
     private void titleBarMouseDragged(java.awt.event.MouseEvent evt) {
         // JFRAME DRAGGER
@@ -761,7 +760,7 @@ public final class PMDSDispatch extends JFrame {
 
         try {
             for ( javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels() ) {
-                if ( "Windows".equals(info.getName()) ) {
+                if ( "Nimbus".equals(info.getName()) ) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
