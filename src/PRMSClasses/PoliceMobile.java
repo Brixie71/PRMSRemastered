@@ -14,8 +14,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
-public final class PMDSDispatch extends JFrame {
+import static PRMSClasses.PMDSLogin.IronShark;
+import static PRMSClasses.PMDSLogin.Quicksand; 
+import static PRMSClasses.PMDSLogin.Gepestev;
+import static PRMSClasses.PMDSLogin.minimize;
+import javax.swing.JCheckBox;
+
+
+
+public final class PoliceMobile extends JFrame {
     
     
     // <editor-fold defaultstate="collapsed" desc="<<< Component Declarations.">
@@ -26,19 +42,39 @@ public final class PMDSDispatch extends JFrame {
     
     JLabel nBLText, homeTabText, databaseTabText, profileTabText, aboutTabText,
             logo, companyName, cNameShadow, programName, 
-            dBHBackground, homeText, databaseText, dBDBackground, officerProfileText, dOPBackground, aboutDashBarText, aboutBackground;
+            dBHBackground, homeText, databaseText, dBDBackground, officerProfileText, dOPBackground, aboutDashBarText, aboutBackground,
+            unitStatusText, UserLogsText;
     
-    Font IronShark;
+    JRadioButton AvailabilityA, AvailabilityE;
+    
+    JCheckBox SirenToggle, EMSLights;
+    
+    ButtonGroup UnitStatus;
+    
+    JTextArea userLogsInput;
+    
+    JScrollPane userLogsScroller;
+            
+        
+    
+    // FRAME DRAGGER
+    int xMouse;
+    int yMouse;
+    
+    
     
     // </editor-fold>
     
     
-    public PMDSDispatch() {
-        MainGUIWindow();
+    public PoliceMobile() {
+        
+        SetComponentLookAndFeel();
+        
+        PoliceMobileComponents();
 
     }
 
-    private void MainGUIWindow() {
+    private void PoliceMobileComponents() {
 
         // <editor-fold defaultstate="collapsed" desc="<<< JFrame Container.">
         // JFrame Declaration
@@ -86,7 +122,7 @@ public final class PMDSDispatch extends JFrame {
         dashbarDatabase = new JPanel();
         dashbarProfile = new JPanel();
         dashbarAbout = new JPanel();
-
+        
         nBLText = new JLabel();
         homeTabText = new JLabel();
         databaseTabText = new JLabel();
@@ -106,12 +142,46 @@ public final class PMDSDispatch extends JFrame {
         dOPBackground = new JLabel();
         aboutDashBarText = new JLabel();
         aboutBackground = new JLabel();
+        
+        unitStatusText = new JLabel();
+        AvailabilityA = new JRadioButton();
+        AvailabilityE = new JRadioButton();
+        UnitStatus = new ButtonGroup();
+        SirenToggle = new JCheckBox();
+        EMSLights = new JCheckBox();     
+        UserLogsText = new JLabel();
+        userLogsInput = new JTextArea();
+        userLogsScroller = new JScrollPane();
+        
+        minimize = new JButton();
+        
         // </editor-fold>
 
+        // CUSTOM FONTS 
+        try {
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                
+                // FOR COMPANY NAME
+                IronShark = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")).deriveFont(18f);
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")));
+                
+                // FOR THE ENTIRE SYSTEM
+                Quicksand = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Quicksand-Regular.ttf")).deriveFont(18f);
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Quicksand-Regular.ttf")));
+                
+                // FOR THE SYSTEM NAME
+                Gepestev = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Gepestev.ttf")).deriveFont(18f);
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Gepestev.ttf")));
+
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        
         // <editor-fold defaultstate="collapsed" desc="<<< JPanel Declarations.">
         // <editor-fold defaultstate="collapsed" desc="<<< Navigation Bar Components.">
 
         // Navigation Bar (JPanel) Decorations.
+        
             final int navigationPanelHeight = 574;
             final int navigationPanelWidth = 202;
             final int navigationPanelLocationX = 0;
@@ -119,7 +189,7 @@ public final class PMDSDispatch extends JFrame {
 
             navigationBar.setBounds(navigationPanelLocationX, navigationPanelLocationY, navigationPanelWidth, navigationPanelHeight);
             add(navigationBar);
-            navigationBar.setBackground(new java.awt.Color(0, 0, 32));
+            navigationBar.setBackground(new java.awt.Color(10, 10, 10));
             navigationBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
             navigationBar.setLayout(null);
 
@@ -131,23 +201,32 @@ public final class PMDSDispatch extends JFrame {
 
                 navigationBarLabel.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
                 navigationBar.add(navigationBarLabel);
-                navigationBarLabel.setBackground(new java.awt.Color(255, 208, 0));
-                navigationBarLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                navigationBarLabel.setBackground(new java.awt.Color(0, 29, 61));
+                navigationBarLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.SoftBevelBorder.RAISED));
                 navigationBarLabel.setLayout(null);
 
                 // nBLText (JLabel) Decorations.
                     nBLText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                     navigationBarLabel.add(nBLText);
-                    nBLText.setForeground(new java.awt.Color(0, 0, 0));
-                    nBLText.setFont(new java.awt.Font("Verdana", Font.BOLD, 14));
+                    nBLText.setForeground(new java.awt.Color(255, 255, 255));
+                    nBLText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
                     nBLText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                    nBLText.setIconTextGap(15);
                     nBLText.setText("Navigation Bar");
+                    
+                    ImageIcon navIcon = new ImageIcon("src\\PRMS Files\\icons\\Navigation_Bar.png");
+                    Image getNavIcon = navIcon.getImage();
+                    Image scaleNavIcon = getNavIcon.getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+                    ImageIcon displayNavIcon = new ImageIcon(scaleNavIcon);
+                    nBLText.setIcon(displayNavIcon);
 
                 // Home Tab (JPanel) Decorations.
-                    final int dBHTAbX = 6;
+                    final int dBHTAbX = 3;
                     final int dBHTabY = 60;
+                    final int dBHTabWidth = 196;
+                    final int dBHTabHeight = 50;
 
-                    dBHTab.setBounds(dBHTAbX, dBHTabY, navigationTabWidth, navigationTabHeight);
+                    dBHTab.setBounds(dBHTAbX, dBHTabY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(dBHTab);
                     dBHTab.setBackground(new java.awt.Color(21, 21, 21));
                     dBHTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -157,14 +236,14 @@ public final class PMDSDispatch extends JFrame {
                         homeTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                         dBHTab.add(homeTabText);
                         homeTabText.setForeground(new java.awt.Color(255, 255, 255));
-                        homeTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
+                        homeTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
                         homeTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         homeTabText.setText("Home");
 
                         // Home Tab Indicator (JPanel) Decorations.
                             final int homeTabIndicatorHeight = 46;
                             final int homeTabIndicatorWidth = 10;
-                            final int homeTabIndicatorLocationX = 178;
+                            final int homeTabIndicatorLocationX = 2;
                             final int homeTabIndicatorLocationY = 2;
 
                             homeTabIndicator.setBounds(homeTabIndicatorLocationX, homeTabIndicatorLocationY, homeTabIndicatorWidth, homeTabIndicatorHeight);
@@ -174,10 +253,10 @@ public final class PMDSDispatch extends JFrame {
                             homeTabIndicator.setVisible(true);
 
                 // Database Tab (JPanel) Decorations.
-                    final int dBDTabX = 6;
+                    final int dBDTabX = 3;
                     final int dBDTabY = 114;
 
-                    dBDTab.setBounds(dBDTabX, dBDTabY, navigationTabWidth, navigationTabHeight);
+                    dBDTab.setBounds(dBDTabX, dBDTabY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(dBDTab);
                     dBDTab.setBackground(new java.awt.Color(21, 21, 21));
                     dBDTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -187,14 +266,14 @@ public final class PMDSDispatch extends JFrame {
                     databaseTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                     dBDTab.add(databaseTabText);
                     databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
-                    databaseTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
+                    databaseTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
                     databaseTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                     databaseTabText.setText("Database");
 
                     // Database Tab Indicator (JPanel) Declarations.
                         final int databaseTabIndicatorHeight = 46;
                         final int databaseTabIndicatorWidth = 10;
-                        final int databaseTabIndicatorLocationX = 178;
+                        final int databaseTabIndicatorLocationX = 2;
                         final int databaseTabIndicatorLocationY = 2;
 
                         // Database Tab Indicator (JPanel) Decorations.
@@ -205,10 +284,10 @@ public final class PMDSDispatch extends JFrame {
                             databaseTabIndicator.setVisible(false);
 
                 // Officer Profile Tab (JPanel) Decorations.
-                    final int profileTabX = 6;
+                    final int profileTabX = 3;
                     final int profileTabY = 168;
 
-                    profileTab.setBounds(profileTabX, profileTabY, navigationTabWidth, navigationTabHeight);
+                    profileTab.setBounds(profileTabX, profileTabY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(profileTab);
                     profileTab.setBackground(new java.awt.Color(21, 21, 21));
                     profileTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -218,14 +297,14 @@ public final class PMDSDispatch extends JFrame {
                         profileTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                         profileTab.add(profileTabText);
                         profileTabText.setForeground(new java.awt.Color(255, 255, 255));
-                        profileTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
+                        profileTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
                         profileTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         profileTabText.setText("Officer Profile");
 
                         // Officer Profile Tab Indicator (JPanel) Decorations.
                             final int profileTabIndicatorHeight = 46;
                             final int profileTabIndicatorWidth = 10;
-                            final int profileTabIndicatorLocationX = 178;
+                            final int profileTabIndicatorLocationX = 2;
                             final int profileTabIndicatorLocationY = 2;
 
                             profileTabIndicator.setBounds(profileTabIndicatorLocationX, profileTabIndicatorLocationY, profileTabIndicatorWidth, profileTabIndicatorHeight);
@@ -236,10 +315,10 @@ public final class PMDSDispatch extends JFrame {
 
                 // About Software Tab (JPanel) Decorations.
 
-                    final int aboutTabLocationX = 6;
+                    final int aboutTabLocationX = 3;
                     final int aboutTabLocationY = 222;
 
-                    aboutTab.setBounds(aboutTabLocationX, aboutTabLocationY, navigationTabWidth, navigationTabHeight);
+                    aboutTab.setBounds(aboutTabLocationX, aboutTabLocationY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(aboutTab);
                     aboutTab.setBackground(new java.awt.Color(21, 21, 21));
                     aboutTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -250,22 +329,180 @@ public final class PMDSDispatch extends JFrame {
                         aboutTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                         aboutTab.add(aboutTabText);
                         aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
-                        aboutTabText.setFont(new java.awt.Font("Cambria", Font.BOLD, 14));
+                        aboutTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
                         aboutTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         aboutTabText.setText("About");
 
                         // About Software Tab Indicator (JPanel) Decorations.
 
-                            final int aboutTabIndicatorLocationX = 178;
+                            final int aboutTabIndicatorLocationX = 2;
                             final int aboutTabIndicatorLocationY = 2;
-                            final int aboutTabIndicatorWidth = 10;
-                            final int aboutTabIndicatorHeigth = 46;
+                            final int aboutTabIndicatorWidth     = 10;
+                            final int aboutTabIndicatorHeigth    = 46;
 
                             aboutTabIndicator.setBounds(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth);
                             aboutTab.add(aboutTabIndicator);
                             aboutTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
                             aboutTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             aboutTabIndicator.setVisible(false);
+                            
+            // Unit Status
+            
+            // Unit Status Text (JLabel) Decorations.
+            
+                final int unitStatusTextLocationX = 64;
+                final int unitStatusTextLocationY = 270;
+                final int unitStatusTextWidth     = 75;
+                final int unitStatusTextHeight    = 35;
+            
+                navigationBar.add(unitStatusText);
+                unitStatusText.setBounds(unitStatusTextLocationX, unitStatusTextLocationY, unitStatusTextWidth, unitStatusTextHeight);
+                unitStatusText.setForeground(new java.awt.Color(255, 255, 255));
+                unitStatusText.setFont(new java.awt.Font("Quicksand", Font.PLAIN, 14));
+                unitStatusText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                unitStatusText.setText("Unit Status");
+            
+            // Available Status (JRadioButton) Decorations.
+            
+                final int AvailableLocationX = 20;
+                final int AvailableLocationY = 300;
+                final int AvailableWidth     = 150;
+                final int AvailableHeight    = 35;
+
+                navigationBar.add(AvailabilityA);
+                AvailabilityA.setBounds(AvailableLocationX, AvailableLocationY, AvailableWidth, AvailableHeight);
+                AvailabilityA.setBackground(new java.awt.Color(248, 249, 250));
+                AvailabilityA.setFont(new java.awt.Font("Quicksand", Font.PLAIN, 16));
+                AvailabilityA.setFocusPainted(false);
+                AvailabilityA.setHorizontalAlignment(SwingConstants.LEADING);
+                AvailabilityA.setHorizontalTextPosition(SwingConstants.RIGHT);
+                AvailabilityA.setVerticalAlignment(SwingConstants.CENTER);
+                AvailabilityA.setVerticalTextPosition(SwingConstants.CENTER);
+
+                AvailabilityA.setOpaque(false);
+                AvailabilityA.setForeground(new java.awt.Color(255,255,255));
+                AvailabilityA.setText("Available");
+                AvailabilityA.setVisible(true);
+                
+            // Enrote (JRadioButton) Decorations.
+            
+                final int EnrouteLocationX = 20;
+                final int EnrouteLocationY = 330;
+                final int EnrouteWidth     = 150;
+                final int EnrouteHeight    = 35;
+
+                navigationBar.add(AvailabilityE);
+                AvailabilityE.setBounds(EnrouteLocationX, EnrouteLocationY, EnrouteWidth, EnrouteHeight);
+                AvailabilityE.setBackground(new java.awt.Color(248, 249, 250));
+                AvailabilityE.setFont(new java.awt.Font("Quicksand", Font.PLAIN, 16));
+                AvailabilityE.setFocusPainted(false);
+                AvailabilityE.setHorizontalAlignment(SwingConstants.LEADING);
+                AvailabilityE.setHorizontalTextPosition(SwingConstants.RIGHT);
+                AvailabilityE.setVerticalAlignment(SwingConstants.CENTER);
+                AvailabilityE.setVerticalTextPosition(SwingConstants.CENTER);
+
+                AvailabilityE.setOpaque(false);
+                AvailabilityE.setForeground(new java.awt.Color(255,255,255));
+                AvailabilityE.setText("Enroute");
+                AvailabilityE.setVisible(true);
+                
+                UnitStatus.add(AvailabilityA);
+                UnitStatus.add(AvailabilityE);
+                
+             // Sirens Toggle (JCheckBox) Decorations.
+            
+                final int sirenToggleLocationX = 10;
+                final int sirenToggleLocationY = 365;
+                final int sirenToggleWidth     = 65;
+                final int sirenToggleHeight    = 35;
+
+                navigationBar.add(SirenToggle);
+                SirenToggle.setBounds(sirenToggleLocationX, sirenToggleLocationY, sirenToggleWidth, sirenToggleHeight);
+                SirenToggle.setBackground(new java.awt.Color(248, 249, 250));
+                SirenToggle.setFont(new java.awt.Font("Cambria", Font.PLAIN, 16));
+                SirenToggle.setFocusPainted(false);
+                SirenToggle.setHorizontalAlignment(SwingConstants.LEADING);
+                SirenToggle.setHorizontalTextPosition(SwingConstants.RIGHT);
+                SirenToggle.setVerticalAlignment(SwingConstants.CENTER);
+                SirenToggle.setVerticalTextPosition(SwingConstants.CENTER);
+
+                SirenToggle.setOpaque(false);
+                SirenToggle.setForeground(new java.awt.Color(255,255,255));
+                SirenToggle.setText("Sirens");
+                SirenToggle.setVisible(true);
+                
+            // EMS Lights Toggle (JCheckBox) Decorations.
+            
+                final int EMSLightsLocationX = 90;
+                final int EMSLightsLocationY = 365;
+                final int EMSLightsWidth     = 100;
+                final int EMSLightsHeight    = 35;
+
+                navigationBar.add(EMSLights);
+                EMSLights.setBounds(EMSLightsLocationX, EMSLightsLocationY, EMSLightsWidth, EMSLightsHeight);
+                EMSLights.setBackground(new java.awt.Color(248, 249, 250));
+                EMSLights.setFont(new java.awt.Font("Cambria", Font.PLAIN, 16));
+                EMSLights.setFocusPainted(false);
+                EMSLights.setHorizontalAlignment(SwingConstants.LEADING);
+                EMSLights.setHorizontalTextPosition(SwingConstants.RIGHT);
+                EMSLights.setVerticalAlignment(SwingConstants.CENTER);
+                EMSLights.setVerticalTextPosition(SwingConstants.CENTER);
+
+                EMSLights.setOpaque(false);
+                EMSLights.setForeground(new java.awt.Color(255,255,255));
+                EMSLights.setText("EMS Lights");
+                EMSLights.setVisible(true);
+                
+            // User logs.
+            
+                // User Logs Text Label (JLabel) Decorations.
+                
+                final int userLogsTextLocationX = 10;
+                final int userLogsTextLocationY = 395;
+                final int userLogsTextWidth     = 80;
+                final int userLogsTextHeight    = 35;
+                
+                // nBLText (JLabel) Decorations.
+                    UserLogsText.setBounds(userLogsTextLocationX, userLogsTextLocationY, userLogsTextWidth, userLogsTextHeight);
+                    navigationBar.add(UserLogsText);
+                    UserLogsText.setForeground(new java.awt.Color(255, 255, 255));
+                    UserLogsText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
+                    UserLogsText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                    UserLogsText.setIconTextGap(0);
+                    UserLogsText.setText("User Logs : ");
+            
+                // User Logs Input (JTextArea) Decorations.
+            
+                    final int logInputLocationX = 3;
+                    final int logInputLocationY = 420;
+                    final int logInputWidth     = 196;
+                    final int logInputHeight    = 150;
+
+                    userLogsInput.setBounds(logInputLocationX, logInputLocationY, logInputWidth, logInputHeight);
+                    navigationBar.add(userLogsInput);
+                    userLogsInput.setForeground(new java.awt.Color(0,0,0));
+                    userLogsInput.setCaretColor(new java.awt.Color(0,0,0));
+                    userLogsInput.setBackground(new java.awt.Color(237, 242, 244));
+                    userLogsInput.setLineWrap(true);
+                    userLogsInput.setWrapStyleWord(true);
+                    userLogsInput.setFont(new java.awt.Font("Tahoma", 0, 14));
+                    userLogsInput.setLayout(null);
+                    userLogsInput.setVisible(true);
+                    
+
+                        // User Logs Scroll Pane.
+                        
+                            userLogsScroller.setBounds(logInputLocationX, logInputLocationY, logInputWidth, logInputHeight);
+                            navigationBar.add(userLogsScroller);
+                            userLogsScroller.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                            userLogsScroller.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                            userLogsScroller.setViewportBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0,0,0)));
+                            userLogsScroller.setAutoscrolls(true);      
+                            userLogsScroller.getViewport().add(userLogsInput);
+            
+                            
+               
+
 
 
         // </editor-fold>
@@ -278,20 +515,26 @@ public final class PMDSDispatch extends JFrame {
 
             titleBar.setBounds(titlePanelLocationX, titlePanelLocationY, titlePanelWidth, titlePanelHeight);
             add(titleBar);
-            titleBar.setBackground(new java.awt.Color(0, 0, 32));
+            titleBar.setBackground(new java.awt.Color(0, 29, 61));
             titleBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
             titleBar.setLayout(null);
 
             // Title Bar Frame dragging Declaration.
             titleBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
                 public void mouseDragged(java.awt.event.MouseEvent evt) {
-                    titleBarMouseDragged(evt);
+                    // JFRAME DRAGGER
+                    int x = evt.getXOnScreen();
+                    int y = evt.getYOnScreen();
+
+                    setLocation(x - xMouse, y - yMouse);
                 }
             });
 
             titleBar.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mousePressed(java.awt.event.MouseEvent evt) {
-                    titleBarMousePressed(evt);
+                    // JFRAME DRAGGER PART 2
+                    xMouse = evt.getX();
+                    yMouse = evt.getY();
                 }
             });
 
@@ -331,16 +574,6 @@ public final class PMDSDispatch extends JFrame {
                 cNameShadow.setForeground(new java.awt.Color(0, 0, 0));
                 cNameShadow.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 20));
 
-                try {
-
-                    IronShark = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")).deriveFont(20f);
-                    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                    ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")));
-
-                } catch (IOException | FontFormatException e) {
-                    e.printStackTrace();
-                }
-
                 companyName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 companyName.setText("Brion Tactical Systems");
                 companyName.setVisible(true);
@@ -358,7 +591,7 @@ public final class PMDSDispatch extends JFrame {
                 programName.setBounds(programNameLocationX, programNameLocationY, programNameWidth, programNameHeight);
                 titleBar.add(programName);
                 programName.setForeground(new java.awt.Color(255, 255, 255));
-                programName.setFont(new java.awt.Font("Impact", Font.PLAIN, 25));
+                programName.setFont(new java.awt.Font("Gepestev", Font.BOLD, 25));
                 programName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 programName.setText("POLICE MOBILE AND DISPATCH SYSTEM");
                 programName.setVisible(true);
@@ -482,7 +715,7 @@ public final class PMDSDispatch extends JFrame {
 
                 dashbarProfile.setBounds(dashbarProfileLocationX, dashbarProfileLocationY, dashbarProfileWidth, dashbarProfileHeight);
                 add(dashbarProfile);
-                dashbarProfile.setBackground(new java.awt.Color(0, 0, 32));
+                dashbarProfile.setBackground(new java.awt.Color(0, 0, 50));
                 dashbarProfile.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
                 dashbarProfile.setLayout(null);
                 dashbarProfile.setVisible(false);
@@ -530,7 +763,7 @@ public final class PMDSDispatch extends JFrame {
 
                 dashbarAbout.setBounds(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight);
                 add(dashbarAbout);
-                dashbarAbout.setBackground(new java.awt.Color(0, 0, 32));
+                dashbarAbout.setBackground(new java.awt.Color(0, 0, 50));
                 dashbarAbout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
                 dashbarAbout.setLayout(null);
                 dashbarAbout.setVisible(false);
@@ -733,43 +966,70 @@ public final class PMDSDispatch extends JFrame {
                 aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
             }
         });
+        
+        // Minimize Button.
+        final int minimizeButtonLocationX = 966;
+        final int minimizeButtonLocationY = 10;
+        final int minimizeButtonWidth     = 24;
+        final int minimizeButtonHeight    = 24;
+        
+        titleBar.add(minimize);
+        minimize.setBounds(minimizeButtonLocationX, minimizeButtonLocationY, minimizeButtonWidth, minimizeButtonHeight);
+        minimize.setForeground(new java.awt.Color(0,0,0));
+        minimize.setBackground(new java.awt.Color(248, 249, 250));
+        minimize.setFont(new java.awt.Font("Quicksand", Font.PLAIN, 16));
+        minimize.setBorder(null);
+        minimize.setFocusPainted(false);
+        minimize.setHorizontalAlignment(SwingConstants.CENTER);
+        minimize.setOpaque(false);
+        minimize.setVisible(true);
+        minimize.setContentAreaFilled(false);
+        minimize.setBorderPainted(false);
+        minimize.setIconTextGap(0);
+        
+        ImageIcon minimizeIcon = new ImageIcon("src\\PRMS Files\\icons\\DehoveredMinimize.png");
+        Image importMinimizeIcon = minimizeIcon.getImage();
+        ImageIcon GetMinimizeIcon = new ImageIcon(importMinimizeIcon);
+        minimize.setIcon(GetMinimizeIcon);
+        
+        ImageIcon minimizeSelectedIcon = new ImageIcon("src\\PRMS Files\\icons\\HoveredMinimize.png");
+        Image importMinimizeSelectedIcon = minimizeSelectedIcon.getImage();
+        ImageIcon GetMinimizeSelectedIcon = new ImageIcon(importMinimizeSelectedIcon);
+        minimize.setSelectedIcon(GetMinimizeSelectedIcon);
+        
+        ImageIcon minimizeRolloverIcon = new ImageIcon("src\\PRMS Files\\icons\\Clicked Minimize.png");
+        Image importMinimizeRolloverIcon = minimizeRolloverIcon.getImage();
+        ImageIcon GetMinimizeRolloverIcon = new ImageIcon(importMinimizeRolloverIcon);
+        minimize.setRolloverIcon(GetMinimizeRolloverIcon);
+        
+        // Minimize Function 
+        minimize.addActionListener((java.awt.event.ActionEvent evt) -> {
+            setState(PMDSLogin.ICONIFIED);
+            });
 
         pack();
         setLocationRelativeTo(null);
     }
     
-    // FRAME DRAGGER
-    int xMouse;
-    int yMouse;
-
-    private void titleBarMouseDragged(java.awt.event.MouseEvent evt) {
-        // JFRAME DRAGGER
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-
-        this.setLocation(x - xMouse, y - yMouse);
-    }
-
-    private void titleBarMousePressed(java.awt.event.MouseEvent evt) {
-        // JFRAME DRAGGER PART 2
-        xMouse = evt.getX();
-        yMouse = evt.getY();
-    }
-
-    public static void main(String[] args) {
-
-        try {
-            for ( javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels() ) {
-                if ( "Nimbus".equals(info.getName()) ) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    private void SetComponentLookAndFeel(){
+       
+       try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PMDSDispatch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+           e.printStackTrace();
         }/*/ /*/
+       
+        
+    }
+    
+    public static void main(String[] args) {
 
-        PMDSDispatch Open = new PMDSDispatch();
+        PoliceMobile Open = new PoliceMobile();
         Open.setVisible(true);
     }
 }
