@@ -1,3 +1,0 @@
-labquizregister.LabQuizRegister$1
-labquizregister.LabQuizRegister$2
-labquizregister.LabQuizRegister
