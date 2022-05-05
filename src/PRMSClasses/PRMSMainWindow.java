@@ -16,18 +16,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JCheckBox;
 
 import static PRMSClasses.PRMSLogin.IronShark;
 import static PRMSClasses.PRMSLogin.Quicksand; 
 import static PRMSClasses.PRMSLogin.Gepestev;
 import static PRMSClasses.PRMSLogin.minimize;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import javax.swing.BorderFactory;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public final class PRMSMainWindow extends JFrame {
     
@@ -39,17 +42,16 @@ public final class PRMSMainWindow extends JFrame {
     JLabel nBLText, homeTabText, databaseTabText, profileTabText, aboutTabText,
             logo, companyName, cNameShadow, programName, 
             dBHBackground, homeText, databaseText, dBDBackground, officerProfileText, dOPBackground, aboutDashBarText, aboutBackground,
-            unitStatusText, UserLogsText;
+            unitStatusText, UserLogsText,
+            NameLabel, AgeLabel, GenderLabel, HomeAddressLabel, ProvinceOfOriginLabel, DateOfArrestLabel, DateOfReleaseLabel, ReasonOfApprehensionLabel, MugShot,
+            RecordsLabel,SearchLabel;
     
-    JRadioButton AvailabilityA, AvailabilityE;
+    JTable PoliceRecords;
+    JScrollPane PoliceRecordsScrollBar;
+    JTextField SearchBar;
     
-    JCheckBox SirenToggle, EMSLights;
-    
-    ButtonGroup UnitStatus;
-    
-    JTextArea userLogsInput;
-    
-    JScrollPane userLogsScroller;
+    JButton RefreshList, DeleteRecord, PrintRecord, ClearRecordFields, ResetListFields;
+
             
 
     // FRAME DRAGGER
@@ -80,7 +82,7 @@ public final class PRMSMainWindow extends JFrame {
         //JFrame Decoration.
         setUndecorated(true);
         setOpacity(1.0f);
-        setTitle("BTS : Police Database");
+        setTitle("PRMS : Police Database");
         setLayout(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,6 +113,29 @@ public final class PRMSMainWindow extends JFrame {
         
         dashBarHome = new JPanel();
         dashbarDatabase = new JPanel();
+            
+            NameLabel = new JLabel();
+            AgeLabel = new JLabel();
+            GenderLabel = new JLabel();
+            HomeAddressLabel = new JLabel();
+            ProvinceOfOriginLabel = new JLabel();
+            DateOfArrestLabel = new JLabel();
+            DateOfReleaseLabel = new JLabel();
+            ReasonOfApprehensionLabel = new JLabel();
+            MugShot = new JLabel();
+            RecordsLabel = new JLabel();
+            SearchLabel = new JLabel();
+            
+            PoliceRecords = new JTable();
+            PoliceRecordsScrollBar = new JScrollPane();
+            SearchBar = new JTextField();
+            
+            RefreshList = new JButton();
+            DeleteRecord = new JButton();
+            PrintRecord = new JButton();
+            ResetListFields = new JButton();
+            
+        
         dashbarProfile = new JPanel();
         dashbarAbout = new JPanel();
         
@@ -134,15 +159,8 @@ public final class PRMSMainWindow extends JFrame {
         aboutDashBarText = new JLabel();
         aboutBackground = new JLabel();
         
-        unitStatusText = new JLabel();
-        AvailabilityA = new JRadioButton();
-        AvailabilityE = new JRadioButton();
-        UnitStatus = new ButtonGroup();
-        SirenToggle = new JCheckBox();
-        EMSLights = new JCheckBox();     
+        unitStatusText = new JLabel();    
         UserLogsText = new JLabel();
-        userLogsInput = new JTextArea();
-        userLogsScroller = new JScrollPane();
         
         minimize = new JButton();
         
@@ -336,55 +354,7 @@ public final class PRMSMainWindow extends JFrame {
                             aboutTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
                             aboutTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             aboutTabIndicator.setVisible(false);
-                            
-           /*
-            // User logs.
-            
-                // User Logs Text Label (JLabel) Decorations.
-                
-                final int userLogsTextLocationX = 10;
-                final int userLogsTextLocationY = 395;
-                final int userLogsTextWidth     = 80;
-                final int userLogsTextHeight    = 35;
-                
-                // nBLText (JLabel) Decorations.
-                    UserLogsText.setBounds(userLogsTextLocationX, userLogsTextLocationY, userLogsTextWidth, userLogsTextHeight);
-                    navigationBar.add(UserLogsText);
-                    UserLogsText.setForeground(new java.awt.Color(255, 255, 255));
-                    UserLogsText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
-                    UserLogsText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                    UserLogsText.setIconTextGap(0);
-                    UserLogsText.setText("User Logs : ");
-            
-                // User Logs Input (JTextArea) Decorations.
-            
-                    final int logInputLocationX = 3;
-                    final int logInputLocationY = 420;
-                    final int logInputWidth     = 196;
-                    final int logInputHeight    = 150;
 
-                    userLogsInput.setBounds(logInputLocationX, logInputLocationY, logInputWidth, logInputHeight);
-                    navigationBar.add(userLogsInput);
-                    userLogsInput.setForeground(new java.awt.Color(0,0,0));
-                    userLogsInput.setCaretColor(new java.awt.Color(0,0,0));
-                    userLogsInput.setBackground(new java.awt.Color(237, 242, 244));
-                    userLogsInput.setLineWrap(true);
-                    userLogsInput.setWrapStyleWord(true);
-                    userLogsInput.setFont(new java.awt.Font("Tahoma", 0, 14));
-                    userLogsInput.setLayout(null);
-                    userLogsInput.setVisible(true);
-                    
-
-                        // User Logs Scroll Pane.
-                        
-                            userLogsScroller.setBounds(logInputLocationX, logInputLocationY, logInputWidth, logInputHeight);
-                            navigationBar.add(userLogsScroller);
-                            userLogsScroller.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                            userLogsScroller.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                            userLogsScroller.setViewportBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0,0,0)));
-                            userLogsScroller.setAutoscrolls(true);      
-                            userLogsScroller.getViewport().add(userLogsInput);
-                            */
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="<<< Title Bar Components.">
         // Title Bar (JPanel) Decorations.
@@ -540,6 +510,413 @@ public final class PRMSMainWindow extends JFrame {
                 databaseText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 databaseText.setText("DATABASE");
                 databaseText.setVisible(true);
+                
+                // Database Dashbar Components.
+                
+                // Person's Name (JLabel) Decorations.
+                
+                    final int NameLabelLocationX = 50;
+                    final int NameLabelLocationY = 25;
+                    final int NameLabelWidth     = 700;
+                    final int NameLabelHeight    = 35;
+
+                    dashbarDatabase.add(NameLabel);
+                    NameLabel.setBounds(NameLabelLocationX, NameLabelLocationY, NameLabelWidth, NameLabelHeight);
+                    NameLabel.setForeground(new Color(255,255,255));
+                    NameLabel.setFont(new Font("Quicksand", Font.BOLD, 25));
+                    NameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                    NameLabel.setText("- REPORT SHEET -"); 
+                    NameLabel.setVisible(true);
+                    
+                // Person's Age  (JLabel) Decorations.
+                
+                    final int AgeLabelLocationX = 300;
+                    final int AgeLabelLocationY = 80;
+                    final int AgeLabelWidth     = 130;
+                    final int AgeLabelHeight    = 35;
+
+                    dashbarDatabase.add(AgeLabel);
+                    AgeLabel.setBounds(AgeLabelLocationX, AgeLabelLocationY, AgeLabelWidth, AgeLabelHeight);
+                    AgeLabel.setForeground(new Color(255,255,255));
+                    AgeLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    AgeLabel.setText("Age :");
+                    AgeLabel.setVisible(true);
+                    
+                // Person's Gender (JLabel) Decorations.
+                
+                    final int GenderLabelLocationX = 50;
+                    final int GenderLabelLocationY = 80;
+                    final int GenderLabelWidth     = 130;
+                    final int GenderLabelHeight    = 35;
+
+                    dashbarDatabase.add(GenderLabel);
+                    GenderLabel.setBounds(GenderLabelLocationX, GenderLabelLocationY, GenderLabelWidth, GenderLabelHeight);
+                    GenderLabel.setForeground(new Color(255,255,255));
+                    GenderLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    GenderLabel.setText("Gender :");
+                    GenderLabel.setVisible(true);
+                    
+                // Person's Home Address (JLabel) Decorations.
+                
+                    final int usernameTextLocationX = 50;
+                    final int usernameTextLocationY = 110;
+                    final int usernameTextWidth     = 130;
+                    final int usernameTextHeight    = 35;
+
+                    dashbarDatabase.add(HomeAddressLabel);
+                    HomeAddressLabel.setBounds(usernameTextLocationX, usernameTextLocationY, usernameTextWidth, usernameTextHeight);
+                    HomeAddressLabel.setForeground(new Color(255,255,255));
+                    HomeAddressLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    HomeAddressLabel.setText("Home Address :");
+                    HomeAddressLabel.setVisible(true);
+                    
+                // Person's Province of Origin (JLabel) Decorations.
+                
+                    final int OriginLabelLocationX = 50;
+                    final int OriginLabelLocationY = 140;
+                    final int OriginLabelWidth     = 200;
+                    final int OriginLabelHeight    = 35;
+
+                    dashbarDatabase.add(ProvinceOfOriginLabel);
+                    ProvinceOfOriginLabel.setBounds(OriginLabelLocationX, OriginLabelLocationY, OriginLabelWidth, OriginLabelHeight);
+                    ProvinceOfOriginLabel.setForeground(new Color(255,255,255));
+                    ProvinceOfOriginLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ProvinceOfOriginLabel.setText("Province of Origin :");
+                    ProvinceOfOriginLabel.setVisible(true);
+                    
+                // Person's Date of Arrest (JLabel) Decorations.
+                
+                    final int DOALabelLocationX = 50;
+                    final int DOALabelLocationY = 170;
+                    final int DOALabelWidth     = 130;
+                    final int DOALabelHeight    = 35;
+
+                    dashbarDatabase.add(DateOfArrestLabel);
+                    DateOfArrestLabel.setBounds(DOALabelLocationX, DOALabelLocationY, DOALabelWidth, DOALabelHeight);
+                    DateOfArrestLabel.setForeground(new Color(255,255,255));
+                    DateOfArrestLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    DateOfArrestLabel.setText("Date Arrested :");
+                    DateOfArrestLabel.setVisible(true);
+                    
+                // Person's Date of Release (JLabel) Decorations.
+                
+                    final int DORLabelLocationX = 50;
+                    final int DORLabelLocationY = 200;
+                    final int DORLabelWidth     = 130;
+                    final int DORLabelHeight    = 35;
+
+                    dashbarDatabase.add(DateOfReleaseLabel);
+                    DateOfReleaseLabel.setBounds(DORLabelLocationX, DORLabelLocationY, DORLabelWidth, DORLabelHeight);
+                    DateOfReleaseLabel.setForeground(new Color(255,255,255));
+                    DateOfReleaseLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    DateOfReleaseLabel.setText("Release Date :");
+                    DateOfReleaseLabel.setVisible(true);
+                    
+                // Person's Reason of Apprehension (JLabel) Decorations.
+                
+                    final int ReasonLabelLocationX = 50;
+                    final int ReasonLabelLocationY = 230;
+                    final int ReasonLabelWidth     = 200;
+                    final int ReasonLabelHeight    = 35;
+
+                    dashbarDatabase.add(ReasonOfApprehensionLabel);
+                    ReasonOfApprehensionLabel.setBounds(ReasonLabelLocationX, ReasonLabelLocationY, ReasonLabelWidth, ReasonLabelHeight);
+                    ReasonOfApprehensionLabel.setForeground(new Color(255,255,255));
+                    ReasonOfApprehensionLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ReasonOfApprehensionLabel.setText("Reason of Apprehension :");
+                    ReasonOfApprehensionLabel.setVisible(true);
+                    
+                // Person's Mug shot (JLabel) Decorations.
+
+                    final int MugshotLocationX = 550;
+                    final int MugshotLocationY = 85;
+                    final int MugshotWidth     = 180;
+                    final int MugshotHeight    = 180;
+
+                    dashbarDatabase.add(MugShot);
+                    MugShot.setBounds(MugshotLocationX, MugshotLocationY, MugshotWidth, MugshotHeight);
+                    MugShot.setBackground(new Color(255,255,255));
+                    MugShot.setOpaque(true);
+                    MugShot.setHorizontalAlignment(SwingConstants.CENTER);
+                    MugShot.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(255, 208, 0)));
+                    MugShot.setLayout(null);
+                    MugShot.setVisible(true);
+
+                    ImageIcon findMugshot = new ImageIcon("src\\PRMS Files\\icons\\Mugshot180x.png");
+                    Image importMugshot = findMugshot.getImage();
+                    Image scaleMugshot= importMugshot.getScaledInstance(MugShot.getWidth(), MugShot.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledMugshot = new ImageIcon(scaleMugshot);
+                    MugShot.setIcon(scaledMugshot);
+                    
+                // Records Label (JLabel) Decorations.
+                
+                    final int RecordsLabelLocationX = 370;
+                    final int RecordsLabelLocationY = 260;
+                    final int RecordsLabelWidth     = 130;
+                    final int RecordsLabelHeight    = 35;
+
+                    dashbarDatabase.add(RecordsLabel);
+                    RecordsLabel.setBounds(RecordsLabelLocationX, RecordsLabelLocationY, RecordsLabelWidth, RecordsLabelHeight);
+                    RecordsLabel.setForeground(new Color(255,255,255));
+                    RecordsLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    RecordsLabel.setText("RECORDS");
+                    RecordsLabel.setVisible(true);
+                    
+                // List of Records (JTable) Decorations.
+                
+                    final int RecordsListLocationX = 0;
+                    final int RecordsListLocationY = 290;
+                    final int RecordsListWidth     = 800;
+                    final int RecordsListHeight    = 220;
+
+                    PoliceRecords.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);
+                    dashbarDatabase.add(PoliceRecords);
+                    PoliceRecords.setForeground(new java.awt.Color(0,0,0));
+                    PoliceRecords.setBackground(new java.awt.Color(237, 242, 244));
+                    PoliceRecords.setFont(new java.awt.Font("Tahoma", 0, 14));
+                    PoliceRecords.setLayout(null);
+                    PoliceRecords.setVisible(true);
+                    
+                   // List of Records (JScrollpane) Decorations.
+                        
+                            PoliceRecordsScrollBar.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);
+                            dashbarDatabase.add(PoliceRecordsScrollBar);
+                            PoliceRecordsScrollBar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+                            PoliceRecordsScrollBar.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                            PoliceRecordsScrollBar.setViewportBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0,0,0)));
+                            PoliceRecordsScrollBar.setAutoscrolls(true);      
+                            PoliceRecordsScrollBar.getViewport().add(PoliceRecords);
+                            
+                // Search Records (JLabel) Decorations.
+                
+                    final int SearchLabelLocationX = 50;
+                    final int SearchLabelLocationY = 510;
+                    final int SearchLabelWidth     = 130;
+                    final int SearchLabelHeight    = 35;
+
+                    dashbarDatabase.add(SearchLabel);
+                    SearchLabel.setBounds(SearchLabelLocationX, SearchLabelLocationY, SearchLabelWidth, SearchLabelHeight);
+                    SearchLabel.setForeground(new Color(255,255,255));
+                    SearchLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    SearchLabel.setText("Search :");
+                    SearchLabel.setVisible(true);
+                    
+                // Search Bar (JTextField) Decorations.
+                    
+                    final int SearchBarLocationX = 120;
+                    final int SearchBarLocationY = 510;
+                    final int SearchBarWidth     = 225;
+                    final int SearchBarHeight    = 35;
+
+                    dashbarDatabase.add(SearchBar);
+                    SearchBar.setBounds(SearchBarLocationX, SearchBarLocationY, SearchBarWidth, SearchBarHeight);
+                    SearchBar.setBackground(new Color(0,0,0,0));
+                    SearchBar.setForeground(new Color(237, 242, 244));
+                    SearchBar.setOpaque(false);
+                    SearchBar.setCaretColor(new java.awt.Color(237, 242, 244));
+                    SearchBar.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(237, 242, 244)));
+                    SearchBar.setFont(new Font("Quicksand", Font.PLAIN, 14));
+                    SearchBar.setVisible(true);
+                    
+                // Refresh Button (JButton) Decorations.
+                
+                    final int RefreshButtonLocationX = 360;
+                    final int RefreshButtonLocationY = 510;
+                    final int RefreshButtonWidth     = 90;
+                    final int RefreshButtonHeight    = 35;
+
+                    dashbarDatabase.add(RefreshList);
+                    RefreshList.setBounds(RefreshButtonLocationX, RefreshButtonLocationY, RefreshButtonWidth, RefreshButtonHeight);
+                    RefreshList.setBackground(new Color(248, 249, 250));
+                    RefreshList.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    RefreshList.setFocusPainted(false);
+                    RefreshList.setHorizontalAlignment(SwingConstants.CENTER);
+                    RefreshList.setOpaque(false);
+                    RefreshList.setForeground(new Color(0,0,0));
+                    RefreshList.setText("Refresh");
+                    RefreshList.setVisible(true);
+
+                    RefreshList.setContentAreaFilled(true);
+                    RefreshList.setBorderPainted(false);
+                    RefreshList.setIconTextGap(-2);
+
+                    RefreshList.addMouseListener(new MouseAdapter(){
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                RefreshList.setBackground(new Color(0, 0, 0));
+                                RefreshList.setForeground(new Color(255,255,255));
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {
+                                RefreshList.setBackground(new Color(248, 249, 250));
+                                RefreshList.setForeground(new Color(0,0,0));
+                            }
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){
+                                RefreshList.setBackground(new Color(150,150,150));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e){
+                                RefreshList.setBackground(new Color(248, 249, 250));
+                                RefreshList.setForeground(new Color(0,0,0));
+                            }
+
+                    });
+                
+                // Delete Record Button (JButton) Decorations.
+                
+                    final int DeleteRecordButtonLocationX = 450;
+                    final int DeleteRecordButtonLocationY = 510;
+                    final int DeleteRecordButtonWidth     = 120;
+                    final int DeleteRecordButtonHeight    = 35;
+
+                    dashbarDatabase.add(DeleteRecord);
+                    DeleteRecord.setBounds(DeleteRecordButtonLocationX, DeleteRecordButtonLocationY, DeleteRecordButtonWidth, DeleteRecordButtonHeight);
+                    DeleteRecord.setBackground(new Color(248, 249, 250));
+                    DeleteRecord.setFont(new Font("Quicksand", Font.PLAIN, 14));
+                    DeleteRecord.setFocusPainted(false);
+                    DeleteRecord.setHorizontalAlignment(SwingConstants.CENTER);
+                    DeleteRecord.setOpaque(false);
+                    DeleteRecord.setForeground(new Color(0,0,0));
+                    DeleteRecord.setText("Delete Record");
+                    DeleteRecord.setVisible(true);
+
+                    DeleteRecord.setContentAreaFilled(true);
+                    DeleteRecord.setBorderPainted(false);
+                    DeleteRecord.setIconTextGap(-2);
+
+                    DeleteRecord.addMouseListener(new MouseAdapter(){
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                DeleteRecord.setBackground(new Color(0, 0, 0));
+                                DeleteRecord.setForeground(new Color(255,255,255));
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {
+                                DeleteRecord.setBackground(new Color(248, 249, 250));
+                                DeleteRecord.setForeground(new Color(0,0,0));
+                            }
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){
+                                DeleteRecord.setBackground(new Color(150,150,150));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e){
+                                DeleteRecord.setBackground(new Color(248, 249, 250));
+                                DeleteRecord.setForeground(new Color(0,0,0));
+                            }
+
+                    });
+                    
+                // Print Record Button (JButton) Decorations.
+                
+                    final int PrintRecordButtonLocationX = 570;
+                    final int PrintRecordButtonLocationY = 510;
+                    final int PrintRecordButtonWidth     = 120;
+                    final int PrintRecordButtonHeight    = 35;
+
+                    dashbarDatabase.add(PrintRecord);
+                    PrintRecord.setBounds(PrintRecordButtonLocationX, PrintRecordButtonLocationY, PrintRecordButtonWidth, PrintRecordButtonHeight);
+                    PrintRecord.setBackground(new Color(248, 249, 250));
+                    PrintRecord.setFont(new Font("Quicksand", Font.PLAIN, 14));
+                    PrintRecord.setFocusPainted(false);
+                    PrintRecord.setHorizontalAlignment(SwingConstants.CENTER);
+                    PrintRecord.setOpaque(false);
+                    PrintRecord.setForeground(new Color(0,0,0));
+                    PrintRecord.setText("Print Record");
+                    PrintRecord.setVisible(true);
+
+                    PrintRecord.setContentAreaFilled(true);
+                    PrintRecord.setBorderPainted(false);
+                    PrintRecord.setIconTextGap(-2);
+
+                    PrintRecord.addMouseListener(new MouseAdapter(){
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                PrintRecord.setBackground(new Color(0, 0, 0));
+                                PrintRecord.setForeground(new Color(255,255,255));
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {
+                                PrintRecord.setBackground(new Color(248, 249, 250));
+                                PrintRecord.setForeground(new Color(0,0,0));
+                            }
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){
+                                PrintRecord.setBackground(new Color(150,150,150));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e){
+                                PrintRecord.setBackground(new Color(248, 249, 250));
+                                PrintRecord.setForeground(new Color(0,0,0));
+                            }
+
+                    });
+                    
+                // Clear Fields (JButton) Decorations
+                
+                    final int ResetListFieldsLocationX = 690;
+                    final int ResetListFieldsLocationY = 510;
+                    final int ResetListFieldsButtonWidth     = 100;
+                    final int ResetListFieldsHeight    = 35;
+
+                    dashbarDatabase.add(ResetListFields);
+                    ResetListFields.setBounds(ResetListFieldsLocationX, ResetListFieldsLocationY, ResetListFieldsButtonWidth, ResetListFieldsHeight);
+                    ResetListFields.setBackground(new Color(248, 249, 250));
+                    ResetListFields.setFont(new Font("Quicksand", Font.PLAIN, 14));
+                    ResetListFields.setFocusPainted(false);
+                    ResetListFields.setHorizontalAlignment(SwingConstants.CENTER);
+                    ResetListFields.setOpaque(false);
+                    ResetListFields.setForeground(new Color(0,0,0));
+                    ResetListFields.setText("CLEAR");
+                    ResetListFields.setVisible(true);
+
+                    ResetListFields.setContentAreaFilled(true);
+                    ResetListFields.setBorderPainted(false);
+                    ResetListFields.setIconTextGap(-2);
+
+                    ResetListFields.addMouseListener(new MouseAdapter(){
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                ResetListFields.setBackground(new Color(0, 0, 0));
+                                ResetListFields.setForeground(new Color(255,255,255));
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {
+                                ResetListFields.setBackground(new Color(248, 249, 250));
+                                ResetListFields.setForeground(new Color(0,0,0));
+                            }
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){
+                                ResetListFields.setBackground(new Color(150,150,150));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e){
+                                ResetListFields.setBackground(new Color(248, 249, 250));
+                                ResetListFields.setForeground(new Color(0,0,0));
+                            }
+
+                    });
 
             // Dashbar Database (JPanel) Decorations.
                 final int dashbarDatabaseHeight = 574;
@@ -570,8 +947,7 @@ public final class PRMSMainWindow extends JFrame {
                 Image imgScale2 = databaseBackground.getScaledInstance(dBHBackground.getWidth(), dBHBackground.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon scaledIcon2 = new ImageIcon(imgScale2);
                 dBDBackground.setIcon(scaledIcon2);
-
-        // Dashbar Officer Profile Components.
+                
         
             // Officer Profile Dashbar Name (JLabel) Decorations.
                 final int officerProfileTextHeight = 30;

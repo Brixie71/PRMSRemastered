@@ -5,9 +5,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 
-public class PRMSRegister extends JFrame {
+public class PRMSAddRecord extends JFrame {
     
-    public PRMSRegister(){
+    public PRMSAddRecord(){
         
         RegisterComponents();
         
@@ -28,7 +28,7 @@ public class PRMSRegister extends JFrame {
         //JFrame Decoration.
         setUndecorated(true);
         setOpacity(1.0f);
-        setTitle("PRMS : Register Police Account");
+        setTitle("PRMS : Add Individual Record");
         setLayout(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +45,7 @@ public class PRMSRegister extends JFrame {
     
     public static void main(String args[]){
         
-        PRMSRegister Open = new PRMSRegister();
+        PRMSAddRecord Open = new PRMSAddRecord();
         Open.setVisible(true);
         
     }

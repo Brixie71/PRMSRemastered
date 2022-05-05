@@ -28,7 +28,7 @@ public class PRMSModifyAccount extends JFrame {
         //JFrame Decoration.
         setUndecorated(true);
         setOpacity(1.0f);
-        setTitle("BTS : Modify Police Account");
+        setTitle("PRMS : Modify Police Account");
         setLayout(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

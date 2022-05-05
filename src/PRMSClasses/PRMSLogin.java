@@ -90,7 +90,7 @@ public class PRMSLogin extends JFrame {
         //JFrame Decoration.
             setUndecorated(true);
             setOpacity(1.0f);
-            setTitle("PRMS : Brion Tactical Systems - Login");
+            setTitle("BTS : Police Record Management System - Login");
             setLayout(null);
             setResizable(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
