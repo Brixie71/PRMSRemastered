@@ -17,22 +17,21 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import static PRMSClasses.PRMSLogin.IronShark;
-import static PRMSClasses.PRMSLogin.Quicksand; 
-import static PRMSClasses.PRMSLogin.Gepestev;
-import static PRMSClasses.PRMSLogin.minimize;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
-public final class PRMSMainWindow extends JFrame {
+import static PRMSClasses.PRMSLogin.IronShark;
+import static PRMSClasses.PRMSLogin.Quicksand; 
+import static PRMSClasses.PRMSLogin.Gepestev;
+import static PRMSClasses.PRMSLogin.minimize;
+
+
+public class PRMSMainWindow extends JFrame {
     
     JPanel navigationBar, navigationBarLabel, dBHTab, homeTabIndicator, dBDTab, databaseTabIndicator, profileTab, profileTabIndicator, aboutTab, aboutTabIndicator,
            titleBar,
@@ -42,15 +41,18 @@ public final class PRMSMainWindow extends JFrame {
     JLabel nBLText, homeTabText, databaseTabText, profileTabText, aboutTabText,
             logo, companyName, cNameShadow, programName, 
             dBHBackground, homeText, databaseText, dBDBackground, officerProfileText, dOPBackground, aboutDashBarText, aboutBackground,
-            unitStatusText, UserLogsText,
-            NameLabel, AgeLabel, GenderLabel, HomeAddressLabel, ProvinceOfOriginLabel, DateOfArrestLabel, DateOfReleaseLabel, ReasonOfApprehensionLabel, MugShot,
-            RecordsLabel,SearchLabel;
+            Welcome,
+            AgeLabel, GenderLabel, HomeAddressLabel, ProvinceOfOriginLabel, DateOfArrestLabel, DateOfReleaseLabel, ReasonOfApprehensionLabel, MugShot,
+            RecordsLabel,SearchLabel,
+            ProfilePicture, ProfileAgeLabel, ProfileHomeAddressLabel, ProfileStationLabel, ProfileRankLabel, ProfileUsernameLabel;
     
     JTable PoliceRecords;
     JScrollPane PoliceRecordsScrollBar;
-    JTextField SearchBar;
+    JTextField NameField, AgeField, GenderField, HomeAddressField, ProvinceOfOriginField, DateOfArrestField, DateOfReleaseField, ReasonOfApprehensionField, SearchBar,
+               ProfileNameField, ProfileAgeField, ProfileHomeAddressField, ProfileStationField, ProfileRankField, ProfileUsernameField;
     
-    JButton RefreshList, DeleteRecord, PrintRecord, ClearRecordFields, ResetListFields;
+    JButton RefreshList, DeleteRecord, PrintRecord, ClearRecordFields, ResetListFields, AddRecord,
+            LogOut;
 
             
 
@@ -112,9 +114,11 @@ public final class PRMSMainWindow extends JFrame {
         titleBar = new JPanel();
         
         dashBarHome = new JPanel();
+        
+        Welcome = new JLabel();
+        
         dashbarDatabase = new JPanel();
             
-            NameLabel = new JLabel();
             AgeLabel = new JLabel();
             GenderLabel = new JLabel();
             HomeAddressLabel = new JLabel();
@@ -126,6 +130,15 @@ public final class PRMSMainWindow extends JFrame {
             RecordsLabel = new JLabel();
             SearchLabel = new JLabel();
             
+            NameField = new JTextField();
+            AgeField = new JTextField();
+            GenderField = new JTextField();
+            HomeAddressField = new JTextField();
+            ProvinceOfOriginField = new JTextField();
+            DateOfArrestField = new JTextField();
+            DateOfReleaseField = new JTextField();
+            ReasonOfApprehensionField = new JTextField();
+            
             PoliceRecords = new JTable();
             PoliceRecordsScrollBar = new JScrollPane();
             SearchBar = new JTextField();
@@ -134,9 +147,27 @@ public final class PRMSMainWindow extends JFrame {
             DeleteRecord = new JButton();
             PrintRecord = new JButton();
             ResetListFields = new JButton();
+            AddRecord = new JButton();
             
         
         dashbarProfile = new JPanel();
+        
+            ProfilePicture = new JLabel();
+            ProfileAgeLabel = new JLabel();
+            ProfileHomeAddressLabel = new JLabel();
+            ProfileStationLabel = new JLabel();
+            ProfileRankLabel = new JLabel();
+            ProfileUsernameLabel = new JLabel();
+            
+            ProfileNameField = new JTextField();
+            ProfileAgeField = new JTextField();
+            ProfileHomeAddressField = new JTextField();
+            ProfileStationField = new JTextField();
+            ProfileRankField = new JTextField();
+            ProfileUsernameField = new JTextField();
+            
+            LogOut = new JButton();
+            
         dashbarAbout = new JPanel();
         
         nBLText = new JLabel();
@@ -157,10 +188,7 @@ public final class PRMSMainWindow extends JFrame {
         officerProfileText = new JLabel();
         dOPBackground = new JLabel();
         aboutDashBarText = new JLabel();
-        aboutBackground = new JLabel();
-        
-        unitStatusText = new JLabel();    
-        UserLogsText = new JLabel();
+        aboutBackground = new JLabel();    
         
         minimize = new JButton();
         
@@ -443,7 +471,7 @@ public final class PRMSMainWindow extends JFrame {
                 programName.setForeground(new java.awt.Color(255, 255, 255));
                 programName.setFont(new java.awt.Font("Gepestev", Font.BOLD, 25));
                 programName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-                programName.setText("POLICE MOBILE AND DISPATCH SYSTEM");
+                programName.setText("POLICE RECORD MANAGEMENT SYSTEM");
                 programName.setVisible(true);
 
         // </editor-fold>
@@ -462,6 +490,37 @@ public final class PRMSMainWindow extends JFrame {
                 dashBarHome.setBackground(new java.awt.Color(0, 0, 32));
                 dashBarHome.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
                 dashBarHome.setLayout(null);
+                
+            // Dasbar Home Welcome Label (JLabel) Decorations. 
+                
+                final int WelcomeLabelLocationX = 210;
+                final int WelcomeLabelLocationY = 100;
+                final int WelcomeLabelWidth     = 500;
+                final int WelcomeLabelHeight    = 80;
+
+                dashBarHome.add(Welcome);
+                Welcome.setBounds(WelcomeLabelLocationX, WelcomeLabelLocationY, WelcomeLabelWidth, WelcomeLabelHeight);
+                Welcome.setForeground(new Color(255,255,255));
+                Welcome.setHorizontalAlignment(SwingConstants.LEADING);
+                Welcome.setFont(new Font("Tahoma", Font.BOLD, 80));
+                Welcome.setText("WELCOME");
+                Welcome.setVisible(true);
+                
+                    //Dashbar Home Welcome Label Shadow (JLabel) Declaration and Decorations.
+                    
+                    JLabel WelcomeShadow = new JLabel();
+                    
+                    final int ShadowLabelLocationX = 210;
+                    final int ShadowLabelLocationY = 105;
+                    final int ShadowLabelWidth     = 500;
+                    final int ShadowLabelHeight    = 80;
+                    
+                    dashBarHome.add(WelcomeShadow);
+                    WelcomeShadow.setBounds(ShadowLabelLocationX, ShadowLabelLocationY, ShadowLabelWidth, ShadowLabelHeight);
+                    WelcomeShadow.setForeground(new Color(0,0,50));
+                    WelcomeShadow.setFont(new Font("Tahoma", Font.BOLD, 80));
+                    WelcomeShadow.setText("WELCOME");
+                    WelcomeShadow.setVisible(true); 
 
             // Home Dashbar Name (JLabel) Decorations.
                 final int homeTextHeight = 30;
@@ -486,7 +545,7 @@ public final class PRMSMainWindow extends JFrame {
                 dBHBackground.setBounds(dBHBackgroundLocationX, dBHBackgroundLocationY, dBHBackgroundWidth, dBHBackgroundHeight);
                 dashBarHome.add(dBHBackground);
                 dBHBackground.setForeground(new java.awt.Color(0, 0, 0));
-                dBHBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                dBHBackground.setHorizontalAlignment(SwingConstants.CENTER);
                 dBHBackground.setLayout(null);
 
                 ImageIcon icon = new ImageIcon("src\\PRMS Files\\backgrounds\\carbonbackground.jpg");
@@ -513,20 +572,25 @@ public final class PRMSMainWindow extends JFrame {
                 
                 // Database Dashbar Components.
                 
-                // Person's Name (JLabel) Decorations.
+                // Person's Name (JTextField) Decorations.
                 
-                    final int NameLabelLocationX = 50;
-                    final int NameLabelLocationY = 25;
-                    final int NameLabelWidth     = 700;
-                    final int NameLabelHeight    = 35;
+                    final int NameFieldLocationX = 50;
+                    final int NameFieldLocationY = 40;
+                    final int NameFieldWidth     = 700;
+                    final int NameFieldHeight    = 35;
 
-                    dashbarDatabase.add(NameLabel);
-                    NameLabel.setBounds(NameLabelLocationX, NameLabelLocationY, NameLabelWidth, NameLabelHeight);
-                    NameLabel.setForeground(new Color(255,255,255));
-                    NameLabel.setFont(new Font("Quicksand", Font.BOLD, 25));
-                    NameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                    NameLabel.setText("- REPORT SHEET -"); 
-                    NameLabel.setVisible(true);
+                    dashbarDatabase.add(NameField);
+                    NameField.setBounds(NameFieldLocationX, NameFieldLocationY, NameFieldWidth, NameFieldHeight);
+                    NameField.setBackground(new Color(0,0,0,0));
+                    NameField.setForeground(new Color(255, 255, 255));
+                    NameField.setHorizontalAlignment(SwingConstants.CENTER);
+                    NameField.setEditable(false);
+                    NameField.setText("- REPORT SHEET -");
+                    NameField.setOpaque(false);
+                    NameField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    NameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    NameField.setFont(new Font("Quicksand", Font.BOLD, 26));
+                    NameField.setVisible(true);
                     
                 // Person's Age  (JLabel) Decorations.
                 
@@ -542,6 +606,25 @@ public final class PRMSMainWindow extends JFrame {
                     AgeLabel.setText("Age :");
                     AgeLabel.setVisible(true);
                     
+                    // Person's Age Field (JTextField) Decorations.
+                    
+                        final int AgeFieldLocationX = 340;
+                        final int AgeFieldLocationY = 80;
+                        final int AgeFieldWidth     = 27;
+                        final int AgeFieldHeight    = 35;
+
+                        dashbarDatabase.add(AgeField);
+                        AgeField.setBounds(AgeFieldLocationX, AgeFieldLocationY, AgeFieldWidth, AgeFieldHeight);
+                        AgeField.setBackground(new Color(0,0,0,0));
+                        AgeField.setForeground(new Color(255, 255, 255));
+                        AgeField.setEditable(false);
+                        AgeField.setText("--");
+                        AgeField.setOpaque(false);
+                        AgeField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        AgeField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        AgeField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        AgeField.setVisible(true);
+                    
                 // Person's Gender (JLabel) Decorations.
                 
                     final int GenderLabelLocationX = 50;
@@ -556,19 +639,59 @@ public final class PRMSMainWindow extends JFrame {
                     GenderLabel.setText("Gender :");
                     GenderLabel.setVisible(true);
                     
+                    // Person's Gender Field (JTextField) Decorations.
+                    
+                        final int GenderFieldLocationX = 115;
+                        final int GenderFieldLocationY = 80;
+                        final int GenderFieldWidth     = 150;
+                        final int GenderFieldHeight    = 35;
+
+                        dashbarDatabase.add(GenderField);
+                        GenderField.setBounds(GenderFieldLocationX, GenderFieldLocationY, GenderFieldWidth, GenderFieldHeight);
+                        GenderField.setBackground(new Color(0,0,0,0));
+                        GenderField.setForeground(new Color(255, 255, 255));
+                        GenderField.setEditable(false);
+                        GenderField.setText("");
+                        GenderField.setOpaque(false);
+                        GenderField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        GenderField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        GenderField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        GenderField.setVisible(true);
+                    
+                    
                 // Person's Home Address (JLabel) Decorations.
                 
-                    final int usernameTextLocationX = 50;
-                    final int usernameTextLocationY = 110;
-                    final int usernameTextWidth     = 130;
-                    final int usernameTextHeight    = 35;
+                    final int HomeAddressLabelLocationX = 50;
+                    final int HomeAddressLabelLocationY = 110;
+                    final int HomeAddressLabelWidth     = 130;
+                    final int HomeAddressLabelHeight    = 35;
 
                     dashbarDatabase.add(HomeAddressLabel);
-                    HomeAddressLabel.setBounds(usernameTextLocationX, usernameTextLocationY, usernameTextWidth, usernameTextHeight);
+                    HomeAddressLabel.setBounds(HomeAddressLabelLocationX, HomeAddressLabelLocationY, HomeAddressLabelWidth, HomeAddressLabelHeight);
                     HomeAddressLabel.setForeground(new Color(255,255,255));
                     HomeAddressLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     HomeAddressLabel.setText("Home Address :");
                     HomeAddressLabel.setVisible(true);
+                    
+                    // Person's Home Address Field (JTextField) Decorations.
+                    
+                        final int HomeAddressFieldLocationX = 175;
+                        final int HomeAddressFieldLocationY = 110;
+                        final int HomeAddressFieldWidth     = 365;
+                        final int HomeAddressFieldHeight    = 35;
+
+                        dashbarDatabase.add(HomeAddressField);
+                        HomeAddressField.setBounds(HomeAddressFieldLocationX, HomeAddressFieldLocationY, HomeAddressFieldWidth, HomeAddressFieldHeight);
+                        HomeAddressField.setBackground(new Color(0,0,0,0));
+                        HomeAddressField.setForeground(new Color(255, 255, 255));
+                        HomeAddressField.setEditable(false);
+                        HomeAddressField.setText("-----------------------------------------------------------------");
+                        HomeAddressField.setOpaque(false);
+                        HomeAddressField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        HomeAddressField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        HomeAddressField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        HomeAddressField.setVisible(true);
+                    
                     
                 // Person's Province of Origin (JLabel) Decorations.
                 
@@ -584,6 +707,25 @@ public final class PRMSMainWindow extends JFrame {
                     ProvinceOfOriginLabel.setText("Province of Origin :");
                     ProvinceOfOriginLabel.setVisible(true);
                     
+                    // Person's Province of Origin Field (JTextField) Decorations.
+                    
+                        final int OriginFieldLocationX = 190;
+                        final int OriginFieldLocationY = 140;
+                        final int OriginFieldWidth     = 350;
+                        final int OriginFieldHeight    = 35;
+
+                        dashbarDatabase.add(ProvinceOfOriginField);
+                        ProvinceOfOriginField.setBounds(OriginFieldLocationX, OriginFieldLocationY, OriginFieldWidth, OriginFieldHeight);
+                        ProvinceOfOriginField.setBackground(new Color(0,0,0,0));
+                        ProvinceOfOriginField.setForeground(new Color(255, 255, 255));
+                        ProvinceOfOriginField.setEditable(false);
+                        ProvinceOfOriginField.setText("-----------------------------------------------------------------");
+                        ProvinceOfOriginField.setOpaque(false);
+                        ProvinceOfOriginField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        ProvinceOfOriginField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        ProvinceOfOriginField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        ProvinceOfOriginField.setVisible(true);
+                    
                 // Person's Date of Arrest (JLabel) Decorations.
                 
                     final int DOALabelLocationX = 50;
@@ -598,10 +740,29 @@ public final class PRMSMainWindow extends JFrame {
                     DateOfArrestLabel.setText("Date Arrested :");
                     DateOfArrestLabel.setVisible(true);
                     
+                    // Person's Date of Arrest Field (JTextField) Decorations.
+                    
+                        final int DOAFieldLocationX = 165;
+                        final int DOAFieldLocationY = 170;
+                        final int DOAFieldWidth     = 125;
+                        final int DOAFieldHeight    = 35;
+
+                        dashbarDatabase.add(DateOfArrestField);
+                        DateOfArrestField.setBounds(DOAFieldLocationX, DOAFieldLocationY, DOAFieldWidth, DOAFieldHeight);
+                        DateOfArrestField.setBackground(new Color(0,0,0,0));
+                        DateOfArrestField.setForeground(new Color(255, 255, 255));
+                        DateOfArrestField.setEditable(false);
+                        DateOfArrestField.setText("-----------------------------------------------------------------");
+                        DateOfArrestField.setOpaque(false);
+                        DateOfArrestField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        DateOfArrestField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        DateOfArrestField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        DateOfArrestField.setVisible(true);
+                        
                 // Person's Date of Release (JLabel) Decorations.
                 
-                    final int DORLabelLocationX = 50;
-                    final int DORLabelLocationY = 200;
+                    final int DORLabelLocationX = 300;
+                    final int DORLabelLocationY = 170;
                     final int DORLabelWidth     = 130;
                     final int DORLabelHeight    = 35;
 
@@ -612,10 +773,29 @@ public final class PRMSMainWindow extends JFrame {
                     DateOfReleaseLabel.setText("Release Date :");
                     DateOfReleaseLabel.setVisible(true);
                     
+                    // Person's Date of Release Field (JTextField) Decorations.
+                    
+                        final int DORFieldLocationX = 415;
+                        final int DORFieldLocationY = 170;
+                        final int DORFieldWidth     = 125;
+                        final int DORFieldHeight    = 35;
+
+                        dashbarDatabase.add(DateOfReleaseField);
+                        DateOfReleaseField.setBounds(DORFieldLocationX, DORFieldLocationY, DORFieldWidth, DORFieldHeight);
+                        DateOfReleaseField.setBackground(new Color(0,0,0,0));
+                        DateOfReleaseField.setForeground(new Color(255, 255, 255));
+                        DateOfReleaseField.setEditable(false);
+                        DateOfReleaseField.setText("-----------------------------------------------------------------");
+                        DateOfReleaseField.setOpaque(false);
+                        DateOfReleaseField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        DateOfReleaseField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        DateOfReleaseField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        DateOfReleaseField.setVisible(true);
+                    
                 // Person's Reason of Apprehension (JLabel) Decorations.
                 
                     final int ReasonLabelLocationX = 50;
-                    final int ReasonLabelLocationY = 230;
+                    final int ReasonLabelLocationY = 200;
                     final int ReasonLabelWidth     = 200;
                     final int ReasonLabelHeight    = 35;
 
@@ -626,9 +806,28 @@ public final class PRMSMainWindow extends JFrame {
                     ReasonOfApprehensionLabel.setText("Reason of Apprehension :");
                     ReasonOfApprehensionLabel.setVisible(true);
                     
+                    // Person's Reason of Apprehension Field (JTextField) Decorations.
+                    
+                        final int ROAFieldLocationX = 250;
+                        final int ROAFieldLocationY = 200;
+                        final int ROAFieldWidth     = 290;
+                        final int ROAFieldHeight    = 35;
+
+                        dashbarDatabase.add(ReasonOfApprehensionField);
+                        ReasonOfApprehensionField.setBounds(ROAFieldLocationX, ROAFieldLocationY, ROAFieldWidth, ROAFieldHeight);
+                        ReasonOfApprehensionField.setBackground(new Color(0,0,0,0));
+                        ReasonOfApprehensionField.setForeground(new Color(255, 255, 255));
+                        ReasonOfApprehensionField.setEditable(false);
+                        ReasonOfApprehensionField.setText("-----------------------------------------------------------------");
+                        ReasonOfApprehensionField.setOpaque(false);
+                        ReasonOfApprehensionField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        ReasonOfApprehensionField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        ReasonOfApprehensionField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        ReasonOfApprehensionField.setVisible(true);
+                    
                 // Person's Mug shot (JLabel) Decorations.
 
-                    final int MugshotLocationX = 550;
+                    final int MugshotLocationX = 575;
                     final int MugshotLocationY = 85;
                     final int MugshotWidth     = 180;
                     final int MugshotHeight    = 180;
@@ -660,7 +859,7 @@ public final class PRMSMainWindow extends JFrame {
                     RecordsLabel.setForeground(new Color(255,255,255));
                     RecordsLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     RecordsLabel.setText("RECORDS");
-                    RecordsLabel.setVisible(true);
+                    RecordsLabel.setVisible(true);    
                     
                 // List of Records (JTable) Decorations.
                 
@@ -690,7 +889,7 @@ public final class PRMSMainWindow extends JFrame {
                 // Search Records (JLabel) Decorations.
                 
                     final int SearchLabelLocationX = 50;
-                    final int SearchLabelLocationY = 510;
+                    final int SearchLabelLocationY = 515;
                     final int SearchLabelWidth     = 130;
                     final int SearchLabelHeight    = 35;
 
@@ -704,7 +903,7 @@ public final class PRMSMainWindow extends JFrame {
                 // Search Bar (JTextField) Decorations.
                     
                     final int SearchBarLocationX = 120;
-                    final int SearchBarLocationY = 510;
+                    final int SearchBarLocationY = 515;
                     final int SearchBarWidth     = 225;
                     final int SearchBarHeight    = 35;
 
@@ -721,7 +920,7 @@ public final class PRMSMainWindow extends JFrame {
                 // Refresh Button (JButton) Decorations.
                 
                     final int RefreshButtonLocationX = 360;
-                    final int RefreshButtonLocationY = 510;
+                    final int RefreshButtonLocationY = 515;
                     final int RefreshButtonWidth     = 90;
                     final int RefreshButtonHeight    = 35;
 
@@ -771,7 +970,7 @@ public final class PRMSMainWindow extends JFrame {
                 // Delete Record Button (JButton) Decorations.
                 
                     final int DeleteRecordButtonLocationX = 450;
-                    final int DeleteRecordButtonLocationY = 510;
+                    final int DeleteRecordButtonLocationY = 515;
                     final int DeleteRecordButtonWidth     = 120;
                     final int DeleteRecordButtonHeight    = 35;
 
@@ -821,8 +1020,8 @@ public final class PRMSMainWindow extends JFrame {
                 // Print Record Button (JButton) Decorations.
                 
                     final int PrintRecordButtonLocationX = 570;
-                    final int PrintRecordButtonLocationY = 510;
-                    final int PrintRecordButtonWidth     = 120;
+                    final int PrintRecordButtonLocationY = 515;
+                    final int PrintRecordButtonWidth     = 110;
                     final int PrintRecordButtonHeight    = 35;
 
                     dashbarDatabase.add(PrintRecord);
@@ -868,11 +1067,61 @@ public final class PRMSMainWindow extends JFrame {
 
                     });
                     
-                // Clear Fields (JButton) Decorations
+                    // Add Record (JButton) Decorations
                 
-                    final int ResetListFieldsLocationX = 690;
-                    final int ResetListFieldsLocationY = 510;
-                    final int ResetListFieldsButtonWidth     = 100;
+                    final int AddRecordLocationX = 680;
+                    final int AddRecordLocationY = 515;
+                    final int AddRecordWidth     = 110;
+                    final int AddRecordHeight    = 35;
+
+                    dashbarDatabase.add(AddRecord);
+                    AddRecord.setBounds(AddRecordLocationX, AddRecordLocationY, AddRecordWidth, AddRecordHeight);
+                    AddRecord.setBackground(new Color(248, 249, 250));
+                    AddRecord.setFont(new Font("Quicksand", Font.PLAIN, 14));
+                    AddRecord.setFocusPainted(false);
+                    AddRecord.setHorizontalAlignment(SwingConstants.CENTER);
+                    AddRecord.setOpaque(false);
+                    AddRecord.setForeground(new Color(0,0,0));
+                    AddRecord.setText("Add Record");
+                    AddRecord.setVisible(true);
+
+                    AddRecord.setContentAreaFilled(true);
+                    AddRecord.setBorderPainted(false);
+                    AddRecord.setIconTextGap(-2);
+
+                    AddRecord.addMouseListener(new MouseAdapter(){
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                AddRecord.setBackground(new Color(0, 0, 0));
+                                AddRecord.setForeground(new Color(255,255,255));
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {
+                                AddRecord.setBackground(new Color(248, 249, 250));
+                                AddRecord.setForeground(new Color(0,0,0));
+                            }
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){
+                                AddRecord.setBackground(new Color(150,150,150));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e){
+                                AddRecord.setBackground(new Color(248, 249, 250));
+                                AddRecord.setForeground(new Color(0,0,0));
+                            }
+
+                    });
+                    
+                // Reset Fields (JButton) Decorations
+                
+                    final int ResetListFieldsLocationX = 50;
+                    final int ResetListFieldsLocationY = 235;
+                    final int ResetListFieldsButtonWidth  = 120;
                     final int ResetListFieldsHeight    = 35;
 
                     dashbarDatabase.add(ResetListFields);
@@ -917,6 +1166,7 @@ public final class PRMSMainWindow extends JFrame {
                             }
 
                     });
+                    
 
             // Dashbar Database (JPanel) Decorations.
                 final int dashbarDatabaseHeight = 574;
@@ -948,8 +1198,268 @@ public final class PRMSMainWindow extends JFrame {
                 ImageIcon scaledIcon2 = new ImageIcon(imgScale2);
                 dBDBackground.setIcon(scaledIcon2);
                 
+        // Dashbar Officer Profile Components.
+        
+            // Officer Profile Picture (JLabel) Decorations.
+
+                    final int ProfilePictureLocationX = 50;
+                    final int ProfilePictureLocationY = 50;
+                    final int ProfilePictureWidth     = 180;
+                    final int ProfilePictureHeight    = 180;
+
+                    dashbarProfile.add(ProfilePicture);
+                    ProfilePicture.setBounds(ProfilePictureLocationX, ProfilePictureLocationY, ProfilePictureWidth, ProfilePictureHeight);
+                    ProfilePicture.setBackground(new Color(255,255,255));
+                    ProfilePicture.setOpaque(true);
+                    ProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
+                    ProfilePicture.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(255, 208, 0)));
+                    ProfilePicture.setLayout(null);
+                    ProfilePicture.setVisible(true);
+
+                    ImageIcon findProfilePicture = new ImageIcon("src\\PRMS Files\\icons\\Mugshot180x.png");
+                    Image importProfilePicture = findProfilePicture.getImage();
+                    Image scaleProfilePicture = importProfilePicture.getScaledInstance(ProfilePicture.getWidth(), ProfilePicture.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledProfilePicture = new ImageIcon(scaleProfilePicture);
+                    ProfilePicture.setIcon(scaledProfilePicture);
+                    
+                // Profile Name Field (JTextField) Decorations.
+                
+                    final int ProfileNameFieldLocationX = 300;
+                    final int ProfileNameFieldLocationY = 60;
+                    final int ProfileNameFieldWidth     = 450;
+                    final int ProfileNameFieldHeight    = 35;
+
+                    dashbarProfile.add(ProfileNameField);
+                    ProfileNameField.setBounds(ProfileNameFieldLocationX, ProfileNameFieldLocationY, ProfileNameFieldWidth, ProfileNameFieldHeight);
+                    ProfileNameField.setBackground(new Color(0,0,0,0));
+                    ProfileNameField.setForeground(new Color(255, 255, 255));
+                    ProfileNameField.setHorizontalAlignment(SwingConstants.LEADING);
+                    ProfileNameField.setEditable(false);
+                    ProfileNameField.setText("Jhon Brix G. Brion");
+                    ProfileNameField.setOpaque(false);
+                    ProfileNameField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileNameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    ProfileNameField.setFont(new Font("Quicksand", Font.BOLD, 30));
+                    ProfileNameField.setVisible(true);
+
+                
+            // Profile Age  (JLabel) Decorations.
+                
+                    final int ProfileAgeLabelLocationX = 300;
+                    final int ProfileAgeLabelLocationY = 110;
+                    final int ProfileAgeLabelWidth     = 130;
+                    final int ProfileAgeLabelHeight    = 35;
+
+                    dashbarProfile.add(ProfileAgeLabel);
+                    ProfileAgeLabel.setBounds(ProfileAgeLabelLocationX, ProfileAgeLabelLocationY, ProfileAgeLabelWidth, ProfileAgeLabelHeight);
+                    ProfileAgeLabel.setForeground(new Color(255,255,255));
+                    ProfileAgeLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ProfileAgeLabel.setText("Age : ");
+                    ProfileAgeLabel.setVisible(true);
+                    
+                    // Profile Age Field (JTextField) Decorations.
+                    
+                        final int ProfileAgeFieldLocationX = 340;
+                        final int ProfileAgeFieldLocationY = 110;
+                        final int ProfileAgeFieldWidth     = 27;
+                        final int ProfileAgeFieldHeight    = 35;
+
+                        dashbarProfile.add(ProfileAgeField);
+                        ProfileAgeField.setBounds(ProfileAgeFieldLocationX, ProfileAgeFieldLocationY, ProfileAgeFieldWidth, ProfileAgeFieldHeight);
+                        ProfileAgeField.setBackground(new Color(0,0,0,0));
+                        ProfileAgeField.setForeground(new Color(255, 255, 255));
+                        ProfileAgeField.setEditable(false);
+                        ProfileAgeField.setText("--");
+                        ProfileAgeField.setOpaque(false);
+                        ProfileAgeField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        ProfileAgeField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                        ProfileAgeField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                        ProfileAgeField.setVisible(true);
+                        
+            // Profile Home Address Label (JLabel) Decorations.
+            
+                final int ProfileHomeAddressLabelLocationX = 300;
+                final int ProfileHomeAddressLabelLocationY = 140;
+                final int ProfileHomeAddressLabelWidth     = 130;
+                final int ProfileHomeAddressLabelHeight    = 35;
+
+                dashbarProfile.add(ProfileHomeAddressLabel);
+                ProfileHomeAddressLabel.setBounds(ProfileHomeAddressLabelLocationX, ProfileHomeAddressLabelLocationY, ProfileHomeAddressLabelWidth, ProfileHomeAddressLabelHeight);
+                ProfileHomeAddressLabel.setForeground(new Color(255,255,255));
+                ProfileHomeAddressLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                ProfileHomeAddressLabel.setText("Home Address  :");
+                ProfileHomeAddressLabel.setVisible(true);
+
+                // Profile Home Address Field (JTextField) Decorations.
+
+                    final int ProfileHomeAddressFieldLocationX = 430;
+                    final int ProfileHomeAddressFieldLocationY = 140;
+                    final int ProfileHomeAddressFieldWidth     = 310;
+                    final int ProfileHomeAddressFieldHeight    = 35;
+
+                    dashbarProfile.add(ProfileHomeAddressField);
+                    ProfileHomeAddressField.setBounds(ProfileHomeAddressFieldLocationX, ProfileHomeAddressFieldLocationY, ProfileHomeAddressFieldWidth, ProfileHomeAddressFieldHeight);
+                    ProfileHomeAddressField.setBackground(new Color(0,0,0,0));
+                    ProfileHomeAddressField.setForeground(new Color(255, 255, 255));
+                    ProfileHomeAddressField.setEditable(false);
+                    ProfileHomeAddressField.setText("-----------------------------------------------------------------");
+                    ProfileHomeAddressField.setOpaque(false);
+                    ProfileHomeAddressField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileHomeAddressField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    ProfileHomeAddressField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ProfileHomeAddressField.setVisible(true);
+                      
+            // Profile Station Assigned Label (JLabel) Decorations.
+            
+                final int ProfileStationAssignedLabelLocationX = 300;
+                final int ProfileStationAssignedLabelLocationY = 170;
+                final int ProfileStationAssignedLabelWidth     = 130;
+                final int ProfileStationAssignedLabelHeight    = 35;
+
+                dashbarProfile.add(ProfileStationLabel);
+                ProfileStationLabel.setBounds(ProfileStationAssignedLabelLocationX, ProfileStationAssignedLabelLocationY, ProfileStationAssignedLabelWidth, ProfileStationAssignedLabelHeight);
+                ProfileStationLabel.setForeground(new Color(255,255,255));
+                ProfileStationLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                ProfileStationLabel.setText("Station Assigned :");
+                ProfileStationLabel.setVisible(true);
+
+                // Profile Station Assigned Field (JTextField) Decorations.
+
+                    final int ProfileStationFieldLocationX = 430;
+                    final int ProfileStationFieldLocationY = 170;
+                    final int ProfileStationFieldWidth     = 310;
+                    final int ProfileStationFieldHeight    = 35;
+
+                    dashbarProfile.add(ProfileStationField);
+                    ProfileStationField.setBounds(ProfileStationFieldLocationX, ProfileStationFieldLocationY, ProfileStationFieldWidth, ProfileStationFieldHeight);
+                    ProfileStationField.setBackground(new Color(0,0,0,0));
+                    ProfileStationField.setForeground(new Color(255, 255, 255));
+                    ProfileStationField.setEditable(false);
+                    ProfileStationField.setText("-----------------------------------------------------------------");
+                    ProfileStationField.setOpaque(false);
+                    ProfileStationField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileStationField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    ProfileStationField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ProfileStationField.setVisible(true);
+                    
+            // Profile Rank Label (JLabel) Decorations.
+            
+                final int ProfileRankLabelLocationX = 300;
+                final int ProfileRankLabelLocationY = 200;
+                final int ProfileRankLabelWidth     = 130;
+                final int ProfileRankLabelHeight    = 35;
+
+                dashbarProfile.add(ProfileRankLabel);
+                ProfileRankLabel.setBounds(ProfileRankLabelLocationX, ProfileRankLabelLocationY, ProfileRankLabelWidth, ProfileRankLabelHeight);
+                ProfileRankLabel.setForeground(new Color(255,255,255));
+                ProfileRankLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                ProfileRankLabel.setText("Officer Rank :");
+                ProfileRankLabel.setVisible(true);
+
+                // Profile Rank Field (JTextField) Decorations.
+
+                    final int ProfileRankFieldLocationX = 400;
+                    final int ProfileRankFieldLocationY = 200;
+                    final int ProfileRankFieldWidth     = 310;
+                    final int ProfileRankFieldHeight    = 35;
+
+                    dashbarProfile.add(ProfileRankField);
+                    ProfileRankField.setBounds(ProfileRankFieldLocationX, ProfileRankFieldLocationY, ProfileRankFieldWidth, ProfileRankFieldHeight);
+                    ProfileRankField.setBackground(new Color(0,0,0,0));
+                    ProfileRankField.setForeground(new Color(255, 255, 255));
+                    ProfileRankField.setEditable(false);
+                    ProfileRankField.setText("-----------------------------------------------------------------");
+                    ProfileRankField.setOpaque(false);
+                    ProfileRankField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileRankField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    ProfileRankField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ProfileRankField.setVisible(true);
+                    
+            // Profile Username Label (JLabel) Decorations.
+            
+                final int ProfileUsernameLabelLocationX = 300;
+                final int ProfileUsernameLabelLocationY = 230;
+                final int ProfileUsernameLabelWidth     = 130;
+                final int ProfileUsernameLabelHeight    = 35;
+
+                dashbarProfile.add(ProfileUsernameLabel);
+                ProfileUsernameLabel.setBounds(ProfileUsernameLabelLocationX, ProfileUsernameLabelLocationY, ProfileUsernameLabelWidth, ProfileUsernameLabelHeight);
+                ProfileUsernameLabel.setForeground(new Color(255,255,255));
+                ProfileUsernameLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                ProfileUsernameLabel.setText("Username :");
+                ProfileUsernameLabel.setVisible(true);
+
+                // Profile Username Field (JTextField) Decorations.
+
+                    final int ProfileUsernameFieldLocationX = 390;
+                    final int ProfileUsernameFieldLocationY = 230;
+                    final int ProfileUsernameFieldWidth     = 310;
+                    final int ProfileUsernameFieldHeight    = 35;
+
+                    dashbarProfile.add(ProfileUsernameField);
+                    ProfileUsernameField.setBounds(ProfileUsernameFieldLocationX, ProfileUsernameFieldLocationY, ProfileUsernameFieldWidth, ProfileUsernameFieldHeight);
+                    ProfileUsernameField.setBackground(new Color(0,0,0,0));
+                    ProfileUsernameField.setForeground(new Color(255, 255, 255));
+                    ProfileUsernameField.setEditable(false);
+                    ProfileUsernameField.setText("-----------------------------------------------------------------");
+                    ProfileUsernameField.setOpaque(false);
+                    ProfileUsernameField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileUsernameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    ProfileUsernameField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ProfileUsernameField.setVisible(true);
+                    
+            // Log-out Button (JButton) Decorations.
+                
+                    final int LogOutButtonLocationX = 630;
+                    final int LogOutButtonLocationY = 515;
+                    final int LogOutButtonWidth     = 120;
+                    final int LogOutButtonHeight    = 35;
+
+                    dashbarProfile.add(LogOut);
+                    LogOut.setBounds(LogOutButtonLocationX, LogOutButtonLocationY, LogOutButtonWidth, LogOutButtonHeight);
+                    LogOut.setBackground(new Color(248, 249, 250));
+                    LogOut.setFont(new Font("Quicksand", Font.PLAIN, 14));
+                    LogOut.setFocusPainted(false);
+                    LogOut.setHorizontalAlignment(SwingConstants.CENTER);
+                    LogOut.setOpaque(false);
+                    LogOut.setForeground(new Color(0,0,0));
+                    LogOut.setText("Log-Out");
+                    LogOut.setVisible(true);
+
+                    LogOut.setContentAreaFilled(true);
+                    LogOut.setBorderPainted(false);
+                    LogOut.setIconTextGap(-2);
+
+                    LogOut.addMouseListener(new MouseAdapter(){
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                LogOut.setBackground(new Color(0, 0, 0));
+                                LogOut.setForeground(new Color(255,255,255));
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {
+                                LogOut.setBackground(new Color(248, 249, 250));
+                                LogOut.setForeground(new Color(0,0,0));
+                            }
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){
+                                LogOut.setBackground(new Color(150,150,150));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e){
+                                LogOut.setBackground(new Color(248, 249, 250));
+                                LogOut.setForeground(new Color(0,0,0));
+                            }
+
+                    });
         
             // Officer Profile Dashbar Name (JLabel) Decorations.
+            
                 final int officerProfileTextHeight = 30;
                 final int officerProfileTextWidth = 200;
                 final int officerProfileTextX = 645;
@@ -1267,7 +1777,7 @@ public final class PRMSMainWindow extends JFrame {
         setLocationRelativeTo(null);
     }
     
-    // CLASS FUNCTIONS //
+    // PRMSMainWindow CLASS FUNCTIONS //
     
     private void SetComponentLookAndFeel(){
        
