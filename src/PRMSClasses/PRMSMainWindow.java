@@ -44,7 +44,10 @@ public class PRMSMainWindow extends JFrame {
             Welcome,
             AgeLabel, GenderLabel, HomeAddressLabel, ProvinceOfOriginLabel, DateOfArrestLabel, DateOfReleaseLabel, ReasonOfApprehensionLabel, MugShot,
             RecordsLabel,SearchLabel,
-            ProfilePicture, ProfileAgeLabel, ProfileHomeAddressLabel, ProfileStationLabel, ProfileRankLabel, ProfileUsernameLabel;
+            ProfilePicture, ProfileAgeLabel, ProfileHomeAddressLabel, ProfileStationLabel, ProfileRankLabel, ProfileUsernameLabel,
+            AboutCompanyLogo, AboutCompanyName, AboutProgramName, AboutDevelopmentTeamLabel,
+            FirstYearDevelopers, CC3SubProf, FirstYearLeadD, FirstYearCOD, FirstYearAD, 
+            SecondYearDevelopers, ComProg3Prof, SecondYearLeadD, SecondYearCOD, FirstYearDevTimeline, SecondYearDevTimeline;
     
     JTable PoliceRecords;
     JScrollPane PoliceRecordsScrollBar;
@@ -170,6 +173,22 @@ public class PRMSMainWindow extends JFrame {
             
         dashbarAbout = new JPanel();
         
+            AboutCompanyLogo = new JLabel();
+            AboutCompanyName = new JLabel();
+            AboutProgramName = new JLabel();
+            AboutDevelopmentTeamLabel = new JLabel();
+            FirstYearDevelopers = new JLabel();
+            CC3SubProf = new JLabel();
+            FirstYearLeadD = new JLabel();
+            FirstYearCOD = new JLabel();
+            FirstYearAD = new JLabel();
+            SecondYearDevelopers = new JLabel();
+            ComProg3Prof = new JLabel();
+            SecondYearLeadD = new JLabel(); 
+            SecondYearCOD = new JLabel();
+            FirstYearDevTimeline = new JLabel();
+            SecondYearDevTimeline = new JLabel();
+    
         nBLText = new JLabel();
         homeTabText = new JLabel();
         databaseTabText = new JLabel();
@@ -1519,6 +1538,322 @@ public class PRMSMainWindow extends JFrame {
                 aboutDashBarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 aboutDashBarText.setText("ABOUT");
                 aboutDashBarText.setVisible(true);
+                
+                // Company Logo (JLabel) Decorations.
+                    
+                    final int CompanyLogoLocationX = 0;
+                    final int CompanyLogoLocationY = 0;
+                    final int CompanyLogoWidth     = 400;
+                    final int CompanyLogoHeight    = 400;
+
+                    dashbarAbout.add(AboutCompanyLogo);
+                    AboutCompanyLogo.setBounds(CompanyLogoLocationX, CompanyLogoLocationY, CompanyLogoWidth, CompanyLogoHeight);
+                    AboutCompanyLogo.setOpaque(false);
+                    AboutCompanyLogo.setHorizontalAlignment(SwingConstants.CENTER);
+                    AboutCompanyLogo.setLayout(null);
+                    AboutCompanyLogo.setVisible(true);
+
+                    ImageIcon findCompanyLogo = new ImageIcon("src\\PRMS Files\\logo\\BTSLogo1.png");
+                    Image importCompanyLogo = findCompanyLogo.getImage();
+                    Image scaleCompanyLogo= importCompanyLogo.getScaledInstance(AboutCompanyLogo.getWidth(), AboutCompanyLogo.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledCompanyLogo = new ImageIcon(scaleCompanyLogo);
+                    AboutCompanyLogo.setIcon(scaledCompanyLogo);
+                
+                // Company Name Label (JLabel) Declarations.        
+
+                    final int AboutCompanyLabelHeight = 18;
+                    final int AboutCompanyLabelWidth = 440;
+                    final int AboutCompanyLabelLocationX = 340;
+                    final int AboutCompanyLabelLocationY = 160;
+                    final int AboutCompanyShadowLocationY = 165;
+
+                    dashbarAbout.add(AboutCompanyName);
+                    AboutCompanyName.setBounds(AboutCompanyLabelLocationX, AboutCompanyLabelLocationY, AboutCompanyLabelWidth, AboutCompanyLabelHeight);
+                    AboutCompanyName.setForeground(new java.awt.Color(255, 208, 0));
+                    AboutCompanyName.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 18));
+                    
+                    JLabel ACLShadow = new JLabel();
+                    
+                    dashbarAbout.add(ACLShadow);
+                    ACLShadow.setBounds(AboutCompanyLabelLocationX, AboutCompanyShadowLocationY, AboutCompanyLabelWidth, AboutCompanyLabelHeight);
+                    ACLShadow.setForeground(new java.awt.Color(0, 0, 0));
+                    ACLShadow.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 18));
+
+                    AboutCompanyName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+                    AboutCompanyName.setText("Brion Tactical Systems");
+                    AboutCompanyName.setVisible(true);
+
+                    ACLShadow.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+                    ACLShadow.setText("Brion Tactical Systems");
+                    ACLShadow.setVisible(true);
+
+                    // Program Name Label (JLabel) Declarations.
+                    
+                        final int AboutProgramLabelHeight = 20;
+                        final int AboutProgramLabelWidth = 300;
+                        final int AboutProgramLabelLocationX = 340;
+                        final int AboutProgramLabelLocationY = 185;
+                        final int AboutProgramShadowLocationY = 190;
+                        
+                        dashbarAbout.add(AboutProgramName);
+                        AboutProgramName.setBounds(AboutProgramLabelLocationX, AboutProgramLabelLocationY, AboutProgramLabelWidth, AboutProgramLabelHeight);
+                        AboutProgramName.setForeground(new java.awt.Color(255, 255, 255));
+                        AboutProgramName.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+                    
+                        JLabel APLShadow = new JLabel();
+                        
+                        dashbarAbout.add(APLShadow);
+                        APLShadow.setBounds(AboutProgramLabelLocationX, AboutProgramShadowLocationY, AboutProgramLabelWidth, AboutProgramLabelHeight);
+                        APLShadow.setForeground(new java.awt.Color(0, 0, 0));
+                        APLShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+
+                        AboutProgramName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+                        AboutProgramName.setText("POLICE RECORD MANAGEMENT SYSTEM");
+                        AboutProgramName.setVisible(true);
+                    
+                        APLShadow.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+                        APLShadow.setText("POLICE RECORD MANAGEMENT SYSTEM");
+                        APLShadow.setVisible(true);
+                        
+                // Development Team Label (JLabel) Decorations.
+                    
+                        final int DevelopmentTeamLabelHeight = 20;
+                        final int DevelopmentTeamLabelWidth = 300;
+                        final int DevelopmentTeamLabelLocationX = 275;
+                        final int DevelopmentTeamLabelLocationY = 300;
+                        final int DevelopmentTeamShadowLocationY = 305;
+                        
+                        dashbarAbout.add(AboutDevelopmentTeamLabel);
+                        AboutDevelopmentTeamLabel.setBounds(DevelopmentTeamLabelLocationX, DevelopmentTeamLabelLocationY, DevelopmentTeamLabelWidth, DevelopmentTeamLabelHeight);
+                        AboutDevelopmentTeamLabel.setForeground(new java.awt.Color(255, 255, 255));
+                        AboutDevelopmentTeamLabel.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+                    
+                        JLabel ADTLShadow = new JLabel();
+                        
+                        dashbarAbout.add(ADTLShadow);
+                        ADTLShadow.setBounds(DevelopmentTeamLabelLocationX, DevelopmentTeamShadowLocationY, DevelopmentTeamLabelWidth, DevelopmentTeamLabelHeight);
+                        ADTLShadow.setForeground(new java.awt.Color(0, 0, 0));
+                        ADTLShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+
+                        AboutDevelopmentTeamLabel.setHorizontalAlignment(SwingConstants.LEADING);
+                        AboutDevelopmentTeamLabel.setText("DEVELOPMENT TEAM INFORMATION");
+                        AboutDevelopmentTeamLabel.setVisible(true);
+                    
+                        ADTLShadow.setHorizontalAlignment(SwingConstants.LEADING);
+                        ADTLShadow.setText("DEVELOPMENT TEAM INFORMATION");
+                        ADTLShadow.setVisible(true);
+                
+                // First Year Second Semester Developers.
+                
+                    final int FirstYearLabelHeight = 18;
+                    final int FirstYearLabelWidth = 300;
+                    final int FirstYearLabelLocationX = 50;
+                    final int FirstYearLabelLocationY = 340;
+                    final int FirstYearLabelShadowLocationY = 345;
+
+                    dashbarAbout.add(FirstYearDevelopers);
+                    FirstYearDevelopers.setBounds(FirstYearLabelLocationX, FirstYearLabelLocationY, FirstYearLabelWidth, FirstYearLabelHeight);
+                    FirstYearDevelopers.setForeground(new java.awt.Color(255, 255, 255));
+                    FirstYearDevelopers.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+
+                    JLabel FirstYearShadow = new JLabel();
+
+                    dashbarAbout.add(FirstYearShadow);
+                    FirstYearShadow.setBounds(FirstYearLabelLocationX, FirstYearLabelShadowLocationY, FirstYearLabelWidth, FirstYearLabelHeight);
+                    FirstYearShadow.setForeground(new java.awt.Color(0, 0, 0));
+                    FirstYearShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+
+                    FirstYearDevelopers.setHorizontalAlignment(SwingConstants.LEADING);
+                    FirstYearDevelopers.setText("BSIT WMA 1F, 1st Year, 2nd Semester");
+                    FirstYearDevelopers.setVisible(true);
+
+                    FirstYearShadow.setHorizontalAlignment(SwingConstants.LEADING);
+                    FirstYearShadow.setText("BSIT WMA 1F, 1st Year, 2nd Semester");
+                    FirstYearShadow.setVisible(true);
+
+                // Lead Developer 1st Year (JLabel) Decorations.
+                    
+                    final int FirstYearLeadDevLocationX = 50;
+                    final int FirstYearLeadDevLocationY = 370;
+                    final int FirstYearLeadDevWidth     = 290;
+                    final int FirstYearLeadDevHeight    = 35;
+
+                    dashbarAbout.add(FirstYearLeadD);
+                    FirstYearLeadD.setBounds(FirstYearLeadDevLocationX, FirstYearLeadDevLocationY, FirstYearLeadDevWidth, FirstYearLeadDevHeight);
+                    FirstYearLeadD.setBackground(new Color(0,0,0,0));
+                    FirstYearLeadD.setForeground(new Color(255, 255, 255));
+                    FirstYearLeadD.setText("JHON BRIX BRION (Lead Developer)");
+                    FirstYearLeadD.setOpaque(false);
+                    FirstYearLeadD.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    FirstYearLeadD.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    FirstYearLeadD.setVisible(true);
+                        
+                // Co - Developer 1st Year (JLabel) Decorations.
+                
+                    final int FirstYearCoDevLocationX = 50;
+                    final int FirstYearCoDevLocationY = 390;
+                    final int FirstYearCoDevWidth     = 320;
+                    final int FirstYearCoDevHeight    = 35;
+
+                    dashbarAbout.add(FirstYearCOD);
+                    FirstYearCOD.setBounds(FirstYearCoDevLocationX, FirstYearCoDevLocationY, FirstYearCoDevWidth, FirstYearCoDevHeight);
+                    FirstYearCOD.setBackground(new Color(0,0,0,0));
+                    FirstYearCOD.setForeground(new Color(255, 255, 255));
+                    FirstYearCOD.setText("PAULA ANDREA NAVARRO (Co-Developer)");
+                    FirstYearCOD.setOpaque(false);
+                    FirstYearCOD.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    FirstYearCOD.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    FirstYearCOD.setVisible(true);
+                
+                // Assistand Developer 1st Year (JLabel) Decorations.
+                
+                    final int FirstYearAssistDevLocationX = 50;
+                    final int FirstYearAssistDevLocationY = 410;
+                    final int FirstYearAssistDevWidth     = 320;
+                    final int FirstYearAssistDevHeight    = 35;
+
+                    dashbarAbout.add(FirstYearAD);
+                    FirstYearAD.setBounds(FirstYearAssistDevLocationX, FirstYearAssistDevLocationY, FirstYearAssistDevWidth, FirstYearAssistDevHeight);
+                    FirstYearAD.setBackground(new Color(0,0,0,0));
+                    FirstYearAD.setForeground(new Color(255, 255, 255));
+                    FirstYearAD.setText("ELISON SERRANO (Assistant Developer)");
+                    FirstYearAD.setOpaque(false);
+                    FirstYearAD.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    FirstYearAD.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    FirstYearAD.setVisible(true);
+                
+                // CC3 Subject Professor (JLabel) Decorations.
+                
+                    final int CC3ProfNameLocationX = 50;
+                    final int CC3ProfNameLocationY = 430;
+                    final int CC3ProfNameWidth     = 320;
+                    final int CC3ProfNameHeight    = 35;
+
+                    dashbarAbout.add(CC3SubProf);
+                    CC3SubProf.setBounds(CC3ProfNameLocationX, CC3ProfNameLocationY, CC3ProfNameWidth, CC3ProfNameHeight);
+                    CC3SubProf.setBackground(new Color(0,0,0,0));
+                    CC3SubProf.setForeground(new Color(255, 255, 255));
+                    CC3SubProf.setText("PROF.RENGEL CORPUZ (CC3 Professor)");
+                    CC3SubProf.setOpaque(false);
+                    CC3SubProf.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    CC3SubProf.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    CC3SubProf.setVisible(true);
+                   
+                // 1st Year Development Timeline(JLabel) Decorations.
+                
+                    final int FirstYearTimelineLocationX = 50;
+                    final int FirstYearTimelineLocationY = 460;
+                    final int FirstYearTimelineWidth     = 335;
+                    final int FirstYearTimelineHeight    = 35;
+
+                    dashbarAbout.add(FirstYearDevTimeline);
+                    FirstYearDevTimeline.setBounds(FirstYearTimelineLocationX, FirstYearTimelineLocationY, FirstYearTimelineWidth, FirstYearTimelineHeight);
+                    FirstYearDevTimeline.setBackground(new Color(0,0,0,0));
+                    FirstYearDevTimeline.setForeground(new Color(255, 255, 255));
+                    FirstYearDevTimeline.setText("Started : April 8 2021 - Deadline : May 25 2021");
+                    FirstYearDevTimeline.setOpaque(false);
+                    FirstYearDevTimeline.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    FirstYearDevTimeline.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    FirstYearDevTimeline.setVisible(true);
+                
+                // Second Year Second Semester Developers.
+                
+                    final int SecondYearLabelHeight = 18;
+                    final int SecondYearLabelWidth = 300;
+                    final int SecondYearLabelLocationX = 410;
+                    final int SecondYearLabelLocationY = 340;
+                    final int SecondYearLabelShadowLocationY = 345;
+
+                    dashbarAbout.add(SecondYearDevelopers);
+                    SecondYearDevelopers.setBounds(SecondYearLabelLocationX, SecondYearLabelLocationY, SecondYearLabelWidth, SecondYearLabelHeight);
+                    SecondYearDevelopers.setForeground(new java.awt.Color(255, 255, 255));
+                    SecondYearDevelopers.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+
+                    JLabel SecondYearShadow = new JLabel();
+
+                    dashbarAbout.add(SecondYearShadow);
+                    SecondYearShadow.setBounds(SecondYearLabelLocationX, SecondYearLabelShadowLocationY, SecondYearLabelWidth, SecondYearLabelHeight);
+                    SecondYearShadow.setForeground(new java.awt.Color(0, 0, 0));
+                    SecondYearShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+
+                    SecondYearDevelopers.setHorizontalAlignment(SwingConstants.LEADING);
+                    SecondYearDevelopers.setText("BSCS 2B, 2st Year, 2nd Semester");
+                    SecondYearDevelopers.setVisible(true);
+
+                    SecondYearShadow.setHorizontalAlignment(SwingConstants.LEADING);
+                    SecondYearShadow.setText("BSCS 2B, 2st Year, 2nd Semester");
+                    SecondYearShadow.setVisible(true);
+                    
+                // Lead Developer 2nd Year (JLabel) Decorations.
+                
+                    final int SecondYearLeadDevLocationX = 410;
+                    final int SecondYearLeadDevLocationY = 370;
+                    final int SecondYearLeadDevWidth     = 320;
+                    final int SecondYearLeadDevHeight    = 35;
+
+                    dashbarAbout.add(SecondYearLeadD);
+                    SecondYearLeadD.setBounds(SecondYearLeadDevLocationX, SecondYearLeadDevLocationY, SecondYearLeadDevWidth, SecondYearLeadDevHeight);
+                    SecondYearLeadD.setBackground(new Color(0,0,0,0));
+                    SecondYearLeadD.setForeground(new Color(255, 255, 255));
+                    SecondYearLeadD.setText("JHON BRIX BRION (Lead Developer)");
+                    SecondYearLeadD.setOpaque(false);
+                    SecondYearLeadD.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    SecondYearLeadD.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    SecondYearLeadD.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    SecondYearLeadD.setVisible(true);
+                   
+                
+                // Co - Developer (JLabel) Decorations.
+                
+                    final int SecondYearCODevLocationX = 410;
+                    final int SecondYearCODevLocationY = 390;
+                    final int SecondYearCODevWidth     = 320;
+                    final int SecondYearCODevHeight    = 35;
+
+                    dashbarAbout.add(SecondYearCOD);
+                    SecondYearCOD.setBounds(SecondYearCODevLocationX, SecondYearCODevLocationY, SecondYearCODevWidth, SecondYearCODevHeight);
+                    SecondYearCOD.setBackground(new Color(0,0,0,0));
+                    SecondYearCOD.setForeground(new Color(255, 255, 255));
+                    SecondYearCOD.setText("SHANE MARIE MON (Co-Developer)");
+                    SecondYearCOD.setOpaque(false);
+                    SecondYearCOD.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    SecondYearCOD.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    SecondYearCOD.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    SecondYearCOD.setVisible(true);
+                
+                // ComProg 3 Subject Professor (JLabel) Decorations.
+                
+                    final int ComProg3ProfNameLocationX = 410;
+                    final int ComProg3ProfNameLocationY = 430;
+                    final int ComProg3ProfNameWidth     = 350;
+                    final int ComProg3NameHeight        = 35;
+
+                    dashbarAbout.add(ComProg3Prof);
+                    ComProg3Prof.setBounds(ComProg3ProfNameLocationX, ComProg3ProfNameLocationY, ComProg3ProfNameWidth, ComProg3NameHeight);
+                    ComProg3Prof.setBackground(new Color(0,0,0,0));
+                    ComProg3Prof.setForeground(new Color(255, 255, 255));
+                    ComProg3Prof.setText("PROF.KWINNO PINEDA (ComProg 3 Professor)");
+                    ComProg3Prof.setOpaque(false);
+                    ComProg3Prof.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    ComProg3Prof.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ComProg3Prof.setVisible(true);
+                
+                // 2nd Year Development Timeline (JLabel) Decorations.
+                
+                    final int SecondYearTimelineLocationX = 410;
+                    final int SecondYearTimelineLocationY = 460;
+                    final int SecondYearTimelineWidth     = 355;
+                    final int SecondYearTimelineHeight    = 35;
+
+                    dashbarAbout.add(SecondYearDevTimeline);
+                    SecondYearDevTimeline.setBounds(SecondYearTimelineLocationX, SecondYearTimelineLocationY, SecondYearTimelineWidth, SecondYearTimelineHeight);
+                    SecondYearDevTimeline.setBackground(new Color(0,0,0,0));
+                    SecondYearDevTimeline.setForeground(new Color(255, 255, 255));
+                    SecondYearDevTimeline.setText("Started : March 14 2022 - Deadline : May 23 2022");
+                    SecondYearDevTimeline.setOpaque(false);
+                    SecondYearDevTimeline.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    SecondYearDevTimeline.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    SecondYearDevTimeline.setVisible(true);
 
             // Dashbar About Software (JPanel) Decorations.
 
