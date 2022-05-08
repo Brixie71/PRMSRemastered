@@ -29,7 +29,18 @@ import static PRMSClasses.PRMSLogin.IronShark;
 import static PRMSClasses.PRMSLogin.Quicksand; 
 import static PRMSClasses.PRMSLogin.Gepestev;
 import static PRMSClasses.PRMSLogin.minimize;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
+import net.proteanit.sql.DbUtils;
 
 public class PRMSMainWindow extends JFrame {
     
@@ -37,24 +48,24 @@ public class PRMSMainWindow extends JFrame {
            titleBar,
            dashBarHome, dashbarDatabase, dashbarProfile, dashbarAbout;
     
-    
+    public static JLabel ProfilePicture;
     JLabel nBLText, homeTabText, databaseTabText, profileTabText, aboutTabText,
             logo, companyName, cNameShadow, programName, 
             dBHBackground, homeText, databaseText, dBDBackground, officerProfileText, dOPBackground, aboutDashBarText, aboutBackground,
             Welcome,
-            AgeLabel, GenderLabel, HomeAddressLabel, ProvinceOfOriginLabel, DateOfArrestLabel, DateOfReleaseLabel, ReasonOfApprehensionLabel, MugShot,
+            PersonIDLabel,AgeLabel, GenderLabel, HomeAddressLabel, ProvinceOfOriginLabel, DateOfArrestLabel, DateOfReleaseLabel, ReasonOfApprehensionLabel, MugShot,
             RecordsLabel,SearchLabel,
-            ProfilePicture, ProfileAgeLabel, ProfileHomeAddressLabel, ProfileStationLabel, ProfileRankLabel, ProfileUsernameLabel,
+            ProfileAgeLabel, ProfileHomeAddressLabel, ProfileContactLabel, ProfileStationLabel, ProfileRankLabel, ProfileUsernameLabel,
             AboutCompanyLogo, AboutCompanyName, AboutProgramName, AboutDevelopmentTeamLabel,
             FirstYearDevelopers, CC3SubProf, FirstYearLeadD, FirstYearCOD, FirstYearAD, 
             SecondYearDevelopers, ComProg3Prof, SecondYearLeadD, SecondYearCOD, FirstYearDevTimeline, SecondYearDevTimeline;
     
     JTable PoliceRecords;
     JScrollPane PoliceRecordsScrollBar;
-    JTextField NameField, AgeField, GenderField, HomeAddressField, ProvinceOfOriginField, DateOfArrestField, DateOfReleaseField, ReasonOfApprehensionField, SearchBar,
-               ProfileNameField, ProfileAgeField, ProfileHomeAddressField, ProfileStationField, ProfileRankField, ProfileUsernameField;
+    JTextField IDField, NameField, AgeField, GenderField, HomeAddressField, ProvinceOfOriginField, DateOfArrestField, DateOfReleaseField, ReasonOfApprehensionField, SearchBar;
+    public static JTextField ProfileNameField, ProfileAgeField, ProfileHomeAddressField, ProfileContactField, ProfileStationField, ProfileRankField, ProfileUsernameField;
     
-    JButton RefreshList, DeleteRecord, PrintRecord, ClearRecordFields, ResetListFields, AddRecord,
+    JButton RefreshList, PrintRecord, ClearRecordFields, ResetListFields, AddRecord,
             LogOut;
 
             
@@ -69,6 +80,8 @@ public class PRMSMainWindow extends JFrame {
         SetComponentLookAndFeel();
         
         PoliceMobileComponents();
+        
+        GetDataFromDatabase();
 
     }
 
@@ -122,6 +135,7 @@ public class PRMSMainWindow extends JFrame {
         
         dashbarDatabase = new JPanel();
             
+            PersonIDLabel = new JLabel();
             AgeLabel = new JLabel();
             GenderLabel = new JLabel();
             HomeAddressLabel = new JLabel();
@@ -133,6 +147,7 @@ public class PRMSMainWindow extends JFrame {
             RecordsLabel = new JLabel();
             SearchLabel = new JLabel();
             
+            IDField = new JTextField();
             NameField = new JTextField();
             AgeField = new JTextField();
             GenderField = new JTextField();
@@ -142,12 +157,18 @@ public class PRMSMainWindow extends JFrame {
             DateOfReleaseField = new JTextField();
             ReasonOfApprehensionField = new JTextField();
             
-            PoliceRecords = new JTable();
+            PoliceRecords = new JTable() {
+                
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+                
+            };
+            
             PoliceRecordsScrollBar = new JScrollPane();
             SearchBar = new JTextField();
             
             RefreshList = new JButton();
-            DeleteRecord = new JButton();
             PrintRecord = new JButton();
             ResetListFields = new JButton();
             AddRecord = new JButton();
@@ -157,17 +178,19 @@ public class PRMSMainWindow extends JFrame {
         
             ProfilePicture = new JLabel();
             ProfileAgeLabel = new JLabel();
-            ProfileHomeAddressLabel = new JLabel();
+            ProfileHomeAddressLabel = new JLabel();      
             ProfileStationLabel = new JLabel();
             ProfileRankLabel = new JLabel();
             ProfileUsernameLabel = new JLabel();
+            ProfileContactLabel = new JLabel();
             
             ProfileNameField = new JTextField();
             ProfileAgeField = new JTextField();
-            ProfileHomeAddressField = new JTextField();
+            ProfileHomeAddressField = new JTextField(); 
             ProfileStationField = new JTextField();
             ProfileRankField = new JTextField();
             ProfileUsernameField = new JTextField();
+            ProfileContactField = new JTextField();
             
             LogOut = new JButton();
             
@@ -594,7 +617,7 @@ public class PRMSMainWindow extends JFrame {
                 // Person's Name (JTextField) Decorations.
                 
                     final int NameFieldLocationX = 50;
-                    final int NameFieldLocationY = 40;
+                    final int NameFieldLocationY = 30;
                     final int NameFieldWidth     = 700;
                     final int NameFieldHeight    = 35;
 
@@ -887,24 +910,36 @@ public class PRMSMainWindow extends JFrame {
                     final int RecordsListWidth     = 800;
                     final int RecordsListHeight    = 220;
 
-                    PoliceRecords.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);
                     dashbarDatabase.add(PoliceRecords);
+                    PoliceRecords.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);             
                     PoliceRecords.setForeground(new java.awt.Color(0,0,0));
                     PoliceRecords.setBackground(new java.awt.Color(237, 242, 244));
                     PoliceRecords.setFont(new java.awt.Font("Tahoma", 0, 14));
+                    PoliceRecords.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    PoliceRecords.enableInputMethods(false);
                     PoliceRecords.setLayout(null);
                     PoliceRecords.setVisible(true);
                     
+                    PoliceRecords.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        PoliceRecordsFunction(evt);
+                    }
+                    });
+                    
+                    
                    // List of Records (JScrollpane) Decorations.
                         
-                            PoliceRecordsScrollBar.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);
                             dashbarDatabase.add(PoliceRecordsScrollBar);
-                            PoliceRecordsScrollBar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-                            PoliceRecordsScrollBar.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                            PoliceRecordsScrollBar.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);
+                            PoliceRecordsScrollBar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                            PoliceRecordsScrollBar.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
                             PoliceRecordsScrollBar.setViewportBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0,0,0)));
-                            PoliceRecordsScrollBar.setAutoscrolls(true);      
+                            PoliceRecordsScrollBar.setAutoscrolls(true);
+                            PoliceRecordsScrollBar.setEnabled(true);
+                            PoliceRecordsScrollBar.setWheelScrollingEnabled(true);
+                            PoliceRecordsScrollBar.setFocusable(true);
                             PoliceRecordsScrollBar.getViewport().add(PoliceRecords);
-                            
+       
                 // Search Records (JLabel) Decorations.
                 
                     final int SearchLabelLocationX = 50;
@@ -985,8 +1020,64 @@ public class PRMSMainWindow extends JFrame {
                             }
 
                     });
+                    
+                    RefreshList.addActionListener(new ActionListener(){
+                       public void actionPerformed(ActionEvent evt) {
+                           RefreshListFunction(evt);
+                       } 
+                    });
+                    
+                    // Add Record (JButton) Decorations
                 
-                // Delete Record Button (JButton) Decorations.
+                    final int AddRecordLocationX = 450;
+                    final int AddRecordLocationY = 515;
+                    final int AddRecordWidth     = 110;
+                    final int AddRecordHeight    = 35;
+
+                    dashbarDatabase.add(AddRecord);
+                    AddRecord.setBounds(AddRecordLocationX, AddRecordLocationY, AddRecordWidth, AddRecordHeight);
+                    AddRecord.setBackground(new Color(248, 249, 250));
+                    AddRecord.setFont(new Font("Quicksand", Font.PLAIN, 14));
+                    AddRecord.setFocusPainted(false);
+                    AddRecord.setHorizontalAlignment(SwingConstants.CENTER);
+                    AddRecord.setOpaque(false);
+                    AddRecord.setForeground(new Color(0,0,0));
+                    AddRecord.setText("Add Record");
+                    AddRecord.setVisible(true);
+
+                    AddRecord.setContentAreaFilled(true);
+                    AddRecord.setBorderPainted(false);
+                    AddRecord.setIconTextGap(-2);
+
+                    AddRecord.addMouseListener(new MouseAdapter(){
+
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                AddRecord.setBackground(new Color(0, 0, 0));
+                                AddRecord.setForeground(new Color(255,255,255));
+
+                            }
+
+                            @Override
+                            public void mouseReleased(MouseEvent e) {
+                                AddRecord.setBackground(new Color(248, 249, 250));
+                                AddRecord.setForeground(new Color(0,0,0));
+                            }
+
+                            @Override
+                            public void mouseEntered(MouseEvent e){
+                                AddRecord.setBackground(new Color(150,150,150));
+                            }
+
+                            @Override
+                            public void mouseExited(MouseEvent e){
+                                AddRecord.setBackground(new Color(248, 249, 250));
+                                AddRecord.setForeground(new Color(0,0,0));
+                            }
+
+                    });
+                
+                /*/ Delete Record Button (JButton) Decorations.
                 
                     final int DeleteRecordButtonLocationX = 450;
                     final int DeleteRecordButtonLocationY = 515;
@@ -1036,9 +1127,15 @@ public class PRMSMainWindow extends JFrame {
 
                     });
                     
+                    DeleteRecord.addActionListener(new ActionListener(){
+                       public void actionPerformed(ActionEvent evt) {
+                           DeleteButtonFunction(evt);
+                       } 
+                    }); /*/
+                    
                 // Print Record Button (JButton) Decorations.
                 
-                    final int PrintRecordButtonLocationX = 570;
+                    final int PrintRecordButtonLocationX = 560;
                     final int PrintRecordButtonLocationY = 515;
                     final int PrintRecordButtonWidth     = 110;
                     final int PrintRecordButtonHeight    = 35;
@@ -1086,60 +1183,12 @@ public class PRMSMainWindow extends JFrame {
 
                     });
                     
-                    // Add Record (JButton) Decorations
-                
-                    final int AddRecordLocationX = 680;
-                    final int AddRecordLocationY = 515;
-                    final int AddRecordWidth     = 110;
-                    final int AddRecordHeight    = 35;
-
-                    dashbarDatabase.add(AddRecord);
-                    AddRecord.setBounds(AddRecordLocationX, AddRecordLocationY, AddRecordWidth, AddRecordHeight);
-                    AddRecord.setBackground(new Color(248, 249, 250));
-                    AddRecord.setFont(new Font("Quicksand", Font.PLAIN, 14));
-                    AddRecord.setFocusPainted(false);
-                    AddRecord.setHorizontalAlignment(SwingConstants.CENTER);
-                    AddRecord.setOpaque(false);
-                    AddRecord.setForeground(new Color(0,0,0));
-                    AddRecord.setText("Add Record");
-                    AddRecord.setVisible(true);
-
-                    AddRecord.setContentAreaFilled(true);
-                    AddRecord.setBorderPainted(false);
-                    AddRecord.setIconTextGap(-2);
-
-                    AddRecord.addMouseListener(new MouseAdapter(){
-
-                            @Override
-                            public void mousePressed(MouseEvent e) {
-                                AddRecord.setBackground(new Color(0, 0, 0));
-                                AddRecord.setForeground(new Color(255,255,255));
-
-                            }
-
-                            @Override
-                            public void mouseReleased(MouseEvent e) {
-                                AddRecord.setBackground(new Color(248, 249, 250));
-                                AddRecord.setForeground(new Color(0,0,0));
-                            }
-
-                            @Override
-                            public void mouseEntered(MouseEvent e){
-                                AddRecord.setBackground(new Color(150,150,150));
-                            }
-
-                            @Override
-                            public void mouseExited(MouseEvent e){
-                                AddRecord.setBackground(new Color(248, 249, 250));
-                                AddRecord.setForeground(new Color(0,0,0));
-                            }
-
-                    });
+                    
                     
                 // Reset Fields (JButton) Decorations
                 
-                    final int ResetListFieldsLocationX = 50;
-                    final int ResetListFieldsLocationY = 235;
+                    final int ResetListFieldsLocationX = 670;
+                    final int ResetListFieldsLocationY = 515;
                     final int ResetListFieldsButtonWidth  = 120;
                     final int ResetListFieldsHeight    = 35;
 
@@ -1186,6 +1235,12 @@ public class PRMSMainWindow extends JFrame {
 
                     });
                     
+                    ResetListFields.addActionListener(new ActionListener(){
+                       public void actionPerformed(ActionEvent evt) {
+                           ResetButtonFunction(evt);
+                       } 
+                    });
+                    
 
             // Dashbar Database (JPanel) Decorations.
                 final int dashbarDatabaseHeight = 574;
@@ -1221,8 +1276,8 @@ public class PRMSMainWindow extends JFrame {
         
             // Officer Profile Picture (JLabel) Decorations.
 
-                    final int ProfilePictureLocationX = 50;
-                    final int ProfilePictureLocationY = 50;
+                    final int ProfilePictureLocationX = 70;
+                    final int ProfilePictureLocationY = 80;
                     final int ProfilePictureWidth     = 180;
                     final int ProfilePictureHeight    = 180;
 
@@ -1231,7 +1286,7 @@ public class PRMSMainWindow extends JFrame {
                     ProfilePicture.setBackground(new Color(255,255,255));
                     ProfilePicture.setOpaque(true);
                     ProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
-                    ProfilePicture.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(255, 208, 0)));
+                    ProfilePicture.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(237, 242, 244)));
                     ProfilePicture.setLayout(null);
                     ProfilePicture.setVisible(true);
 
@@ -1254,7 +1309,7 @@ public class PRMSMainWindow extends JFrame {
                     ProfileNameField.setForeground(new Color(255, 255, 255));
                     ProfileNameField.setHorizontalAlignment(SwingConstants.LEADING);
                     ProfileNameField.setEditable(false);
-                    ProfileNameField.setText("Jhon Brix G. Brion");
+                    ProfileNameField.setText("OFFICER PROFILE");
                     ProfileNameField.setOpaque(false);
                     ProfileNameField.setCaretColor(new java.awt.Color(237, 242, 244));
                     ProfileNameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
@@ -1344,7 +1399,7 @@ public class PRMSMainWindow extends JFrame {
 
                 // Profile Station Assigned Field (JTextField) Decorations.
 
-                    final int ProfileStationFieldLocationX = 430;
+                    final int ProfileStationFieldLocationX = 435;
                     final int ProfileStationFieldLocationY = 170;
                     final int ProfileStationFieldWidth     = 310;
                     final int ProfileStationFieldHeight    = 35;
@@ -1377,7 +1432,7 @@ public class PRMSMainWindow extends JFrame {
 
                 // Profile Rank Field (JTextField) Decorations.
 
-                    final int ProfileRankFieldLocationX = 400;
+                    final int ProfileRankFieldLocationX = 410;
                     final int ProfileRankFieldLocationY = 200;
                     final int ProfileRankFieldWidth     = 310;
                     final int ProfileRankFieldHeight    = 35;
@@ -1427,6 +1482,39 @@ public class PRMSMainWindow extends JFrame {
                     ProfileUsernameField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     ProfileUsernameField.setVisible(true);
                     
+            // Profile Username Label (JLabel) Decorations.
+            
+                final int ProfileContactLabelLocationX = 300;
+                final int ProfileContactLabelLocationY = 260;
+                final int ProfileContactWidth     = 130;
+                final int ProfileContactHeight    = 35;
+
+                dashbarProfile.add(ProfileContactLabel);
+                ProfileContactLabel.setBounds(ProfileContactLabelLocationX, ProfileContactLabelLocationY, ProfileContactWidth, ProfileContactHeight);
+                ProfileContactLabel.setForeground(new Color(255,255,255));
+                ProfileContactLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                ProfileContactLabel.setText("Contact Number :");
+                ProfileContactLabel.setVisible(true);
+
+                // Profile Username Field (JTextField) Decorations.
+
+                    final int ProfileContactFieldLocationX = 440;
+                    final int ProfileContactFieldLocationY = 260;
+                    final int ProfileContactFieldWidth     = 310;
+                    final int ProfileContactFieldHeight    = 35;
+
+                    dashbarProfile.add(ProfileContactField);
+                    ProfileContactField.setBounds(ProfileContactFieldLocationX, ProfileContactFieldLocationY, ProfileContactFieldWidth, ProfileContactFieldHeight);
+                    ProfileContactField.setBackground(new Color(0,0,0,0));
+                    ProfileContactField.setForeground(new Color(255, 255, 255));
+                    ProfileContactField.setEditable(false);
+                    ProfileContactField.setText("-----------------------------------------------------------------");
+                    ProfileContactField.setOpaque(false);
+                    ProfileContactField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileContactField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    ProfileContactField.setFont(new Font("Quicksand", Font.PLAIN, 16));
+                    ProfileContactField.setVisible(true);
+                    
             // Log-out Button (JButton) Decorations.
                 
                     final int LogOutButtonLocationX = 630;
@@ -1475,6 +1563,12 @@ public class PRMSMainWindow extends JFrame {
                                 LogOut.setForeground(new Color(0,0,0));
                             }
 
+                    });
+                    
+                    LogOut.addActionListener(new ActionListener(){
+                       public void actionPerformed(ActionEvent evt) {
+                           LogOutFunction(evt);
+                       } 
                     });
         
             // Officer Profile Dashbar Name (JLabel) Decorations.
@@ -2126,9 +2220,207 @@ public class PRMSMainWindow extends JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
            e.printStackTrace();
         }/*/ /*/
-       
+    }
+    
+    private void LogOutFunction(ActionEvent evt){
+        
+        // CUSTOM EXIT BUTTON PROMP
+            
+            try {
+                for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                    if ("Windows".equals(info.getName())) {
+                        UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+               e.printStackTrace();
+            }
+            
+            int Question_YES  = JOptionPane.showConfirmDialog(null, "Are you sure you want to Log-Out?","BTS : PRMS - Log-Out Confirmation",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            
+            if (Question_YES==JOptionPane.YES_OPTION) {
+
+                dispose();
+                try {
+                for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+                   e.printStackTrace();
+                }
+                PRMSLogin LogOut = new PRMSLogin();   
+                LogOut.setTitle("Brion Tactical Systems : PRMS DATABASE");
+                LogOut.setLocationRelativeTo(null);
+                LogOut.setVisible(true);
+
+            } else if (Question_YES==JOptionPane.NO_OPTION) {
+
+                String message = "Log-Out Closure Aborted";
+                String title1 = "BTS : PRMS - Confirmation";
+                
+                JOptionPane.showMessageDialog(null, message, title1, JOptionPane.INFORMATION_MESSAGE);
+
+            }
+    }
+    
+    private void GetDataFromDatabase(){
+        Connection dbconn = DBConnection.connectDB();
+        String sqlQuery = "SELECT * FROM prmscriminalrecords";
+        if(dbconn != null){
+            try {
+                Statement st = (Statement)            
+                        dbconn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        ResultSet rs = st.executeQuery(sqlQuery);
+                        PoliceRecords.setModel(DbUtils.resultSetToTableModel(rs));
+                        PoliceRecords.getColumnModel().getColumn(0).setPreferredWidth(50);
+                        PoliceRecords.getColumnModel().getColumn(1).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(2).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(3).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(4).setPreferredWidth(400);
+                        PoliceRecords.getColumnModel().getColumn(5).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(6).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(7).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(8).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(9).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(10).setPreferredWidth(150);
+                        TableColumn tcol = PoliceRecords.getColumnModel().getColumn(11);
+                        PoliceRecords.removeColumn(tcol);
+
+                        String header[] = {"ID","LAST NAME", "FIRST NAME", "MIDDLE NAME", "ADDRESS", "DATE OF ARREST", "DATE OF RELEASE", "AGE", "GENDER", "STATUS", "ORIGIN", ""};
+
+                        for(int i=0;i<PoliceRecords.getColumnCount();i++)
+                        {
+                        TableColumn column1 = PoliceRecords.getTableHeader().getColumnModel().getColumn(i);
+
+                        column1.setHeaderValue(header[i]);
+                        } 
+            } catch (SQLException ex) {
+            Logger.getLogger(PRMSMainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            System.out.println("Police Database connection Unavailable! Check your JDBC Connector");
+            JOptionPane.showMessageDialog(this, "Police database connection unavailable!\r\n"
+               + "Please Check your JDBC Connector!", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    private void PoliceRecordsFunction(MouseEvent evt){
+        PoliceRecords.setCellSelectionEnabled(false);
+        PoliceRecords.setRowSelectionAllowed(true);
+        
+        
+        int number = PoliceRecords.getSelectedRow();
+        IDField.setText(PoliceRecords.getValueAt(number, 0).toString());
+        String conCat = PoliceRecords.getValueAt(number, 1).toString()+", " + PoliceRecords.getValueAt(number, 2).toString()
+                +" " + PoliceRecords.getValueAt(number, 3).toString();
+        String upperCase = conCat.toUpperCase();
+        NameField.setText(upperCase);
+        HomeAddressField.setText(PoliceRecords.getValueAt(number, 4).toString());
+        DateOfArrestField.setText(PoliceRecords.getValueAt(number, 5).toString());
+        DateOfReleaseField.setText(PoliceRecords.getValueAt(number, 6).toString());
+        AgeField.setText(PoliceRecords.getValueAt(number, 7).toString());
+        GenderField.setText(PoliceRecords.getValueAt(number, 8).toString());
+        ReasonOfApprehensionField.setText(PoliceRecords.getValueAt(number, 9).toString());
+        ProvinceOfOriginField.setText(PoliceRecords.getValueAt(number, 10).toString());
+        
+        
+        Connection conn = DBConnection.connectDB();
+        if(conn != null){
+            try{
+                String username = IDField.getText();
+                PreparedStatement ps = (PreparedStatement) conn.prepareStatement("SELECT crimPicture FROM prmscriminalrecords WHERE id = ?");
+                ps.setString(1, username);
+                
+                ResultSet rs = ps.executeQuery();
+                
+                if(rs.next()){
+                    byte[] imageBytes = rs.getBytes("crimPicture");          
+                    ImageIcon imageIcon = new ImageIcon(imageBytes);
+                    Image imagePicture = imageIcon.getImage();
+                    Image resizeImage = imagePicture.getScaledInstance(180,180, Image.SCALE_SMOOTH);
+                    ImageIcon myPicture = new ImageIcon(resizeImage);
+                    MugShot.setIcon(myPicture);
+
+                }
+            } catch (SQLException ex) {
+            Logger.getLogger(PRMSMainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            System.out.println("Police Database connection Unavailable! Check your JDBC Connector");
+            JOptionPane.showMessageDialog(this, "Police database connection unavailable!\r\n"
+               + "Please Check your JDBC Connector!", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    private void RefreshListFunction(ActionEvent evt) {
+        // GET DATA TO DATABASE
+        Connection dbconn = DBConnection.connectDB();
+        String sqlQuery = "SELECT * FROM prmscriminalrecords";
+        if(dbconn != null){
+            try {
+                Statement st = (Statement)            
+                        dbconn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                        ResultSet rs = st.executeQuery(sqlQuery);
+                        PoliceRecords.setModel(DbUtils.resultSetToTableModel(rs));
+                        PoliceRecords.getColumnModel().getColumn(0).setPreferredWidth(50);
+                        PoliceRecords.getColumnModel().getColumn(1).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(2).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(3).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(4).setPreferredWidth(400);
+                        PoliceRecords.getColumnModel().getColumn(5).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(6).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(7).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(8).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(9).setPreferredWidth(150);
+                        PoliceRecords.getColumnModel().getColumn(10).setPreferredWidth(150);
+                        TableColumn tcol = PoliceRecords.getColumnModel().getColumn(11);
+                        PoliceRecords.removeColumn(tcol);
+
+                        String header[] = {"ID","LAST NAME", "FIRST NAME", "MIDDLE NAME", "ADDRESS", "DATE OF ARREST", "DATE OF RELEASE", "AGE", "GENDER", "STATUS", "ORIGIN", ""};
+
+                        for(int i=0;i<PoliceRecords.getColumnCount();i++)
+                        {
+                        TableColumn column1 = PoliceRecords.getTableHeader().getColumnModel().getColumn(i);
+
+                        column1.setHeaderValue(header[i]);
+                        } 
+            } catch (SQLException ex) {
+            Logger.getLogger(PRMSMainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+            System.out.println("Police Database connection Unavailable! Check your JDBC Connector");
+            JOptionPane.showMessageDialog(this, "Police database connection unavailable!\r\n"
+               + "Please Check your JDBC Connector!", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }
+    
+    private void ResetButtonFunction(ActionEvent evt){
+        
+        
+        IDField.setText("");
+        NameField.setText("- REPORT SHEET -");
+        AgeField.setText("");
+        GenderField.setText("");
+        HomeAddressField.setText("");
+        ProvinceOfOriginField.setText("");
+        DateOfArrestField.setText("");
+        DateOfReleaseField.setText("");
+        ReasonOfApprehensionField.setText("");
+        ImageIcon imageIcon = new ImageIcon("src\\PRMS Files\\icons\\Mugshot180x.png");
+        Image imagePicture = imageIcon.getImage();
+
+        Image resizeImage = imagePicture.getScaledInstance(180,180, Image.SCALE_SMOOTH);
+        ImageIcon myPicture = new ImageIcon(resizeImage);
+        MugShot.setIcon(myPicture);
+        
+    }
+    
     
     public static void main(String[] args) {
 

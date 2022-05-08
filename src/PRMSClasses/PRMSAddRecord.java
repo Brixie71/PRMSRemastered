@@ -39,6 +39,7 @@ public class PRMSAddRecord extends JFrame {
 
         // </editor-fold>
         
+        
         pack();
         setLocationRelativeTo(null);
     }

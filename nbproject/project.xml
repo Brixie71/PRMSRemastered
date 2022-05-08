@@ -6,6 +6,12 @@
             <name>PRMSRemastered</name>
             <source-roots>
                 <root id="src.dir"/>
+                <root id="src.Libraries.dir"/>
+                <root id="src.audio.dir"/>
+                <root id="src.backgrounds.dir"/>
+                <root id="src.fonts.dir"/>
+                <root id="src.icons.dir"/>
+                <root id="src.logo.dir"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>

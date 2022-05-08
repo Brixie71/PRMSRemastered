@@ -2,10 +2,30 @@
 package PRMSClasses;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+
+import static PRMSClasses.PRMSLogin.IronShark;
+import static PRMSClasses.PRMSLogin.Quicksand;
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class PRMSSplash extends JFrame {
+    
+    JPanel SplashBackground;
+    JLabel CompanyLogo, BTSTitle, Status, ProgramName;
+    JProgressBar LoadingBar;
     
     public PRMSSplash(){
         
@@ -31,7 +51,7 @@ public class PRMSSplash extends JFrame {
         setTitle("BTS : Police Record Management System");
         setLayout(null);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // CENTER POPUP MAIN WINDOW.
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -39,14 +59,161 @@ public class PRMSSplash extends JFrame {
 
         // </editor-fold>
         
+        // <editor-fold defaultstate="collapsed" desc="<<< Component Instantiations.">
+         
+            SplashBackground = new JPanel();
+            
+            CompanyLogo = new JLabel();
+            BTSTitle = new JLabel();
+            Status = new JLabel();
+            ProgramName = new JLabel();
+            
+            LoadingBar = new JProgressBar();
+            
+        // </editor-fold>
+        
+        // CUSTOM FONTS 
+        try {
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                
+                // FOR COMPANY NAME
+                IronShark = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")).deriveFont(18f);
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Iron-Shark.ttf")));
+                
+                // FOR THE ENTIRE SYSTEM
+                Quicksand = Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Quicksand-Regular.ttf")).deriveFont(18f);
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\PRMS Files\\fonts\\Quicksand-Regular.ttf")));
+                
+                
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+        
+        // Company Logo (JLabel) Decorations.
+
+            final int companyLogoLocationX = 120;
+            final int companyLogoLocationY = 0;
+            final int companyLogoWidth = 280;
+            final int companyLogoHeight = 280;
+
+            add(CompanyLogo);
+            CompanyLogo.setBounds(companyLogoLocationX, companyLogoLocationY, companyLogoWidth, companyLogoHeight);
+            CompanyLogo.setBackground(null);
+            CompanyLogo.setHorizontalAlignment(SwingConstants.CENTER);
+            CompanyLogo.setLayout(null);
+            CompanyLogo.setVisible(true);
+
+            ImageIcon findLogo = new ImageIcon("src\\PRMS Files\\logo\\BTSLogo1.png");
+            Image importLogo = findLogo.getImage();
+            Image scaleLogo = importLogo.getScaledInstance(CompanyLogo.getWidth(), CompanyLogo.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledLogo = new ImageIcon(scaleLogo);
+            CompanyLogo.setIcon(scaledLogo);
+            
+        // Company Name Label (JLabel) Declarations.        
+
+                    final int CompanyLabelHeight = 15;
+                    final int CompanyLabelWidth = 500;
+                    final int CompanyLabelLocationX = 0;
+                    final int CompanyLabelLocationY = 202;
+                    final int CompanyShadowLocationY = 206;
+
+                    add(BTSTitle);
+                    BTSTitle.setBounds(CompanyLabelLocationX, CompanyLabelLocationY, CompanyLabelWidth, CompanyLabelHeight);
+                    BTSTitle.setForeground(new java.awt.Color(255, 208, 0));
+                    BTSTitle.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 15));
+                    
+                    JLabel BTSTitleShadow = new JLabel();
+                    
+                    add(BTSTitleShadow);
+                    BTSTitleShadow.setBounds(CompanyLabelLocationX, CompanyShadowLocationY, CompanyLabelWidth, CompanyLabelHeight);
+                    BTSTitleShadow.setForeground(new java.awt.Color(0, 0, 0));
+                    BTSTitleShadow.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 15));
+
+                    BTSTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                    BTSTitle.setText("Brion Tactical Systems");
+                    BTSTitle.setVisible(true);
+
+                    BTSTitleShadow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                    BTSTitleShadow.setText("Brion Tactical Systems");
+                    BTSTitleShadow.setVisible(true);
+
+                    // Program Name Label (JLabel) Declarations.
+                    
+                        final int ProgramLabelHeight = 20;
+                        final int ProgramLabelWidth = 500;
+                        final int ProgramLabelLocationX = 0;
+                        final int ProgramLabelLocationY = 228;
+                        final int ProgramShadowLocationY = 232;
+                        
+                        add(ProgramName);
+                        ProgramName.setBounds(ProgramLabelLocationX, ProgramLabelLocationY, ProgramLabelWidth, ProgramLabelHeight);
+                        ProgramName.setForeground(new java.awt.Color(255, 255, 255));
+                        ProgramName.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+                    
+                        JLabel ProgramNameShadow = new JLabel();
+                        
+                        add(ProgramNameShadow);
+                        ProgramNameShadow.setBounds(ProgramLabelLocationX, ProgramShadowLocationY, ProgramLabelWidth, ProgramLabelHeight);
+                        ProgramNameShadow.setForeground(new java.awt.Color(0, 0, 0));
+                        ProgramNameShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+
+                        ProgramName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                        ProgramName.setText("POLICE RECORD MANAGEMENT SYSTEM");
+                        ProgramName.setVisible(true);
+                    
+                        ProgramNameShadow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                        ProgramNameShadow.setText("POLICE RECORD MANAGEMENT SYSTEM");
+                        ProgramNameShadow.setVisible(true);
+                        
+                // Status Timeline (JLabel) Decorations.
+                
+                    final int StatusLocationX = 0;
+                    final int StatusLocationY = 255;
+                    final int StatusWidth     = 500;
+                    final int StatusHeight    = 35;
+
+                    add(Status);
+                    Status.setBounds(StatusLocationX, StatusLocationY, StatusWidth, StatusHeight);
+                    Status.setBackground(new Color(0,0,0,0));
+                    Status.setForeground(new Color(255, 255, 255));
+                    Status.setText("");
+                    Status.setOpaque(false);
+                    Status.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
+                    Status.setFont(new Font("Quicksand", Font.BOLD, 12));
+                    Status.setHorizontalAlignment(SwingConstants.CENTER);
+                    Status.setVisible(true);
+                
+                // Loading Bar (JProgressBar) Decorations.
+                    
+                    final int LoadingBarLocationX = 0;
+                    final int LoadingBarLocationY = 280;
+                    final int LoadingBarWidth     = 500;
+                    final int LoadingBarHeight    = 20;
+                    
+                    add(LoadingBar);
+                    LoadingBar.setBounds(LoadingBarLocationX, LoadingBarLocationY, LoadingBarWidth, LoadingBarHeight);
+                    LoadingBar.setBackground(new Color(0,0,0,0));
+                    LoadingBar.setVisible(true);
+                    
+                    
+        // Splash Screen Background (JPanel) Decorations.
+        
+            final int dashBarLocationX = 0;
+            final int dashBarLocationY = 0;
+            final int dashBarHeight = 300;
+            final int dashBarWidth = 500;
+
+            add(SplashBackground);
+            SplashBackground.setBounds(dashBarLocationX, dashBarLocationY, dashBarWidth, dashBarHeight);
+            SplashBackground.setBackground(new java.awt.Color(0, 0, 32));
+            SplashBackground.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 1, false));
+            SplashBackground.setLayout(null);
+        
+        
+            
+        
         pack();
         setLocationRelativeTo(null);
-    }
-    
-    public static void main(String args[]){
-        
-        PRMSSplash Open = new PRMSSplash();
-        Open.setVisible(true);
-        
+
     }
 }
