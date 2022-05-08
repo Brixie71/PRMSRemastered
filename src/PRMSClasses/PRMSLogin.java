@@ -8,11 +8,24 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,7 +44,7 @@ public class PRMSLogin extends JFrame {
     // Java Swing Components Declarations.
     
     JPanel loginPane, loginBackground;
-    JLabel loginTitle, personelPicture, usernameText, passwordText, loginPaneBackground,
+    JLabel loginTitle, personelPicture, DatabaseInfo, usernameText, passwordText, loginPaneBackground,
            companyLogo, companyName, cNameShadow, programName, pNameShadow;
            
     JTextField userInput;
@@ -60,6 +73,7 @@ public class PRMSLogin extends JFrame {
             loginPaneBackground = new JLabel();
             loginTitle = new JLabel();
             personelPicture = new JLabel();
+            DatabaseInfo = new JLabel();
             usernameText = new JLabel();
             passwordText = new JLabel();
             companyLogo = new JLabel();
@@ -156,9 +170,10 @@ public class PRMSLogin extends JFrame {
 
                 loginPane.add(personelPicture);
                 personelPicture.setBounds(personelPictureLocationX, personelPictureLocationY, personelPictureWidth, personelPictureHeight);
-                personelPicture.setBackground(new Color(255,255,255));
+                personelPicture.setBackground(new Color(255,255,255,255));
                 personelPicture.setOpaque(true);
                 personelPicture.setHorizontalAlignment(SwingConstants.CENTER);
+                personelPicture.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(237, 242, 244)));
                 personelPicture.setLayout(null);
                 personelPicture.setVisible(true);
 
@@ -167,6 +182,21 @@ public class PRMSLogin extends JFrame {
                 Image scalePersonelPicture= importPersonelPicture.getScaledInstance(personelPicture.getWidth(), personelPicture.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon scaledPersonelPicture = new ImageIcon(scalePersonelPicture);
                 personelPicture.setIcon(scaledPersonelPicture);
+                
+            // Database Info (JLabel) Decorations.
+            
+                final int DatabaseInfoLocationX = 20;
+                final int DatabaseInfoLocationY = 220;
+                final int DatabaseInfoWidth     = 340;
+                final int DatabaseInfoHeight    = 30;
+
+                loginPane.add(DatabaseInfo);
+                DatabaseInfo.setBounds(DatabaseInfoLocationX, DatabaseInfoLocationY, DatabaseInfoWidth, DatabaseInfoHeight);
+                DatabaseInfo.setForeground(new Color(255,255,255));
+                DatabaseInfo.setFont(new Font("Quicksand", Font.BOLD, 18));
+                DatabaseInfo.setHorizontalAlignment(SwingConstants.CENTER);
+                DatabaseInfo.setText("");
+                DatabaseInfo.setVisible(true);
 
             // Username Text (JLabel) Decorations.
 
@@ -198,6 +228,18 @@ public class PRMSLogin extends JFrame {
                 userInput.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(255,255,255)));
                 userInput.setFont(new Font("Quicksand", Font.PLAIN, 14));
                 userInput.setVisible(true);
+                
+                userInput.addActionListener(new ActionListener(){
+                   public void actionPerformed(ActionEvent evt) {
+                       userInputFunction(evt);
+                   } 
+                });
+                
+                userInput.addKeyListener(new java.awt.event.KeyAdapter() {
+                    public void keyPressed(java.awt.event.KeyEvent evt) {
+                        userInputKeyPressed(evt);
+                    }
+                }); 
 
             // Password Text (JLabel) Decorations.
 
@@ -278,6 +320,12 @@ public class PRMSLogin extends JFrame {
                             loginButton.setForeground(new Color(0,0,0));
                         }
 
+                });
+                
+                loginButton.addActionListener(new ActionListener(){
+                   public void actionPerformed(ActionEvent evt) {
+                       LoginButtonFunction(evt);
+                   } 
                 });
             
             // Register Button (JButton) Decorations.
@@ -570,7 +618,194 @@ public class PRMSLogin extends JFrame {
             
     }
     
-    public static void main(String[] args) {
+    private void userInputFunction(ActionEvent evt) {
+        Connection conn = DBConnection.connectDB();
+        if (conn != null) {
+            try {
+                String username = userInput.getText();
+                PreparedStatement ps = (PreparedStatement) conn.prepareStatement("SELECT userPicture, firstname, middlename, lastname, rank FROM policedatabaseaccounts WHERE username = ?");
+                ps.setString(1, username);
+
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    byte[] imageBytes = rs.getBytes("userPicture");
+                    String fname = rs.getString("firstname");
+                    String mname = rs.getString("middlename");
+                    String lname = rs.getString("lastname");
+                    String rank = rs.getString("rank");
+
+                    String conCat = rank + " : " + fname + " " + mname + " " + lname;
+                    String upperCase = conCat.toUpperCase();
+                    DatabaseInfo.setText(upperCase);
+
+                    ImageIcon imageIcon = new ImageIcon(imageBytes);
+                    Image imagePicture = imageIcon.getImage();
+                    Image resizeImage = imagePicture.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+                    ImageIcon myPicture = new ImageIcon(resizeImage);
+                    personelPicture.setIcon(myPicture);
+
+                } else if (username.isEmpty()) {
+                    ImageIcon imageIcon = new ImageIcon("src\\PRMS Files\\icons\\USER-ICON.png");
+                    Image imagePicture = imageIcon.getImage();
+
+                    Image resizeImage = imagePicture.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+                    ImageIcon myPicture = new ImageIcon(resizeImage);
+                    personelPicture.setIcon(myPicture);
+                    DatabaseInfo.setText("USERNAME FIELD IS EMPTY!");
+
+                } else {
+                    ImageIcon imageIcon = new ImageIcon("src\\PRMS Files\\icons\\USER-ICON.png");
+                    Image imagePicture = imageIcon.getImage();
+                    Image resizeImage = imagePicture.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+                    ImageIcon myPicture = new ImageIcon(resizeImage);
+                    personelPicture.setIcon(myPicture);
+                    DatabaseInfo.setText("USER NOT FOUND!");
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(PRMSLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            System.out.println("Police Database connection Unavailable! Check your JDBC Connector");
+            JOptionPane.showMessageDialog(this, """
+                                                Police database connection unavailable!\r
+                                                Please Check your JDBC Connector!""", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+    
+    private void userInputKeyPressed(KeyEvent evt){
+        int key = evt.getKeyCode();
+        if (key == 10) {
+            passwordInput.requestFocus();
+        }
+        
+        /* if (key == 10) {}, "10" Corresponds to the ID of the Character on the Keyboard, 
+           Which is the Enter Button.
+        */
+        
+    }
+    
+    private void LoginButtonFunction(ActionEvent evt){
+        
+        String username = userInput.getText();
+        String password = String.valueOf(passwordInput.getPassword());
+
+        if (username.isEmpty() || password.isEmpty()) {
+            DatabaseInfo.setText("LOGIN FIELDS ARE EMPTY!");
+        } else {
+            // start the login process.
+            LoginAuthentication(username, password);
+
+        }
+    }
+    
+    private void LoginAuthentication(String username, String password){
+        Connection dbconn = DBConnection.connectDB();
+        if (dbconn != null) {
+            try {
+                PreparedStatement st = (PreparedStatement) dbconn.prepareStatement("SELECT * FROM policedatabaseaccounts WHERE username = ? AND password = ?");
+
+                st.setString(1, username);
+                st.setString(2, password);
+
+                ResultSet account = st.executeQuery();
+                userInput.setText("");
+                passwordInput.setText("");
+
+                if (account.next()) {
+                    String type = account.getString("userType");
+                    if (type.equals("Dispatcher")) {
+                        dispose();
+                        PRMSMainWindow alpha = new PRMSMainWindow();
+                        alpha.setTitle("Brion Tactical Systems : PRMS DATABASE (DISPATCHER)");
+
+                        byte[] imageBytes = account.getBytes("userPicture");
+                        String fname = account.getString("firstname");
+                        String mname = account.getString("middlename");
+                        String lname = account.getString("lastname");
+                        String rank = account.getString("rank");
+                        String age = account.getString("age");
+                        String address = account.getString("address");
+                        String contact = account.getString("contactnumber");
+                        String station = account.getString("station");
+                        String userAcc = account.getString("username");
+
+                        String conCat = fname + " " + mname + " " + lname;
+                        String upperCase = conCat.toUpperCase();
+                        PRMSMainWindow.ProfileNameField.setText(upperCase);
+                        PRMSMainWindow.ProfileAgeField.setText(age);
+                        PRMSMainWindow.ProfileHomeAddressField.setText(address);
+                        PRMSMainWindow.ProfileContactField.setText(contact);
+                        PRMSMainWindow.ProfileStationField.setText(station);
+                        PRMSMainWindow.ProfileRankField.setText(rank);
+                        PRMSMainWindow.ProfileUsernameField.setText(userAcc);
+
+                        ImageIcon imageIcon = new ImageIcon(imageBytes);
+                        Image imagePicture = imageIcon.getImage();
+                        Image resizeImage = imagePicture.getScaledInstance(PRMSMainWindow.ProfilePicture.getWidth(), PRMSMainWindow.ProfilePicture.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon myPicture = new ImageIcon(resizeImage);
+                        PRMSMainWindow.ProfilePicture.setIcon(myPicture);
+
+                        alpha.setVisible(true);
+
+                    } else if (type.equals("Police Officer")) {
+                        dispose();
+                        PRMSMainWindow bravo = new PRMSMainWindow();
+                        bravo.setTitle("Brion Tactical Systems : PRMS DATABASE (POLICE OFFICER)");
+
+                        byte[] imageBytes = account.getBytes("userPicture");
+                        String fname = account.getString("firstname");
+                        String mname = account.getString("middlename");
+                        String lname = account.getString("lastname");
+                        String rank = account.getString("rank");
+                        String age = account.getString("age");
+                        String address = account.getString("address");
+                        String contact = account.getString("contactnumber");
+                        String station = account.getString("station");
+                        String userAcc = account.getString("username");
+
+                        String conCat = fname + " " + mname + " " + lname;
+                        String upperCase = conCat.toUpperCase();
+                        PRMSMainWindow.ProfileNameField.setText(upperCase);
+                        PRMSMainWindow.ProfileAgeField.setText(age);
+                        PRMSMainWindow.ProfileHomeAddressField.setText(address);
+                        PRMSMainWindow.ProfileContactField.setText(contact);
+                        PRMSMainWindow.ProfileStationField.setText(station);
+                        PRMSMainWindow.ProfileRankField.setText(rank);
+                        PRMSMainWindow.ProfileUsernameField.setText(userAcc);
+
+                        ImageIcon imageIcon = new ImageIcon(imageBytes);
+                        Image imagePicture = imageIcon.getImage();
+                        Image resizeImage = imagePicture.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+                        ImageIcon myPicture = new ImageIcon(resizeImage);
+                        PRMSMainWindow.ProfilePicture.setIcon(myPicture);
+
+                        bravo.setVisible(true);
+                    } else {
+
+                    }
+                } else {
+                    System.out.println("username " + username);
+                    System.out.println("password " + password);
+                    JOptionPane.showMessageDialog(this, """
+                                                        The Username and Password you have entered\r
+                                                        did not match any of our records in the database.""", "PRMS DATABASE", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PRMSLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            System.out.println("Police Database connection Unavailable! Check your JDBC Connector");
+            JOptionPane.showMessageDialog(this, """
+                                                Police database connection unavailable!\r
+                                                Please Check your JDBC Connector!""", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public static void main(String[] args) throws IOException, LineUnavailableException, UnsupportedAudioFileException {
 
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -583,9 +818,71 @@ public class PRMSLogin extends JFrame {
             java.util.logging.Logger.getLogger(PRMSLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
+       
+        
+        // Call Loading Screen Before Launching PRMS Login
+        
+        PRMSSplash Execute = new PRMSSplash();
+        Execute.setTitle("Brion Tactical Systems");
+        Execute.setVisible(true);
+
+        File file = new File("src\\PRMS Files\\audio\\BTSVocalRecConv.wav");
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+        
         PRMSLogin Launch = new PRMSLogin();
-        Launch.setVisible(true);
-        Launch.setOpacity(0.98f);
+        
+        try {
+            for (int i = 0; i < 101; i++) {
+                Thread.sleep(2 * 10);
+                if (i == 1) {
+                    clip.start();
+                }
+
+                if (i == 36) {
+                    
+                    Runtime.getRuntime().exec("cmd /c C:\\wamp64\\wampmanager.exe");
+                    
+                }
+
+                switch (i) {
+                    case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ->
+                        Execute.Status.setText("Booting system        | " + Integer.toString(i) + "%");
+                    case 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ->
+                        Execute.Status.setText("Loading modules       | " + Integer.toString(i) + "%");
+                    case 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 ->
+                        Execute.Status.setText("Booting database      | " + Integer.toString(i) + "%"); 
+                    case 40, 41, 42, 43, 44, 45, 46, 47, 48, 49 ->
+                        Execute.Status.setText("Loading system files  | " + Integer.toString(i) + "%");
+                    case 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 ->
+                        Execute.Status.setText("Checking files        | " + Integer.toString(i) + "%");
+                    case 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79 ->
+                        Execute.Status.setText("Starting System       | " + Integer.toString(i) + "%");
+                    case 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101 ->
+                        Execute.Status.setText("Booting Login Screen  | " + Integer.toString(i) + "%");
+                    default -> {
+                    }
+                }
+                Execute.LoadingBar.setValue(i);        // Loading is a name of progressbar
+            }
+        } catch (InterruptedException e) {
+        }
+
+        // DELAY BEFORE LOGIN POP UP WINDOW
+        try {
+
+            Thread.sleep(2 * 1000);
+            Execute.setVisible(false);
+            Launch.setTitle("Brion Tactical Systems : PRMS DATABASE");
+            Launch.setVisible(true);
+            Launch.setOpacity(0.98f);
+            Execute.dispose();
+
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
+
         
 
     }
