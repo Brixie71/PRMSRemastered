@@ -205,7 +205,7 @@ public class PRMSSplash extends JFrame {
 
             add(SplashBackground);
             SplashBackground.setBounds(dashBarLocationX, dashBarLocationY, dashBarWidth, dashBarHeight);
-            SplashBackground.setBackground(new java.awt.Color(0, 0, 32));
+            SplashBackground.setBackground(new java.awt.Color(0, 29, 61));
             SplashBackground.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 1, false));
             SplashBackground.setLayout(null);
         

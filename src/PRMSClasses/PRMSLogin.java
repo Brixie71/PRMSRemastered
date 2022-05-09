@@ -170,7 +170,7 @@ public class PRMSLogin extends JFrame {
 
                 loginPane.add(personelPicture);
                 personelPicture.setBounds(personelPictureLocationX, personelPictureLocationY, personelPictureWidth, personelPictureHeight);
-                personelPicture.setBackground(new Color(255,255,255,255));
+                personelPicture.setBackground(new Color(237, 242, 244, 255));
                 personelPicture.setOpaque(true);
                 personelPicture.setHorizontalAlignment(SwingConstants.CENTER);
                 personelPicture.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(237, 242, 244)));
@@ -195,7 +195,7 @@ public class PRMSLogin extends JFrame {
                 DatabaseInfo.setForeground(new Color(255,255,255));
                 DatabaseInfo.setFont(new Font("Quicksand", Font.BOLD, 18));
                 DatabaseInfo.setHorizontalAlignment(SwingConstants.CENTER);
-                DatabaseInfo.setText("");
+                DatabaseInfo.setText("WELCOME!");
                 DatabaseInfo.setVisible(true);
 
             // Username Text (JLabel) Decorations.
@@ -224,7 +224,7 @@ public class PRMSLogin extends JFrame {
                 userInput.setBackground(new Color(0,0,0,0));
                 userInput.setForeground(new Color(255,255,255));
                 userInput.setOpaque(false);
-                userInput.setCaretColor(new java.awt.Color(255,255,255));
+                userInput.setCaretColor(new Color(255,255,255));
                 userInput.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(255,255,255)));
                 userInput.setFont(new Font("Quicksand", Font.PLAIN, 14));
                 userInput.setVisible(true);
@@ -646,20 +646,22 @@ public class PRMSLogin extends JFrame {
                     personelPicture.setIcon(myPicture);
 
                 } else if (username.isEmpty()) {
+                    
                     ImageIcon imageIcon = new ImageIcon("src\\PRMS Files\\icons\\USER-ICON.png");
                     Image imagePicture = imageIcon.getImage();
-
                     Image resizeImage = imagePicture.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
                     ImageIcon myPicture = new ImageIcon(resizeImage);
                     personelPicture.setIcon(myPicture);
                     DatabaseInfo.setText("USERNAME FIELD IS EMPTY!");
 
                 } else {
+                    
                     ImageIcon imageIcon = new ImageIcon("src\\PRMS Files\\icons\\USER-ICON.png");
                     Image imagePicture = imageIcon.getImage();
                     Image resizeImage = imagePicture.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
                     ImageIcon myPicture = new ImageIcon(resizeImage);
                     personelPicture.setIcon(myPicture);
+                    
                     DatabaseInfo.setText("USER NOT FOUND!");
 
                 }
@@ -695,6 +697,13 @@ public class PRMSLogin extends JFrame {
 
         if (username.isEmpty() || password.isEmpty()) {
             DatabaseInfo.setText("LOGIN FIELDS ARE EMPTY!");
+            
+            ImageIcon findPersonelPicture = new ImageIcon("src\\PRMS Files\\icons\\USER-ICON.png");
+            Image importPersonelPicture = findPersonelPicture.getImage();
+            Image scalePersonelPicture= importPersonelPicture.getScaledInstance(personelPicture.getWidth(), personelPicture.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon scaledPersonelPicture = new ImageIcon(scalePersonelPicture);
+            personelPicture.setIcon(scaledPersonelPicture);
+                
         } else {
             // start the login process.
             LoginAuthentication(username, password);
@@ -720,7 +729,7 @@ public class PRMSLogin extends JFrame {
                     if (type.equals("Dispatcher")) {
                         dispose();
                         PRMSMainWindow alpha = new PRMSMainWindow();
-                        alpha.setTitle("Brion Tactical Systems : PRMS DATABASE (DISPATCHER)");
+                        alpha.setTitle("PRMS : Police Database ");
 
                         byte[] imageBytes = account.getBytes("userPicture");
                         String fname = account.getString("firstname");
@@ -754,7 +763,7 @@ public class PRMSLogin extends JFrame {
                     } else if (type.equals("Police Officer")) {
                         dispose();
                         PRMSMainWindow bravo = new PRMSMainWindow();
-                        bravo.setTitle("Brion Tactical Systems : PRMS DATABASE (POLICE OFFICER)");
+                        bravo.setTitle("PRMS : Police Database ");
 
                         byte[] imageBytes = account.getBytes("userPicture");
                         String fname = account.getString("firstname");
@@ -788,11 +797,21 @@ public class PRMSLogin extends JFrame {
 
                     }
                 } else {
+                    
                     System.out.println("username " + username);
                     System.out.println("password " + password);
+                    
+                    DatabaseInfo.setText("Login Failed!");
+                    ImageIcon findPersonelPicture = new ImageIcon("src\\PRMS Files\\icons\\USER-ICON.png");
+                    Image importPersonelPicture = findPersonelPicture.getImage();
+                    Image scalePersonelPicture= importPersonelPicture.getScaledInstance(personelPicture.getWidth(), personelPicture.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon scaledPersonelPicture = new ImageIcon(scalePersonelPicture);
+                    personelPicture.setIcon(scaledPersonelPicture);
+                    
                     JOptionPane.showMessageDialog(this, """
                                                         The Username and Password you have entered\r
                                                         did not match any of our records in the database.""", "PRMS DATABASE", JOptionPane.INFORMATION_MESSAGE);
+                    
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(PRMSLogin.class.getName()).log(Level.SEVERE, null, ex);

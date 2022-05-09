@@ -31,6 +31,7 @@ import static PRMSClasses.PRMSLogin.Gepestev;
 import static PRMSClasses.PRMSLogin.minimize;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +40,10 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
 import net.proteanit.sql.DbUtils;
 
 public class PRMSMainWindow extends JFrame {
@@ -65,7 +69,7 @@ public class PRMSMainWindow extends JFrame {
     JTextField IDField, NameField, AgeField, GenderField, HomeAddressField, ProvinceOfOriginField, DateOfArrestField, DateOfReleaseField, ReasonOfApprehensionField, SearchBar;
     public static JTextField ProfileNameField, ProfileAgeField, ProfileHomeAddressField, ProfileContactField, ProfileStationField, ProfileRankField, ProfileUsernameField;
     
-    JButton RefreshList, PrintRecord, ClearRecordFields, ResetListFields, AddRecord,
+    JButton RefreshList, PrintRecord, ClearRecordFields, ResetListFields, AddRecord, DeleteRecord,
             LogOut;
 
             
@@ -94,8 +98,8 @@ public class PRMSMainWindow extends JFrame {
 
         //JFrame Size.
         setSize(FrameSizeX, FrameSizeY);
-        setMinimumSize(new java.awt.Dimension(FrameSizeX, FrameSizeY));
-        setPreferredSize(new java.awt.Dimension(FrameSizeX, FrameSizeY));
+        setMinimumSize(new Dimension(FrameSizeX, FrameSizeY));
+        setPreferredSize(new Dimension(FrameSizeX, FrameSizeY));
 
         //JFrame Decoration.
         setUndecorated(true);
@@ -103,7 +107,7 @@ public class PRMSMainWindow extends JFrame {
         setTitle("PRMS : Police Database");
         setLayout(null);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // CENTER POPUP MAIN WINDOW.
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -159,6 +163,7 @@ public class PRMSMainWindow extends JFrame {
             
             PoliceRecords = new JTable() {
                 
+                @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
@@ -171,6 +176,7 @@ public class PRMSMainWindow extends JFrame {
             RefreshList = new JButton();
             PrintRecord = new JButton();
             ResetListFields = new JButton();
+            DeleteRecord = new JButton();
             AddRecord = new JButton();
             
         
@@ -268,8 +274,8 @@ public class PRMSMainWindow extends JFrame {
 
             navigationBar.setBounds(navigationPanelLocationX, navigationPanelLocationY, navigationPanelWidth, navigationPanelHeight);
             add(navigationBar);
-            navigationBar.setBackground(new java.awt.Color(10, 10, 10));
-            navigationBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
+            navigationBar.setBackground(new Color(10, 10, 10));
+            navigationBar.setBorder(new javax.swing.border.LineBorder(new Color(255, 200, 0), 2, false));
             navigationBar.setLayout(null);
 
             // Navigation Bar Label (JPanel) Decorations.
@@ -280,15 +286,15 @@ public class PRMSMainWindow extends JFrame {
 
                 navigationBarLabel.setBounds(navigationTabLocationX, navigationTabLocationY, navigationTabWidth, navigationTabHeight);
                 navigationBar.add(navigationBarLabel);
-                navigationBarLabel.setBackground(new java.awt.Color(0, 29, 61));
+                navigationBarLabel.setBackground(new Color(0, 29, 61));
                 navigationBarLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.SoftBevelBorder.RAISED));
                 navigationBarLabel.setLayout(null);
 
                 // nBLText (JLabel) Decorations.
                     nBLText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                     navigationBarLabel.add(nBLText);
-                    nBLText.setForeground(new java.awt.Color(255, 255, 255));
-                    nBLText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
+                    nBLText.setForeground(new Color(255, 255, 255));
+                    nBLText.setFont(new Font("Quicksand", Font.BOLD, 14));
                     nBLText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                     nBLText.setIconTextGap(15);
                     nBLText.setText("Navigation Bar");
@@ -307,15 +313,15 @@ public class PRMSMainWindow extends JFrame {
 
                     dBHTab.setBounds(dBHTAbX, dBHTabY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(dBHTab);
-                    dBHTab.setBackground(new java.awt.Color(21, 21, 21));
+                    dBHTab.setBackground(new Color(21, 21, 21));
                     dBHTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                     dBHTab.setLayout(null);
 
                     // Home Tab Text(JLabel) Decorations.
                         homeTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                         dBHTab.add(homeTabText);
-                        homeTabText.setForeground(new java.awt.Color(255, 255, 255));
-                        homeTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
+                        homeTabText.setForeground(new Color(255, 255, 255));
+                        homeTabText.setFont(new Font("Quicksand", Font.BOLD, 14));
                         homeTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         homeTabText.setText("Home");
 
@@ -327,7 +333,7 @@ public class PRMSMainWindow extends JFrame {
 
                             homeTabIndicator.setBounds(homeTabIndicatorLocationX, homeTabIndicatorLocationY, homeTabIndicatorWidth, homeTabIndicatorHeight);
                             dBHTab.add(homeTabIndicator);
-                            homeTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
+                            homeTabIndicator.setBackground(new Color(255, 208, 0));
                             homeTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             homeTabIndicator.setVisible(true);
 
@@ -337,15 +343,15 @@ public class PRMSMainWindow extends JFrame {
 
                     dBDTab.setBounds(dBDTabX, dBDTabY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(dBDTab);
-                    dBDTab.setBackground(new java.awt.Color(21, 21, 21));
+                    dBDTab.setBackground(new Color(21, 21, 21));
                     dBDTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                     dBDTab.setLayout(null);
 
                     // Database Tab Text (JLabel) Decorations.      
                     databaseTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                     dBDTab.add(databaseTabText);
-                    databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
-                    databaseTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
+                    databaseTabText.setForeground(new Color(255, 255, 255));
+                    databaseTabText.setFont(new Font("Quicksand", Font.BOLD, 14));
                     databaseTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                     databaseTabText.setText("Database");
 
@@ -358,7 +364,7 @@ public class PRMSMainWindow extends JFrame {
                         // Database Tab Indicator (JPanel) Decorations.
                             databaseTabIndicator.setBounds(databaseTabIndicatorLocationX, databaseTabIndicatorLocationY, databaseTabIndicatorWidth, databaseTabIndicatorHeight);
                             dBDTab.add(databaseTabIndicator);
-                            databaseTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
+                            databaseTabIndicator.setBackground(new Color(255, 208, 0));
                             databaseTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             databaseTabIndicator.setVisible(false);
 
@@ -368,15 +374,15 @@ public class PRMSMainWindow extends JFrame {
 
                     profileTab.setBounds(profileTabX, profileTabY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(profileTab);
-                    profileTab.setBackground(new java.awt.Color(21, 21, 21));
+                    profileTab.setBackground(new Color(21, 21, 21));
                     profileTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                     profileTab.setLayout(null);
 
                     // Officer Profile Tab Text (JLabel) Decorations.
                         profileTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                         profileTab.add(profileTabText);
-                        profileTabText.setForeground(new java.awt.Color(255, 255, 255));
-                        profileTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
+                        profileTabText.setForeground(new Color(255, 255, 255));
+                        profileTabText.setFont(new Font("Quicksand", Font.BOLD, 14));
                         profileTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         profileTabText.setText("Officer Profile");
 
@@ -388,7 +394,7 @@ public class PRMSMainWindow extends JFrame {
 
                             profileTabIndicator.setBounds(profileTabIndicatorLocationX, profileTabIndicatorLocationY, profileTabIndicatorWidth, profileTabIndicatorHeight);
                             profileTab.add(profileTabIndicator);
-                            profileTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
+                            profileTabIndicator.setBackground(new Color(255, 208, 0));
                             profileTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             profileTabIndicator.setVisible(false);
 
@@ -399,7 +405,7 @@ public class PRMSMainWindow extends JFrame {
 
                     aboutTab.setBounds(aboutTabLocationX, aboutTabLocationY, dBHTabWidth, dBHTabHeight);
                     navigationBar.add(aboutTab);
-                    aboutTab.setBackground(new java.awt.Color(21, 21, 21));
+                    aboutTab.setBackground(new Color(21, 21, 21));
                     aboutTab.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                     aboutTab.setLayout(null);
 
@@ -407,8 +413,8 @@ public class PRMSMainWindow extends JFrame {
 
                         aboutTabText.setBounds(0, 0, navigationTabWidth, navigationTabHeight);
                         aboutTab.add(aboutTabText);
-                        aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
-                        aboutTabText.setFont(new java.awt.Font("Quicksand", Font.BOLD, 14));
+                        aboutTabText.setForeground(new Color(255, 255, 255));
+                        aboutTabText.setFont(new Font("Quicksand", Font.BOLD, 14));
                         aboutTabText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                         aboutTabText.setText("About");
 
@@ -421,7 +427,7 @@ public class PRMSMainWindow extends JFrame {
 
                             aboutTabIndicator.setBounds(aboutTabIndicatorLocationX, aboutTabIndicatorLocationY, aboutTabIndicatorWidth, aboutTabIndicatorHeigth);
                             aboutTab.add(aboutTabIndicator);
-                            aboutTabIndicator.setBackground(new java.awt.Color(255, 208, 0));
+                            aboutTabIndicator.setBackground(new Color(255, 208, 0));
                             aboutTabIndicator.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
                             aboutTabIndicator.setVisible(false);
 
@@ -435,12 +441,13 @@ public class PRMSMainWindow extends JFrame {
 
             titleBar.setBounds(titlePanelLocationX, titlePanelLocationY, titlePanelWidth, titlePanelHeight);
             add(titleBar);
-            titleBar.setBackground(new java.awt.Color(0, 29, 61));
-            titleBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
+            titleBar.setBackground(new Color(0, 29, 61));
+            titleBar.setBorder(new javax.swing.border.LineBorder(new Color(255, 200, 0), 2, false));
             titleBar.setLayout(null);
 
             // Title Bar Frame dragging Declaration.
             titleBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+                @Override
                 public void mouseDragged(java.awt.event.MouseEvent evt) {
                     // JFRAME DRAGGER
                     int x = evt.getXOnScreen();
@@ -451,6 +458,7 @@ public class PRMSMainWindow extends JFrame {
             });
 
             titleBar.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
                 public void mousePressed(java.awt.event.MouseEvent evt) {
                     // JFRAME DRAGGER PART 2
                     xMouse = evt.getX();
@@ -466,7 +474,7 @@ public class PRMSMainWindow extends JFrame {
 
                 logo.setBounds(logoLocationX, logoLocationY, logoWidth, logoHeight);
                 titleBar.add(logo);
-                logo.setForeground(new java.awt.Color(0, 0, 0));
+                logo.setForeground(new Color(0, 0, 0));
                 logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 logo.setLayout(null);
 
@@ -486,13 +494,13 @@ public class PRMSMainWindow extends JFrame {
 
                 companyName.setBounds(companyNameLocationX, companyNameLocationY, companyNameWidth, companyNameHeight);
                 titleBar.add(companyName);
-                companyName.setForeground(new java.awt.Color(255, 208, 0));
-                companyName.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 20));
+                companyName.setForeground(new Color(255, 208, 0));
+                companyName.setFont(new Font("Iron Shark", Font.PLAIN, 20));
 
                 cNameShadow.setBounds(companyNameLocationX, cNameShadowLocationY, companyNameWidth, companyNameHeight);
                 titleBar.add(cNameShadow);
-                cNameShadow.setForeground(new java.awt.Color(0, 0, 0));
-                cNameShadow.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 20));
+                cNameShadow.setForeground(new Color(0, 0, 0));
+                cNameShadow.setFont(new Font("Iron Shark", Font.PLAIN, 20));
 
                 companyName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 companyName.setText("Brion Tactical Systems");
@@ -510,8 +518,8 @@ public class PRMSMainWindow extends JFrame {
 
                 programName.setBounds(programNameLocationX, programNameLocationY, programNameWidth, programNameHeight);
                 titleBar.add(programName);
-                programName.setForeground(new java.awt.Color(255, 255, 255));
-                programName.setFont(new java.awt.Font("Gepestev", Font.BOLD, 25));
+                programName.setForeground(new Color(255, 255, 255));
+                programName.setFont(new Font("Gepestev", Font.BOLD, 25));
                 programName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                 programName.setText("POLICE RECORD MANAGEMENT SYSTEM");
                 programName.setVisible(true);
@@ -529,8 +537,8 @@ public class PRMSMainWindow extends JFrame {
 
                 dashBarHome.setBounds(dashBarLocationX, dashBarLocationY, dashBarWidth, dashBarHeight);
                 add(dashBarHome);
-                dashBarHome.setBackground(new java.awt.Color(0, 0, 32));
-                dashBarHome.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
+                dashBarHome.setBackground(new Color(0, 0, 32));
+                dashBarHome.setBorder(new javax.swing.border.LineBorder(new Color(255, 200, 0), 2, false));
                 dashBarHome.setLayout(null);
                 
             // Dasbar Home Welcome Label (JLabel) Decorations. 
@@ -572,8 +580,8 @@ public class PRMSMainWindow extends JFrame {
 
                 homeText.setBounds(homeTextX, homeTextY, homeTextWidth, homeTextHeight);
                 dashBarHome.add(homeText);
-                homeText.setForeground(new java.awt.Color(255, 255, 255));
-                homeText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
+                homeText.setForeground(new Color(255, 255, 255));
+                homeText.setFont(new Font("Impact", Font.PLAIN, 14));
                 homeText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 homeText.setText("HOME");
                 homeText.setVisible(true);
@@ -586,7 +594,7 @@ public class PRMSMainWindow extends JFrame {
 
                 dBHBackground.setBounds(dBHBackgroundLocationX, dBHBackgroundLocationY, dBHBackgroundWidth, dBHBackgroundHeight);
                 dashBarHome.add(dBHBackground);
-                dBHBackground.setForeground(new java.awt.Color(0, 0, 0));
+                dBHBackground.setForeground(new Color(0, 0, 0));
                 dBHBackground.setHorizontalAlignment(SwingConstants.CENTER);
                 dBHBackground.setLayout(null);
 
@@ -606,8 +614,8 @@ public class PRMSMainWindow extends JFrame {
 
                 databaseText.setBounds(databaseTextX, databaseTextY, databaseTextWidth, databaseTextHeight);
                 dashbarDatabase.add(databaseText);
-                databaseText.setForeground(new java.awt.Color(255, 255, 255));
-                databaseText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
+                databaseText.setForeground(new Color(255, 255, 255));
+                databaseText.setFont(new Font("Impact", Font.PLAIN, 14));
                 databaseText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 databaseText.setText("DATABASE");
                 databaseText.setVisible(true);
@@ -629,7 +637,7 @@ public class PRMSMainWindow extends JFrame {
                     NameField.setEditable(false);
                     NameField.setText("- REPORT SHEET -");
                     NameField.setOpaque(false);
-                    NameField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    NameField.setCaretColor(new Color(237, 242, 244));
                     NameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                     NameField.setFont(new Font("Quicksand", Font.BOLD, 26));
                     NameField.setVisible(true);
@@ -660,9 +668,8 @@ public class PRMSMainWindow extends JFrame {
                         AgeField.setBackground(new Color(0,0,0,0));
                         AgeField.setForeground(new Color(255, 255, 255));
                         AgeField.setEditable(false);
-                        AgeField.setText("--");
                         AgeField.setOpaque(false);
-                        AgeField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        AgeField.setCaretColor(new Color(237, 242, 244));
                         AgeField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         AgeField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         AgeField.setVisible(true);
@@ -693,9 +700,8 @@ public class PRMSMainWindow extends JFrame {
                         GenderField.setBackground(new Color(0,0,0,0));
                         GenderField.setForeground(new Color(255, 255, 255));
                         GenderField.setEditable(false);
-                        GenderField.setText("");
                         GenderField.setOpaque(false);
-                        GenderField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        GenderField.setCaretColor(new Color(237, 242, 244));
                         GenderField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         GenderField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         GenderField.setVisible(true);
@@ -727,9 +733,8 @@ public class PRMSMainWindow extends JFrame {
                         HomeAddressField.setBackground(new Color(0,0,0,0));
                         HomeAddressField.setForeground(new Color(255, 255, 255));
                         HomeAddressField.setEditable(false);
-                        HomeAddressField.setText("-----------------------------------------------------------------");
                         HomeAddressField.setOpaque(false);
-                        HomeAddressField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        HomeAddressField.setCaretColor(new Color(237, 242, 244));
                         HomeAddressField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         HomeAddressField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         HomeAddressField.setVisible(true);
@@ -761,9 +766,8 @@ public class PRMSMainWindow extends JFrame {
                         ProvinceOfOriginField.setBackground(new Color(0,0,0,0));
                         ProvinceOfOriginField.setForeground(new Color(255, 255, 255));
                         ProvinceOfOriginField.setEditable(false);
-                        ProvinceOfOriginField.setText("-----------------------------------------------------------------");
                         ProvinceOfOriginField.setOpaque(false);
-                        ProvinceOfOriginField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        ProvinceOfOriginField.setCaretColor(new Color(237, 242, 244));
                         ProvinceOfOriginField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         ProvinceOfOriginField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         ProvinceOfOriginField.setVisible(true);
@@ -794,9 +798,8 @@ public class PRMSMainWindow extends JFrame {
                         DateOfArrestField.setBackground(new Color(0,0,0,0));
                         DateOfArrestField.setForeground(new Color(255, 255, 255));
                         DateOfArrestField.setEditable(false);
-                        DateOfArrestField.setText("-----------------------------------------------------------------");
                         DateOfArrestField.setOpaque(false);
-                        DateOfArrestField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        DateOfArrestField.setCaretColor(new Color(237, 242, 244));
                         DateOfArrestField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         DateOfArrestField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         DateOfArrestField.setVisible(true);
@@ -827,9 +830,8 @@ public class PRMSMainWindow extends JFrame {
                         DateOfReleaseField.setBackground(new Color(0,0,0,0));
                         DateOfReleaseField.setForeground(new Color(255, 255, 255));
                         DateOfReleaseField.setEditable(false);
-                        DateOfReleaseField.setText("-----------------------------------------------------------------");
                         DateOfReleaseField.setOpaque(false);
-                        DateOfReleaseField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        DateOfReleaseField.setCaretColor(new Color(237, 242, 244));
                         DateOfReleaseField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         DateOfReleaseField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         DateOfReleaseField.setVisible(true);
@@ -860,9 +862,8 @@ public class PRMSMainWindow extends JFrame {
                         ReasonOfApprehensionField.setBackground(new Color(0,0,0,0));
                         ReasonOfApprehensionField.setForeground(new Color(255, 255, 255));
                         ReasonOfApprehensionField.setEditable(false);
-                        ReasonOfApprehensionField.setText("-----------------------------------------------------------------");
                         ReasonOfApprehensionField.setOpaque(false);
-                        ReasonOfApprehensionField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        ReasonOfApprehensionField.setCaretColor(new Color(237, 242, 244));
                         ReasonOfApprehensionField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         ReasonOfApprehensionField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         ReasonOfApprehensionField.setVisible(true);
@@ -876,7 +877,7 @@ public class PRMSMainWindow extends JFrame {
 
                     dashbarDatabase.add(MugShot);
                     MugShot.setBounds(MugshotLocationX, MugshotLocationY, MugshotWidth, MugshotHeight);
-                    MugShot.setBackground(new Color(255,255,255));
+                    MugShot.setBackground(new Color(237, 242, 244));
                     MugShot.setOpaque(true);
                     MugShot.setHorizontalAlignment(SwingConstants.CENTER);
                     MugShot.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(255, 208, 0)));
@@ -912,15 +913,16 @@ public class PRMSMainWindow extends JFrame {
 
                     dashbarDatabase.add(PoliceRecords);
                     PoliceRecords.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);             
-                    PoliceRecords.setForeground(new java.awt.Color(0,0,0));
-                    PoliceRecords.setBackground(new java.awt.Color(237, 242, 244));
-                    PoliceRecords.setFont(new java.awt.Font("Tahoma", 0, 14));
+                    PoliceRecords.setForeground(new Color(0,0,0));
+                    PoliceRecords.setBackground(new Color(237, 242, 244));
+                    PoliceRecords.setFont(new Font("Tahoma", 0, 14));
                     PoliceRecords.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
                     PoliceRecords.enableInputMethods(false);
                     PoliceRecords.setLayout(null);
                     PoliceRecords.setVisible(true);
                     
                     PoliceRecords.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         PoliceRecordsFunction(evt);
                     }
@@ -933,7 +935,7 @@ public class PRMSMainWindow extends JFrame {
                             PoliceRecordsScrollBar.setBounds(RecordsListLocationX, RecordsListLocationY, RecordsListWidth, RecordsListHeight);
                             PoliceRecordsScrollBar.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                             PoliceRecordsScrollBar.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-                            PoliceRecordsScrollBar.setViewportBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0,0,0)));
+                            PoliceRecordsScrollBar.setViewportBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0,0,0)));
                             PoliceRecordsScrollBar.setAutoscrolls(true);
                             PoliceRecordsScrollBar.setEnabled(true);
                             PoliceRecordsScrollBar.setWheelScrollingEnabled(true);
@@ -953,7 +955,7 @@ public class PRMSMainWindow extends JFrame {
                     SearchLabel.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     SearchLabel.setText("Search :");
                     SearchLabel.setVisible(true);
-                    
+
                 // Search Bar (JTextField) Decorations.
                     
                     final int SearchBarLocationX = 120;
@@ -966,10 +968,17 @@ public class PRMSMainWindow extends JFrame {
                     SearchBar.setBackground(new Color(0,0,0,0));
                     SearchBar.setForeground(new Color(237, 242, 244));
                     SearchBar.setOpaque(false);
-                    SearchBar.setCaretColor(new java.awt.Color(237, 242, 244));
+                    SearchBar.setCaretColor(new Color(237, 242, 244));
                     SearchBar.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(237, 242, 244)));
                     SearchBar.setFont(new Font("Quicksand", Font.PLAIN, 14));
                     SearchBar.setVisible(true);
+                    
+                    SearchBar.addKeyListener(new java.awt.event.KeyAdapter() {
+                        @Override
+                        public void keyReleased(java.awt.event.KeyEvent evt) {
+                            SearchBarKeyPressed(evt);
+                        }
+                    });
                     
                 // Refresh Button (JButton) Decorations.
                 
@@ -1022,6 +1031,7 @@ public class PRMSMainWindow extends JFrame {
                     });
                     
                     RefreshList.addActionListener(new ActionListener(){
+                       @Override
                        public void actionPerformed(ActionEvent evt) {
                            RefreshListFunction(evt);
                        } 
@@ -1076,10 +1086,16 @@ public class PRMSMainWindow extends JFrame {
                             }
 
                     });
+                    
+                    AddRecord.addActionListener(new ActionListener(){
+                       public void actionPerformed(ActionEvent evt) {
+                           AddRecordButtonFunction(evt);
+                       } 
+                    });
                 
-                /*/ Delete Record Button (JButton) Decorations.
+                //Delete Record Button (JButton) Decorations.
                 
-                    final int DeleteRecordButtonLocationX = 450;
+                    final int DeleteRecordButtonLocationX = 670;
                     final int DeleteRecordButtonLocationY = 515;
                     final int DeleteRecordButtonWidth     = 120;
                     final int DeleteRecordButtonHeight    = 35;
@@ -1131,7 +1147,7 @@ public class PRMSMainWindow extends JFrame {
                        public void actionPerformed(ActionEvent evt) {
                            DeleteButtonFunction(evt);
                        } 
-                    }); /*/
+                    });
                     
                 // Print Record Button (JButton) Decorations.
                 
@@ -1187,8 +1203,8 @@ public class PRMSMainWindow extends JFrame {
                     
                 // Reset Fields (JButton) Decorations
                 
-                    final int ResetListFieldsLocationX = 670;
-                    final int ResetListFieldsLocationY = 515;
+                    final int ResetListFieldsLocationX = 50;
+                    final int ResetListFieldsLocationY = 230;
                     final int ResetListFieldsButtonWidth  = 120;
                     final int ResetListFieldsHeight    = 35;
 
@@ -1250,8 +1266,8 @@ public class PRMSMainWindow extends JFrame {
 
                 dashbarDatabase.setBounds(dashbarDatabaseLocationX, dashbarDatabaseLocationY, dashbarDatabaseWidth, dashbarDatabaseHeight);
                 add(dashbarDatabase);
-                dashbarDatabase.setBackground(new java.awt.Color(0, 0, 32));
-                dashbarDatabase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
+                dashbarDatabase.setBackground(new Color(0, 0, 32));
+                dashbarDatabase.setBorder(new javax.swing.border.LineBorder(new Color(255, 200, 0), 2, false));
                 dashbarDatabase.setLayout(null);
 
             // dBDBackground (JLabel) Decorations.
@@ -1262,7 +1278,7 @@ public class PRMSMainWindow extends JFrame {
 
                 dBDBackground.setBounds(dBDBackgroundLocationX, dBDBackgroundLocationY, dBDBackgroundWidth, dBDBackgroundHeight);
                 dashbarDatabase.add(dBDBackground);
-                dBDBackground.setForeground(new java.awt.Color(0, 0, 0));
+                dBDBackground.setForeground(new Color(0, 0, 0));
                 dBDBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 dBDBackground.setLayout(null);
 
@@ -1283,7 +1299,7 @@ public class PRMSMainWindow extends JFrame {
 
                     dashbarProfile.add(ProfilePicture);
                     ProfilePicture.setBounds(ProfilePictureLocationX, ProfilePictureLocationY, ProfilePictureWidth, ProfilePictureHeight);
-                    ProfilePicture.setBackground(new Color(255,255,255));
+                    ProfilePicture.setBackground(new Color(237, 242, 244));
                     ProfilePicture.setOpaque(true);
                     ProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
                     ProfilePicture.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(237, 242, 244)));
@@ -1311,7 +1327,7 @@ public class PRMSMainWindow extends JFrame {
                     ProfileNameField.setEditable(false);
                     ProfileNameField.setText("OFFICER PROFILE");
                     ProfileNameField.setOpaque(false);
-                    ProfileNameField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileNameField.setCaretColor(new Color(237, 242, 244));
                     ProfileNameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                     ProfileNameField.setFont(new Font("Quicksand", Font.BOLD, 30));
                     ProfileNameField.setVisible(true);
@@ -1343,9 +1359,8 @@ public class PRMSMainWindow extends JFrame {
                         ProfileAgeField.setBackground(new Color(0,0,0,0));
                         ProfileAgeField.setForeground(new Color(255, 255, 255));
                         ProfileAgeField.setEditable(false);
-                        ProfileAgeField.setText("--");
                         ProfileAgeField.setOpaque(false);
-                        ProfileAgeField.setCaretColor(new java.awt.Color(237, 242, 244));
+                        ProfileAgeField.setCaretColor(new Color(237, 242, 244));
                         ProfileAgeField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                         ProfileAgeField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                         ProfileAgeField.setVisible(true);
@@ -1376,9 +1391,8 @@ public class PRMSMainWindow extends JFrame {
                     ProfileHomeAddressField.setBackground(new Color(0,0,0,0));
                     ProfileHomeAddressField.setForeground(new Color(255, 255, 255));
                     ProfileHomeAddressField.setEditable(false);
-                    ProfileHomeAddressField.setText("-----------------------------------------------------------------");
                     ProfileHomeAddressField.setOpaque(false);
-                    ProfileHomeAddressField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileHomeAddressField.setCaretColor(new Color(237, 242, 244));
                     ProfileHomeAddressField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                     ProfileHomeAddressField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     ProfileHomeAddressField.setVisible(true);
@@ -1409,9 +1423,8 @@ public class PRMSMainWindow extends JFrame {
                     ProfileStationField.setBackground(new Color(0,0,0,0));
                     ProfileStationField.setForeground(new Color(255, 255, 255));
                     ProfileStationField.setEditable(false);
-                    ProfileStationField.setText("-----------------------------------------------------------------");
                     ProfileStationField.setOpaque(false);
-                    ProfileStationField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileStationField.setCaretColor(new Color(237, 242, 244));
                     ProfileStationField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                     ProfileStationField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     ProfileStationField.setVisible(true);
@@ -1442,9 +1455,8 @@ public class PRMSMainWindow extends JFrame {
                     ProfileRankField.setBackground(new Color(0,0,0,0));
                     ProfileRankField.setForeground(new Color(255, 255, 255));
                     ProfileRankField.setEditable(false);
-                    ProfileRankField.setText("-----------------------------------------------------------------");
                     ProfileRankField.setOpaque(false);
-                    ProfileRankField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileRankField.setCaretColor(new Color(237, 242, 244));
                     ProfileRankField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                     ProfileRankField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     ProfileRankField.setVisible(true);
@@ -1475,9 +1487,8 @@ public class PRMSMainWindow extends JFrame {
                     ProfileUsernameField.setBackground(new Color(0,0,0,0));
                     ProfileUsernameField.setForeground(new Color(255, 255, 255));
                     ProfileUsernameField.setEditable(false);
-                    ProfileUsernameField.setText("-----------------------------------------------------------------");
                     ProfileUsernameField.setOpaque(false);
-                    ProfileUsernameField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileUsernameField.setCaretColor(new Color(237, 242, 244));
                     ProfileUsernameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                     ProfileUsernameField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     ProfileUsernameField.setVisible(true);
@@ -1508,9 +1519,8 @@ public class PRMSMainWindow extends JFrame {
                     ProfileContactField.setBackground(new Color(0,0,0,0));
                     ProfileContactField.setForeground(new Color(255, 255, 255));
                     ProfileContactField.setEditable(false);
-                    ProfileContactField.setText("-----------------------------------------------------------------");
                     ProfileContactField.setOpaque(false);
-                    ProfileContactField.setCaretColor(new java.awt.Color(237, 242, 244));
+                    ProfileContactField.setCaretColor(new Color(237, 242, 244));
                     ProfileContactField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
                     ProfileContactField.setFont(new Font("Quicksand", Font.PLAIN, 16));
                     ProfileContactField.setVisible(true);
@@ -1580,8 +1590,8 @@ public class PRMSMainWindow extends JFrame {
 
                 officerProfileText.setBounds(officerProfileTextX, officerProfileTextY, officerProfileTextWidth, officerProfileTextHeight);
                 dashbarProfile.add(officerProfileText);
-                officerProfileText.setForeground(new java.awt.Color(255, 255, 255));
-                officerProfileText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
+                officerProfileText.setForeground(new Color(255, 255, 255));
+                officerProfileText.setFont(new Font("Impact", Font.PLAIN, 14));
                 officerProfileText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 officerProfileText.setText("OFFICER PROFILE");
                 officerProfileText.setVisible(true);
@@ -1594,8 +1604,8 @@ public class PRMSMainWindow extends JFrame {
 
                 dashbarProfile.setBounds(dashbarProfileLocationX, dashbarProfileLocationY, dashbarProfileWidth, dashbarProfileHeight);
                 add(dashbarProfile);
-                dashbarProfile.setBackground(new java.awt.Color(0, 0, 50));
-                dashbarProfile.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
+                dashbarProfile.setBackground(new Color(0, 0, 50));
+                dashbarProfile.setBorder(new javax.swing.border.LineBorder(new Color(255, 200, 0), 2, false));
                 dashbarProfile.setLayout(null);
                 dashbarProfile.setVisible(false);
 
@@ -1607,7 +1617,7 @@ public class PRMSMainWindow extends JFrame {
 
                 dOPBackground.setBounds(dOPBackgroundLocationX, dOPBackgroundLocationY, dOPBackgroundWidth, dOPBackgroundHeight);
                 dashbarProfile.add(dOPBackground);
-                dOPBackground.setForeground(new java.awt.Color(0, 0, 0));
+                dOPBackground.setForeground(new Color(0, 0, 0));
                 dOPBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 dOPBackground.setLayout(null);
 
@@ -1627,8 +1637,8 @@ public class PRMSMainWindow extends JFrame {
 
                 aboutDashBarText.setBounds(dashbarAboutTextX, dashbarAboutTextY, dashbarAboutTextWidth, dashbarAboutTextHeight);
                 dashbarAbout.add(aboutDashBarText);
-                aboutDashBarText.setForeground(new java.awt.Color(255, 255, 255));
-                aboutDashBarText.setFont(new java.awt.Font("Impact", Font.PLAIN, 14));
+                aboutDashBarText.setForeground(new Color(255, 255, 255));
+                aboutDashBarText.setFont(new Font("Impact", Font.PLAIN, 14));
                 aboutDashBarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 aboutDashBarText.setText("ABOUT");
                 aboutDashBarText.setVisible(true);
@@ -1663,15 +1673,15 @@ public class PRMSMainWindow extends JFrame {
 
                     dashbarAbout.add(AboutCompanyName);
                     AboutCompanyName.setBounds(AboutCompanyLabelLocationX, AboutCompanyLabelLocationY, AboutCompanyLabelWidth, AboutCompanyLabelHeight);
-                    AboutCompanyName.setForeground(new java.awt.Color(255, 208, 0));
-                    AboutCompanyName.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 18));
+                    AboutCompanyName.setForeground(new Color(255, 208, 0));
+                    AboutCompanyName.setFont(new Font("Iron Shark", Font.PLAIN, 18));
                     
                     JLabel ACLShadow = new JLabel();
                     
                     dashbarAbout.add(ACLShadow);
                     ACLShadow.setBounds(AboutCompanyLabelLocationX, AboutCompanyShadowLocationY, AboutCompanyLabelWidth, AboutCompanyLabelHeight);
-                    ACLShadow.setForeground(new java.awt.Color(0, 0, 0));
-                    ACLShadow.setFont(new java.awt.Font("Iron Shark", Font.PLAIN, 18));
+                    ACLShadow.setForeground(new Color(0, 0, 0));
+                    ACLShadow.setFont(new Font("Iron Shark", Font.PLAIN, 18));
 
                     AboutCompanyName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                     AboutCompanyName.setText("Brion Tactical Systems");
@@ -1691,15 +1701,15 @@ public class PRMSMainWindow extends JFrame {
                         
                         dashbarAbout.add(AboutProgramName);
                         AboutProgramName.setBounds(AboutProgramLabelLocationX, AboutProgramLabelLocationY, AboutProgramLabelWidth, AboutProgramLabelHeight);
-                        AboutProgramName.setForeground(new java.awt.Color(255, 255, 255));
-                        AboutProgramName.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+                        AboutProgramName.setForeground(new Color(255, 255, 255));
+                        AboutProgramName.setFont(new Font("Impact", Font.PLAIN, 20));
                     
                         JLabel APLShadow = new JLabel();
                         
                         dashbarAbout.add(APLShadow);
                         APLShadow.setBounds(AboutProgramLabelLocationX, AboutProgramShadowLocationY, AboutProgramLabelWidth, AboutProgramLabelHeight);
-                        APLShadow.setForeground(new java.awt.Color(0, 0, 0));
-                        APLShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+                        APLShadow.setForeground(new Color(0, 0, 0));
+                        APLShadow.setFont(new Font("Impact", Font.PLAIN, 20));
 
                         AboutProgramName.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
                         AboutProgramName.setText("POLICE RECORD MANAGEMENT SYSTEM");
@@ -1719,15 +1729,15 @@ public class PRMSMainWindow extends JFrame {
                         
                         dashbarAbout.add(AboutDevelopmentTeamLabel);
                         AboutDevelopmentTeamLabel.setBounds(DevelopmentTeamLabelLocationX, DevelopmentTeamLabelLocationY, DevelopmentTeamLabelWidth, DevelopmentTeamLabelHeight);
-                        AboutDevelopmentTeamLabel.setForeground(new java.awt.Color(255, 255, 255));
-                        AboutDevelopmentTeamLabel.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+                        AboutDevelopmentTeamLabel.setForeground(new Color(255, 255, 255));
+                        AboutDevelopmentTeamLabel.setFont(new Font("Impact", Font.PLAIN, 20));
                     
                         JLabel ADTLShadow = new JLabel();
                         
                         dashbarAbout.add(ADTLShadow);
                         ADTLShadow.setBounds(DevelopmentTeamLabelLocationX, DevelopmentTeamShadowLocationY, DevelopmentTeamLabelWidth, DevelopmentTeamLabelHeight);
-                        ADTLShadow.setForeground(new java.awt.Color(0, 0, 0));
-                        ADTLShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 20));
+                        ADTLShadow.setForeground(new Color(0, 0, 0));
+                        ADTLShadow.setFont(new Font("Impact", Font.PLAIN, 20));
 
                         AboutDevelopmentTeamLabel.setHorizontalAlignment(SwingConstants.LEADING);
                         AboutDevelopmentTeamLabel.setText("DEVELOPMENT TEAM INFORMATION");
@@ -1747,15 +1757,15 @@ public class PRMSMainWindow extends JFrame {
 
                     dashbarAbout.add(FirstYearDevelopers);
                     FirstYearDevelopers.setBounds(FirstYearLabelLocationX, FirstYearLabelLocationY, FirstYearLabelWidth, FirstYearLabelHeight);
-                    FirstYearDevelopers.setForeground(new java.awt.Color(255, 255, 255));
-                    FirstYearDevelopers.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+                    FirstYearDevelopers.setForeground(new Color(255, 255, 255));
+                    FirstYearDevelopers.setFont(new Font("Impact", Font.PLAIN, 18));
 
                     JLabel FirstYearShadow = new JLabel();
 
                     dashbarAbout.add(FirstYearShadow);
                     FirstYearShadow.setBounds(FirstYearLabelLocationX, FirstYearLabelShadowLocationY, FirstYearLabelWidth, FirstYearLabelHeight);
-                    FirstYearShadow.setForeground(new java.awt.Color(0, 0, 0));
-                    FirstYearShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+                    FirstYearShadow.setForeground(new Color(0, 0, 0));
+                    FirstYearShadow.setFont(new Font("Impact", Font.PLAIN, 18));
 
                     FirstYearDevelopers.setHorizontalAlignment(SwingConstants.LEADING);
                     FirstYearDevelopers.setText("BSIT WMA 1F, 1st Year, 2nd Semester");
@@ -1860,15 +1870,15 @@ public class PRMSMainWindow extends JFrame {
 
                     dashbarAbout.add(SecondYearDevelopers);
                     SecondYearDevelopers.setBounds(SecondYearLabelLocationX, SecondYearLabelLocationY, SecondYearLabelWidth, SecondYearLabelHeight);
-                    SecondYearDevelopers.setForeground(new java.awt.Color(255, 255, 255));
-                    SecondYearDevelopers.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+                    SecondYearDevelopers.setForeground(new Color(255, 255, 255));
+                    SecondYearDevelopers.setFont(new Font("Impact", Font.PLAIN, 18));
 
                     JLabel SecondYearShadow = new JLabel();
 
                     dashbarAbout.add(SecondYearShadow);
                     SecondYearShadow.setBounds(SecondYearLabelLocationX, SecondYearLabelShadowLocationY, SecondYearLabelWidth, SecondYearLabelHeight);
-                    SecondYearShadow.setForeground(new java.awt.Color(0, 0, 0));
-                    SecondYearShadow.setFont(new java.awt.Font("Impact", Font.PLAIN, 18));
+                    SecondYearShadow.setForeground(new Color(0, 0, 0));
+                    SecondYearShadow.setFont(new Font("Impact", Font.PLAIN, 18));
 
                     SecondYearDevelopers.setHorizontalAlignment(SwingConstants.LEADING);
                     SecondYearDevelopers.setText("BSCS 2B, 2st Year, 2nd Semester");
@@ -1958,8 +1968,8 @@ public class PRMSMainWindow extends JFrame {
 
                 dashbarAbout.setBounds(dashbarAboutLocationX, dashbarAboutLocationY, dashbarAboutWidth, dashbarAboutHeight);
                 add(dashbarAbout);
-                dashbarAbout.setBackground(new java.awt.Color(0, 0, 50));
-                dashbarAbout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 200, 0), 2, false));
+                dashbarAbout.setBackground(new Color(0, 0, 50));
+                dashbarAbout.setBorder(new javax.swing.border.LineBorder(new Color(255, 200, 0), 2, false));
                 dashbarAbout.setLayout(null);
                 dashbarAbout.setVisible(false);
 
@@ -1971,7 +1981,7 @@ public class PRMSMainWindow extends JFrame {
 
                 aboutBackground.setBounds(aboutBackgroundLocationX, aboutBackgroundLocationY, aboutBackgroundWidth, aboutBackgroundHeight);
                 dashbarAbout.add(aboutBackground);
-                aboutBackground.setForeground(new java.awt.Color(0, 0, 0));
+                aboutBackground.setForeground(new Color(0, 0, 0));
                 aboutBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 aboutBackground.setLayout(null);
 
@@ -2002,8 +2012,8 @@ public class PRMSMainWindow extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 //                                       R    G    B
-                dBHTab.setBackground(new java.awt.Color(255, 255, 255));
-                homeTabText.setForeground(new java.awt.Color(0, 0, 0));
+                dBHTab.setBackground(new Color(255, 255, 255));
+                homeTabText.setForeground(new Color(0, 0, 0));
 
                 dashBarHome.setVisible(true);
                 dashbarDatabase.setVisible(false);
@@ -2019,20 +2029,20 @@ public class PRMSMainWindow extends JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                dBHTab.setBackground(new java.awt.Color(21, 21, 21));
-                homeTabText.setForeground(new java.awt.Color(255, 255, 255));
+                dBHTab.setBackground(new Color(21, 21, 21));
+                homeTabText.setForeground(new Color(255, 255, 255));
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                dBHTab.setBackground(new java.awt.Color(100, 100, 100));
-                homeTabText.setForeground(new java.awt.Color(0, 0, 0));
+                dBHTab.setBackground(new Color(100, 100, 100));
+                homeTabText.setForeground(new Color(0, 0, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                dBHTab.setBackground(new java.awt.Color(21, 21, 21));
-                homeTabText.setForeground(new java.awt.Color(255, 255, 255));
+                dBHTab.setBackground(new Color(21, 21, 21));
+                homeTabText.setForeground(new Color(255, 255, 255));
             }
         });
 
@@ -2044,8 +2054,8 @@ public class PRMSMainWindow extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
 
-                dBDTab.setBackground(new java.awt.Color(255, 255, 255));
-                databaseTabText.setForeground(new java.awt.Color(0, 0, 0));
+                dBDTab.setBackground(new Color(255, 255, 255));
+                databaseTabText.setForeground(new Color(0, 0, 0));
 
                 dashBarHome.setVisible(false);
                 dashbarDatabase.setVisible(true);
@@ -2061,20 +2071,20 @@ public class PRMSMainWindow extends JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                dBDTab.setBackground(new java.awt.Color(21, 21, 21));
-                databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
+                dBDTab.setBackground(new Color(21, 21, 21));
+                databaseTabText.setForeground(new Color(255, 255, 255));
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                dBDTab.setBackground(new java.awt.Color(100, 100, 100));
-                databaseTabText.setForeground(new java.awt.Color(0, 0, 0));
+                dBDTab.setBackground(new Color(100, 100, 100));
+                databaseTabText.setForeground(new Color(0, 0, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                dBDTab.setBackground(new java.awt.Color(21, 21, 21));
-                databaseTabText.setForeground(new java.awt.Color(255, 255, 255));
+                dBDTab.setBackground(new Color(21, 21, 21));
+                databaseTabText.setForeground(new Color(255, 255, 255));
             }
         });
 
@@ -2087,8 +2097,8 @@ public class PRMSMainWindow extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
 
-                profileTab.setBackground(new java.awt.Color(255, 255, 255));
-                profileTabText.setForeground(new java.awt.Color(0, 0, 0));
+                profileTab.setBackground(new Color(255, 255, 255));
+                profileTabText.setForeground(new Color(0, 0, 0));
 
                 dashBarHome.setVisible(false);
                 dashbarDatabase.setVisible(false);
@@ -2104,20 +2114,20 @@ public class PRMSMainWindow extends JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                profileTab.setBackground(new java.awt.Color(21, 21, 21));
-                profileTabText.setForeground(new java.awt.Color(255, 255, 255));
+                profileTab.setBackground(new Color(21, 21, 21));
+                profileTabText.setForeground(new Color(255, 255, 255));
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                profileTab.setBackground(new java.awt.Color(100, 100, 100));
-                profileTabText.setForeground(new java.awt.Color(0, 0, 0));
+                profileTab.setBackground(new Color(100, 100, 100));
+                profileTabText.setForeground(new Color(0, 0, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                profileTab.setBackground(new java.awt.Color(21, 21, 21));
-                profileTabText.setForeground(new java.awt.Color(255, 255, 255));
+                profileTab.setBackground(new Color(21, 21, 21));
+                profileTabText.setForeground(new Color(255, 255, 255));
             }
         });
 
@@ -2129,8 +2139,8 @@ public class PRMSMainWindow extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                aboutTab.setBackground(new java.awt.Color(255, 255, 255));
-                aboutTabText.setForeground(new java.awt.Color(0, 0, 0));
+                aboutTab.setBackground(new Color(255, 255, 255));
+                aboutTabText.setForeground(new Color(0, 0, 0));
 
                 dashBarHome.setVisible(false);
                 dashbarDatabase.setVisible(false);
@@ -2145,20 +2155,20 @@ public class PRMSMainWindow extends JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                aboutTab.setBackground(new java.awt.Color(21, 21, 21));
-                aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
+                aboutTab.setBackground(new Color(21, 21, 21));
+                aboutTabText.setForeground(new Color(255, 255, 255));
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                aboutTab.setBackground(new java.awt.Color(100, 100, 100));
-                aboutTabText.setForeground(new java.awt.Color(0, 0, 0));
+                aboutTab.setBackground(new Color(100, 100, 100));
+                aboutTabText.setForeground(new Color(0, 0, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                aboutTab.setBackground(new java.awt.Color(21, 21, 21));
-                aboutTabText.setForeground(new java.awt.Color(255, 255, 255));
+                aboutTab.setBackground(new Color(21, 21, 21));
+                aboutTabText.setForeground(new Color(255, 255, 255));
             }
         });
         
@@ -2170,9 +2180,9 @@ public class PRMSMainWindow extends JFrame {
         
         titleBar.add(minimize);
         minimize.setBounds(minimizeButtonLocationX, minimizeButtonLocationY, minimizeButtonWidth, minimizeButtonHeight);
-        minimize.setForeground(new java.awt.Color(0,0,0));
-        minimize.setBackground(new java.awt.Color(248, 249, 250));
-        minimize.setFont(new java.awt.Font("Quicksand", Font.PLAIN, 16));
+        minimize.setForeground(new Color(0,0,0));
+        minimize.setBackground(new Color(248, 249, 250));
+        minimize.setFont(new Font("Quicksand", Font.PLAIN, 16));
         minimize.setBorder(null);
         minimize.setFocusPainted(false);
         minimize.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2259,7 +2269,7 @@ public class PRMSMainWindow extends JFrame {
 
             } else if (Question_YES==JOptionPane.NO_OPTION) {
 
-                String message = "Log-Out Closure Aborted";
+                String message = " User Log-Out Aborted";
                 String title1 = "BTS : PRMS - Confirmation";
                 
                 JOptionPane.showMessageDialog(null, message, title1, JOptionPane.INFORMATION_MESSAGE);
@@ -2356,7 +2366,19 @@ public class PRMSMainWindow extends JFrame {
         }
     }
     
+    private void SearchBarKeyPressed(KeyEvent evt) {
+        
+        DefaultTableModel table = (DefaultTableModel)PoliceRecords.getModel();
+        String search = SearchBar.getText();
+        @SuppressWarnings("Convert2Diamond")
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        PoliceRecords.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+        
+    }
+    
     private void RefreshListFunction(ActionEvent evt) {
+        
         // GET DATA TO DATABASE
         Connection dbconn = DBConnection.connectDB();
         String sqlQuery = "SELECT * FROM prmscriminalrecords";
@@ -2400,6 +2422,48 @@ public class PRMSMainWindow extends JFrame {
         
     }
     
+    private void DeleteButtonFunction(ActionEvent evt) {
+        
+        PRMSAddRecord GetData = new PRMSAddRecord();
+        Connection conn = DBConnection.connectDB();
+        if(conn != null){
+            try{
+                PreparedStatement ps = (PreparedStatement)
+                conn.prepareStatement("DELETE FROM prmscriminalrecords WHERE ID = ?");
+                ps.setInt(1, Integer.parseInt(IDField.getText()));
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Success! Record has been deleted");
+                IDField.setText("");
+                GetData.LastNameField.setText("");
+                GetData.FirstNameField.setText("");
+                GetData.MiddleNameField.setText("");
+                GetData.HomeAddressField.setText("");
+                GetData.DateOfArrestChooser.toString();
+                GetData.DateOfReleaseChooser.toString();
+                GetData.AgeList.getSelectedItem().toString();
+                GetData.GenderList.getSelectedItem().toString();
+                GetData.ReasonList.getSelectedItem().toString();
+                GetData.OriginList.getSelectedItem().toString();
+                GetData.AddMugShot.getIcon();
+
+            }catch (SQLException ex){
+                Logger.getLogger(PRMSMainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            System.out.println("Police Database connection Unavailable! Check your JDBC Connector");
+            JOptionPane.showMessageDialog(this, "Police database connection unavailable!\r\n"
+               + "Please Check your JDBC Connector!", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }
+    
+    private void AddRecordButtonFunction(ActionEvent evt) {
+        
+        PRMSAddRecord Launch = new PRMSAddRecord();
+        Launch.setVisible(true);
+        
+    }
+    
     private void ResetButtonFunction(ActionEvent evt){
         
         
@@ -2423,7 +2487,6 @@ public class PRMSMainWindow extends JFrame {
     
     
     public static void main(String[] args) {
-
         PRMSMainWindow Open = new PRMSMainWindow();
         Open.setVisible(true);
     }
