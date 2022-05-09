@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import static PRMSClasses.PRMSLogin.IronShark;
-import static PRMSClasses.PRMSLogin.Quicksand;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.BorderFactory;
@@ -26,6 +24,8 @@ public class PRMSSplash extends JFrame {
     JPanel SplashBackground;
     JLabel CompanyLogo, BTSTitle, Status, ProgramName;
     JProgressBar LoadingBar;
+    
+    Font IronShark, Quicksand, Gepestev;
     
     public PRMSSplash(){
         

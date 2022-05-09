@@ -11,11 +11,11 @@ public class DBConnection {
     public static Connection connectDB() {
 
         try {
-            
+
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
+
         } catch (ClassNotFoundException ex) {
-            
+
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
 

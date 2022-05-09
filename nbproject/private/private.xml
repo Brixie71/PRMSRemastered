@@ -5,10 +5,10 @@
         <group>
             <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSLogin.java</file>
             <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSRegister.java</file>
-            <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSAddRecord.java</file>
             <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSModifyAccount.java</file>
-            <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/DBConnection.java</file>
+            <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSAddRecord.java</file>
             <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSMainWindow.java</file>
+            <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSPrint.java</file>
             <file>file:/C:/Users/Laptop/Documents/NetBeansProjects/PRMSRemastered/src/PRMSClasses/PRMSSplash.java</file>
         </group>
     </open-files>
