@@ -53,7 +53,7 @@ public class PRMSMainWindow extends JFrame {
     JLabel nBLText, homeTabText, databaseTabText, profileTabText, aboutTabText,
             logo, companyName, cNameShadow, programName,
             dBHBackground, homeText, databaseText, dBDBackground, officerProfileText, dOPBackground, aboutDashBarText, aboutBackground,
-            Welcome,
+            Welcome, WelcomeLine1, WelcomeLine2, WelcomeLine3, WelcomeLine4, WelcomeLine5, WelcomeLine6, WelcomeLine7, WelcomeLine8, WelcomeLine9, WelcomeLine10, WelcomeLine11,
             PersonIDLabel, AgeLabel, GenderLabel, HomeAddressLabel, ProvinceOfOriginLabel, DateOfArrestLabel, DateOfReleaseLabel, ReasonOfApprehensionLabel, MugShot,
             RecordsLabel, SearchLabel,
             ProfileAgeLabel, ProfileHomeAddressLabel, ProfileContactLabel, ProfileStationLabel, ProfileRankLabel, ProfileUsernameLabel,
@@ -131,6 +131,17 @@ public class PRMSMainWindow extends JFrame {
         dashBarHome = new JPanel();
 
         Welcome = new JLabel();
+        WelcomeLine1 = new JLabel();
+        WelcomeLine2 = new JLabel();
+        WelcomeLine3 = new JLabel();
+        WelcomeLine4 = new JLabel();
+        WelcomeLine5 = new JLabel();
+        WelcomeLine6 = new JLabel();
+        WelcomeLine7 = new JLabel();
+        WelcomeLine8 = new JLabel();
+        WelcomeLine9 = new JLabel();
+        WelcomeLine10 = new JLabel();
+        WelcomeLine11 = new JLabel();
 
         dashbarDatabase = new JPanel();
 
@@ -553,6 +564,162 @@ public class PRMSMainWindow extends JFrame {
         WelcomeShadow.setFont(new Font("Tahoma", Font.BOLD, 80));
         WelcomeShadow.setText("WELCOME");
         WelcomeShadow.setVisible(true);
+        
+        // Welcome Line 1 (JLabel) Decorations. 
+        final int WelcomeLine1LocationX = 0;
+        final int WelcomeLine1LocationY = 200;
+        final int WelcomeLine1Width = 801;
+        final int WelcomeLine1Height = 20;
+
+        dashBarHome.add(WelcomeLine1);
+        WelcomeLine1.setBounds(WelcomeLine1LocationX, WelcomeLine1LocationY, WelcomeLine1Width, WelcomeLine1Height);
+        WelcomeLine1.setForeground(new Color(255, 255, 255));
+        WelcomeLine1.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine1.setFont(new Font("Quicksand", Font.ITALIC, 16));
+        WelcomeLine1.setText("Imagination is more important than knowledge. For Knowledge is Limited,");
+        WelcomeLine1.setVisible(true);
+        
+        // Welcome Line 2 (JLabel) Decorations. 
+        final int WelcomeLine2LocationX = 0;
+        final int WelcomeLine2LocationY = 220;
+        final int WelcomeLine2Width = 801;
+        final int WelcomeLine2Height = 20;
+
+        dashBarHome.add(WelcomeLine2);
+        WelcomeLine2.setBounds(WelcomeLine2LocationX, WelcomeLine2LocationY, WelcomeLine2Width, WelcomeLine2Height);
+        WelcomeLine2.setForeground(new Color(255, 255, 255));
+        WelcomeLine2.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine2.setFont(new Font("Quicksand", Font.ITALIC, 16));
+        WelcomeLine2.setText("whereas imagination embraces the entire world, stimulating progress,");
+        WelcomeLine2.setVisible(true);
+        
+        // Welcome Line 3 (JLabel) Decorations. 
+        final int WelcomeLine3LocationX = 0;
+        final int WelcomeLine3LocationY = 240;
+        final int WelcomeLine3Width = 801;
+        final int WelcomeLine3Height = 20;
+
+        dashBarHome.add(WelcomeLine3);
+        WelcomeLine3.setBounds(WelcomeLine3LocationX, WelcomeLine3LocationY, WelcomeLine3Width, WelcomeLine3Height);
+        WelcomeLine3.setForeground(new Color(255, 255, 255));
+        WelcomeLine3.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine3.setFont(new Font("Quicksand", Font.ITALIC, 16));
+        WelcomeLine3.setText("giving birth to evolution\" - Albert Einstein");
+        WelcomeLine3.setVisible(true);
+        
+        // Welcome Line 4 (JLabel) Decorations. 
+        final int WelcomeLine4LocationX = 0;
+        final int WelcomeLine4LocationY = 280;
+        final int WelcomeLine4Width = 801;
+        final int WelcomeLine4Height = 20;
+
+        dashBarHome.add(WelcomeLine4);
+        WelcomeLine4.setBounds(WelcomeLine4LocationX, WelcomeLine4LocationY, WelcomeLine4Width, WelcomeLine4Height);
+        WelcomeLine4.setForeground(new Color(255, 255, 255));
+        WelcomeLine4.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine4.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine4.setText("This Java Program is for Educational Purposes Only!.");
+        WelcomeLine4.setVisible(true);
+        
+        // Welcome Line 5 (JLabel) Decorations. 
+        final int WelcomeLine5LocationX = 0;
+        final int WelcomeLine5LocationY = 300;
+        final int WelcomeLine5Width = 801;
+        final int WelcomeLine5Height = 20;
+
+        dashBarHome.add(WelcomeLine5);
+        WelcomeLine5.setBounds(WelcomeLine5LocationX, WelcomeLine5LocationY, WelcomeLine5Width, WelcomeLine5Height);
+        WelcomeLine5.setForeground(new Color(255, 255, 255));
+        WelcomeLine5.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine5.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine5.setText("Do not Distribute.");
+        WelcomeLine5.setVisible(true);
+        
+        // Welcome Line 6 (JLabel) Decorations. 
+        final int WelcomeLine6LocationX = 0;
+        final int WelcomeLine6LocationY = 340;
+        final int WelcomeLine6Width = 801;
+        final int WelcomeLine6Height = 20;
+
+        dashBarHome.add(WelcomeLine6);
+        WelcomeLine6.setBounds(WelcomeLine6LocationX, WelcomeLine6LocationY, WelcomeLine6Width, WelcomeLine6Height);
+        WelcomeLine6.setForeground(new Color(255, 255, 255));
+        WelcomeLine6.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine6.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine6.setText("This is Finals Requirement for ComProg 3");
+        WelcomeLine6.setVisible(true);
+        
+        // Welcome Line 7 (JLabel) Decorations. 
+        final int WelcomeLine7LocationX = 0;
+        final int WelcomeLine7LocationY = 360;
+        final int WelcomeLine7Width = 801;
+        final int WelcomeLine7Height = 20;
+
+        dashBarHome.add(WelcomeLine7);
+        WelcomeLine7.setBounds(WelcomeLine7LocationX, WelcomeLine7LocationY, WelcomeLine7Width, WelcomeLine7Height);
+        WelcomeLine7.setForeground(new Color(255, 255, 255));
+        WelcomeLine7.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine7.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine7.setText("BSCS 2B, 2nd Semester C.Y 2021 - 2022");
+        WelcomeLine7.setVisible(true);
+        
+        // Welcome Line 8 (JLabel) Decorations. 
+        final int WelcomeLine8LocationX = 0;
+        final int WelcomeLine8LocationY = 400;
+        final int WelcomeLine8Width = 801;
+        final int WelcomeLine8Height = 20;
+
+        dashBarHome.add(WelcomeLine8);
+        WelcomeLine8.setBounds(WelcomeLine8LocationX, WelcomeLine8LocationY, WelcomeLine8Width, WelcomeLine8Height);
+        WelcomeLine8.setForeground(new Color(255, 255, 255));
+        WelcomeLine8.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine8.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine8.setText("This Java Program is actually a Remastered Version of the PRMS that");
+        WelcomeLine8.setVisible(true);
+        
+        // Welcome Line 9 (JLabel) Decorations. 
+        final int WelcomeLine9LocationX = 0;
+        final int WelcomeLine9LocationY = 420;
+        final int WelcomeLine9Width = 801;
+        final int WelcomeLine9Height = 20;
+
+        dashBarHome.add(WelcomeLine9);
+        WelcomeLine9.setBounds(WelcomeLine9LocationX, WelcomeLine9LocationY, WelcomeLine9Width, WelcomeLine9Height);
+        WelcomeLine9.setForeground(new Color(255, 255, 255));
+        WelcomeLine9.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine9.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine9.setText("we have created back in 1st Year, 2nd Semester as a finals requirement");
+        WelcomeLine9.setVisible(true);
+        
+        // Welcome Line 10 (JLabel) Decorations. 
+        final int WelcomeLine10LocationX = 0;
+        final int WelcomeLine10LocationY = 440;
+        final int WelcomeLine10Width = 801;
+        final int WelcomeLine10Height = 20;
+
+        dashBarHome.add(WelcomeLine10);
+        WelcomeLine10.setBounds(WelcomeLine10LocationX, WelcomeLine10LocationY, WelcomeLine10Width, WelcomeLine10Height);
+        WelcomeLine10.setForeground(new Color(255, 255, 255));
+        WelcomeLine10.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine10.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine10.setText("for CC3, so most of the Source code in this program is based on the first Project.");
+        WelcomeLine10.setVisible(true);
+        
+        // Welcome Line 10 (JLabel) Decorations. 
+        final int WelcomeLine11LocationX = 0;
+        final int WelcomeLine11LocationY = 460;
+        final int WelcomeLine11Width = 801;
+        final int WelcomeLine11Height = 16;
+
+        dashBarHome.add(WelcomeLine11);
+        WelcomeLine11.setBounds(WelcomeLine11LocationX, WelcomeLine11LocationY, WelcomeLine11Width, WelcomeLine11Height);
+        WelcomeLine11.setForeground(new Color(255, 255, 255));
+        WelcomeLine11.setHorizontalAlignment(SwingConstants.CENTER);
+        WelcomeLine11.setFont(new Font("Quicksand", Font.PLAIN, 16));
+        WelcomeLine11.setText("The First Project uses Java Swing Builder.");
+        WelcomeLine11.setVisible(true);
+        
+        
 
         // Home Dashbar Name (JLabel) Decorations.
         final int homeTextHeight = 30;
@@ -876,6 +1043,8 @@ public class PRMSMainWindow extends JFrame {
         PoliceRecords.setForeground(new Color(0, 0, 0));
         PoliceRecords.setBackground(new Color(237, 242, 244));
         PoliceRecords.setFont(new Font("Tahoma", 0, 14));
+        PoliceRecords.setShowHorizontalLines(true);
+        PoliceRecords.setGridColor(Color.BLACK);
         PoliceRecords.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         PoliceRecords.enableInputMethods(false);
         PoliceRecords.setLayout(null);
@@ -1099,6 +1268,7 @@ public class PRMSMainWindow extends JFrame {
         DeleteRecord.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 DeleteButtonFunction(evt);
+                RefreshListFunction(evt);
             }
         });
 
@@ -1243,6 +1413,7 @@ public class PRMSMainWindow extends JFrame {
         dBDBackground.setIcon(scaledIcon2);
 
         // Dashbar Officer Profile Components.
+        
         // Officer Profile Picture (JLabel) Decorations.
         final int ProfilePictureLocationX = 70;
         final int ProfilePictureLocationY = 80;
@@ -1266,9 +1437,9 @@ public class PRMSMainWindow extends JFrame {
 
         // Profile Name Field (JTextField) Decorations.
         final int ProfileNameFieldLocationX = 300;
-        final int ProfileNameFieldLocationY = 60;
+        final int ProfileNameFieldLocationY = 80;
         final int ProfileNameFieldWidth = 450;
-        final int ProfileNameFieldHeight = 35;
+        final int ProfileNameFieldHeight = 18;
 
         dashbarProfile.add(ProfileNameField);
         ProfileNameField.setBounds(ProfileNameFieldLocationX, ProfileNameFieldLocationY, ProfileNameFieldWidth, ProfileNameFieldHeight);
@@ -1280,7 +1451,7 @@ public class PRMSMainWindow extends JFrame {
         ProfileNameField.setOpaque(false);
         ProfileNameField.setCaretColor(new Color(237, 242, 244));
         ProfileNameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(237, 242, 244)));
-        ProfileNameField.setFont(new Font("Quicksand", Font.BOLD, 30));
+        ProfileNameField.setFont(new Font("Quicksand", Font.BOLD, 18));
         ProfileNameField.setVisible(true);
 
         // Profile Age  (JLabel) Decorations.
@@ -2210,8 +2381,8 @@ public class PRMSMainWindow extends JFrame {
                 PoliceRecords.getColumnModel().getColumn(8).setPreferredWidth(150);
                 PoliceRecords.getColumnModel().getColumn(9).setPreferredWidth(150);
                 PoliceRecords.getColumnModel().getColumn(10).setPreferredWidth(150);
-                TableColumn tcol = PoliceRecords.getColumnModel().getColumn(11);
-                PoliceRecords.removeColumn(tcol);
+                TableColumn RemovePictureColumn = PoliceRecords.getColumnModel().getColumn(11);
+                PoliceRecords.removeColumn(RemovePictureColumn);
 
                 String header[] = {"ID", "LAST NAME", "FIRST NAME", "MIDDLE NAME", "ADDRESS", "DATE OF ARREST", "DATE OF RELEASE", "AGE", "GENDER", "STATUS", "ORIGIN", ""};
 
@@ -2308,8 +2479,8 @@ public class PRMSMainWindow extends JFrame {
                 PoliceRecords.getColumnModel().getColumn(8).setPreferredWidth(150);
                 PoliceRecords.getColumnModel().getColumn(9).setPreferredWidth(150);
                 PoliceRecords.getColumnModel().getColumn(10).setPreferredWidth(150);
-                TableColumn tcol = PoliceRecords.getColumnModel().getColumn(11);
-                PoliceRecords.removeColumn(tcol);
+                TableColumn RemovePictureColumn = PoliceRecords.getColumnModel().getColumn(11);
+                PoliceRecords.removeColumn(RemovePictureColumn);
 
                 String header[] = {"ID", "LAST NAME", "FIRST NAME", "MIDDLE NAME", "ADDRESS", "DATE OF ARREST", "DATE OF RELEASE", "AGE", "GENDER", "STATUS", "ORIGIN", ""};
 
@@ -2394,10 +2565,5 @@ public class PRMSMainWindow extends JFrame {
         ImageIcon myPicture = new ImageIcon(resizeImage);
         MugShot.setIcon(myPicture);
 
-    }
-    
-    public static void main(String args[]) {
-        PRMSMainWindow Launch = new PRMSMainWindow();
-        Launch.setVisible(true);
     }
 }

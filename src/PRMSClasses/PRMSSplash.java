@@ -18,6 +18,8 @@ import java.awt.Image;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class PRMSSplash extends JFrame {
     
@@ -28,6 +30,8 @@ public class PRMSSplash extends JFrame {
     Font IronShark, Quicksand, Gepestev;
     
     public PRMSSplash(){
+        
+        SetComponentLookAndFeel();
         
         SplashComponents();
         
@@ -215,5 +219,19 @@ public class PRMSSplash extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
+    }
+    
+    private void SetComponentLookAndFeel() {
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }/*/ /*/
     }
 }

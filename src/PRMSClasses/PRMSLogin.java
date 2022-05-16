@@ -58,6 +58,7 @@ public class PRMSLogin extends JFrame {
     int yMouse;
 
     public PRMSLogin() {
+        
         PRMSLoginComponents();
 
     }
@@ -365,6 +366,12 @@ public class PRMSLogin extends JFrame {
             }
 
         });
+        
+        registerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                registerButtonFunction(evt);
+            }
+        });
 
         // Company Logo (JLabel) Decorations.
         final int companyLogoLocationX = 415;
@@ -559,6 +566,7 @@ public class PRMSLogin extends JFrame {
     }
 
     // CLASS FUNCTIONS //
+    
     private void ExitButtonFunction(ActionEvent evt) {
 
         // CUSTOM EXIT BUTTON PROMP
@@ -573,7 +581,8 @@ public class PRMSLogin extends JFrame {
             e.printStackTrace();
         }
 
-        int Question_YES = JOptionPane.showConfirmDialog(null, "Do you want to close the Program?", "BTS : PRMS - Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int Question_YES = JOptionPane.showConfirmDialog(null, "Do you want to close the Program?", 
+                "BTS : PRMS - Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (Question_YES == JOptionPane.YES_OPTION) {
 
@@ -596,6 +605,13 @@ public class PRMSLogin extends JFrame {
     }
 
     private void userInputFunction(ActionEvent evt) {
+        
+        GetDataFromDatabase();
+
+    }
+    
+    private void GetDataFromDatabase(){
+        
         Connection conn = DBConnection.connectDB();
         if (conn != null) {
             try {
@@ -652,7 +668,7 @@ public class PRMSLogin extends JFrame {
                                                 Police database connection unavailable!\r
                                                 Please Check your JDBC Connector!""", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
         }
-
+        
     }
 
     private void userInputKeyPressed(KeyEvent evt) {
@@ -685,6 +701,13 @@ public class PRMSLogin extends JFrame {
             LoginAuthentication(username, password);
 
         }
+    }
+    
+    private void registerButtonFunction(ActionEvent evt) {
+        
+        PRMSRegister Launch = new PRMSRegister();
+        Launch.setVisible(true);
+        
     }
 
     private void LoginAuthentication(String username, String password) {
@@ -764,7 +787,7 @@ public class PRMSLogin extends JFrame {
 
                         ImageIcon imageIcon = new ImageIcon(imageBytes);
                         Image imagePicture = imageIcon.getImage();
-                        Image resizeImage = imagePicture.getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+                        Image resizeImage = imagePicture.getScaledInstance(180, 180, Image.SCALE_SMOOTH);
                         ImageIcon myPicture = new ImageIcon(resizeImage);
                         PRMSMainWindow.ProfilePicture.setIcon(myPicture);
 
@@ -834,7 +857,8 @@ public class PRMSLogin extends JFrame {
 
                 if (i == 36) {
 
-                    Runtime.getRuntime().exec("cmd /c C:\\wamp64\\wampmanager.exe");
+                    // Runtime.getRuntime().exec("cmd /c C:\\wamp64\\wampmanager.exe"); 
+                    // This Program uses MySQL Database Via WAMP Server. 
 
                 }
 

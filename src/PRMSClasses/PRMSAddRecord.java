@@ -35,6 +35,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PRMSAddRecord extends JFrame {
@@ -58,6 +60,8 @@ public class PRMSAddRecord extends JFrame {
     Font IronShark, Quicksand, Gepestev;
 
     public PRMSAddRecord() {
+        
+        SetComponentLookAndFeel();
 
         RegisterComponents();
 
@@ -142,21 +146,8 @@ public class PRMSAddRecord extends JFrame {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-
-        // Add Record Background (JPanel) Decorations.
-        final int loginBackgroundLocationX = 0;
-        final int loginBackgroundLocationY = 0;
-        final int loginBackgroundWidth = 900;
-        final int lofinBackgroundHeigth = 530;
-
-        add(AddRecordBackground);
-        AddRecordBackground.setBounds(loginBackgroundLocationX, loginBackgroundLocationY, loginBackgroundWidth, lofinBackgroundHeigth);
-        AddRecordBackground.setBackground(new Color(0, 29, 61));
-        AddRecordBackground.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(255, 208, 0)));
-        AddRecordBackground.setLayout(null);
-        AddRecordBackground.setVisible(true);
-
-        // Login Frame dragging Declaration.
+        
+        // PRMSAddRecord Frame dragging Declaration.
         AddRecordBackground.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent evt) {
 
@@ -176,6 +167,19 @@ public class PRMSAddRecord extends JFrame {
 
             }
         });
+        
+        // Add Record Background (JPanel) Decorations.
+        final int AddRecordBackgroundLocationX = 0;
+        final int AddRecordBackgroundLocationY = 0;
+        final int AddRecordBackgroundWidth = 900;
+        final int AddRecordBackgroundHeigth = 530;
+
+        add(AddRecordBackground);
+        AddRecordBackground.setBounds(AddRecordBackgroundLocationX, AddRecordBackgroundLocationY, AddRecordBackgroundWidth, AddRecordBackgroundHeigth);
+        AddRecordBackground.setBackground(new Color(0, 29, 61));
+        AddRecordBackground.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(255, 208, 0)));
+        AddRecordBackground.setLayout(null);
+        AddRecordBackground.setVisible(true);
 
         // Add Record Title (JLabel) Decorations.
         final int AddRecordLabelLocationX = 0;
@@ -408,7 +412,7 @@ public class PRMSAddRecord extends JFrame {
         OriginList.setBackground(new Color(237, 242, 244));
         OriginList.setForeground(new Color(0, 0, 0));
         OriginList.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        OriginList.setModel(new DefaultComboBoxModel<>(new String[]{"Tarlac", "Zambales", "Bulacan", "Nueva Ejica", "Pangasinan"}));
+        OriginList.setModel(new DefaultComboBoxModel<>(new String[]{"Tarlac", "Zambales", "Bulacan", "Nueva Ejica", "Pampanga", "Bataan", "Aurora"}));
 
         // DateOfArrestLabel (JLabel) Decorations.
         final int DOALabelLocationX = 300;
@@ -717,7 +721,7 @@ public class PRMSAddRecord extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    // CLASS FUNCTIONS.
+    // PRMSAddRecord CLASS FUNCTIONS.
     private void BrowsePictureButtonFunction(ActionEvent evt) {
         // USER PICTURE
         JFileChooser pictureChooser = new JFileChooser();
@@ -856,5 +860,19 @@ public class PRMSAddRecord extends JFrame {
 
     private void BackButtonFunction(ActionEvent evt) {
         dispose();
+    }
+    
+    private void SetComponentLookAndFeel() {
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }/*/ /*/
     }
 }
