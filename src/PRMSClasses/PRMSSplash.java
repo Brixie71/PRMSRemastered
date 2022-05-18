@@ -1,6 +1,7 @@
+// Package, sets the Directory path of the class and its Dependencies.
 
 package PRMSClasses;
-
+// Swing, IO, AWT, and util imports of the Java Program.
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -23,20 +24,31 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class PRMSSplash extends JFrame {
     
+    /* The Functions of this Class is Called by the Parent Class (PRMSLogin class) inside the Main Method before loading the Login Window.
+       Exception Handling (Try-Catch) is used in the Main Method to set the Speed of the Loading bar before and after it Appears. As well
+       as the Information that the program is trying to load along with the Percentage.
+    */
+    
+    // Component Declarations.
+    
     JPanel SplashBackground;
     JLabel CompanyLogo, BTSTitle, Status, ProgramName;
     JProgressBar LoadingBar;
     
     Font IronShark, Quicksand, Gepestev;
     
+    // Calling Method
     public PRMSSplash(){
         
         SetComponentLookAndFeel();
         
         SplashComponents();
         
+        setIconImage();
+        
     }
     
+    // Component Instantiations and Decorations. The UI (Java Swing) design of the class.
     private void SplashComponents() {
         
         // <editor-fold defaultstate="collapsed" desc="<<< JFrame Container.">
@@ -221,6 +233,7 @@ public class PRMSSplash extends JFrame {
 
     }
     
+    // Sets the Component Look and Feel ex. Nimbus, Windows, Default.
     private void SetComponentLookAndFeel() {
 
         try {
@@ -233,5 +246,10 @@ public class PRMSSplash extends JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }/*/ /*/
+    }
+    
+    // Sets the Icon of the JFrame and the TaskBar Icon of the Program, instead of a Java Icon.
+    private void setIconImage() {
+                setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("BTSLogo.png")));
     }
 }

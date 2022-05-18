@@ -1,5 +1,8 @@
+// Package, sets the Directory path of the class and its Dependencies.
+
 package PRMSClasses;
 
+// Swing, IO, AWT, SQL, and util imports of the Java Program.
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -41,7 +44,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class PRMSLogin extends JFrame {
 
-    // Java Swing Components Declarations.
+    // Components Declarations.
+    
     JPanel loginPane, loginBackground;
     JLabel loginTitle, personelPicture, DatabaseInfo, usernameText, passwordText, loginPaneBackground,
             companyLogo, companyName, cNameShadow, programName, pNameShadow;
@@ -56,13 +60,17 @@ public class PRMSLogin extends JFrame {
     // FRAME DRAGGER
     int xMouse;
     int yMouse;
-
+    
+    // Calling Method
     public PRMSLogin() {
         
         PRMSLoginComponents();
+        
+        setIconImage();
 
     }
 
+    // Component Instantiations and Decorations. The UI (Java Swing) design of the class.
     private void PRMSLoginComponents() {
 
         // Calling Method for Java Swing Components.
@@ -567,6 +575,7 @@ public class PRMSLogin extends JFrame {
 
     // CLASS FUNCTIONS //
     
+    // Closes the Entire Program. Default Close Operation is set to "JFrame.EXIT_ON_CLOSE".
     private void ExitButtonFunction(ActionEvent evt) {
 
         // CUSTOM EXIT BUTTON PROMP
@@ -598,18 +607,24 @@ public class PRMSLogin extends JFrame {
         }
     }
 
+    /* Minimized the JFrame Window. It is import static in PRMSMainWindow(Check on imports) used to minimize the PRMSMainWindow Class
+        in order to save memory.*/
     private void MinimizeButtonFunction(ActionEvent evt) {
 
         setState(PRMSLogin.ICONIFIED);
 
     }
 
+    // Method to Get Data from database when user enters his/her Username. 
     private void userInputFunction(ActionEvent evt) {
         
         GetDataFromDatabase();
 
     }
     
+    /* Gets the data that is stored from the Database and checks if the username and password is available in the database.
+       It can warn the user that the Username and Password is Incorrect or not available in the System. otherwise, If the user 
+       has an account, it will proceed into the Main Window. */
     private void GetDataFromDatabase(){
         
         Connection conn = DBConnection.connectDB();
@@ -671,6 +686,7 @@ public class PRMSLogin extends JFrame {
         
     }
 
+    // When the Cursor is focused on the Username Field, When you press the Enter Button, It will focus on the Password Field.
     private void userInputKeyPressed(KeyEvent evt) {
         int key = evt.getKeyCode();
         if (key == 10) {
@@ -682,6 +698,9 @@ public class PRMSLogin extends JFrame {
          */
     }
 
+    /* When the Login Button is Pressed, it will Either Warn the user that the Fields are empty. It is the Continuation of the Method
+       "GetDataFromDatabase(){}. but only focuses on whether the username or password fields are incorrect. Otherwise, This Proceeds 
+       in authenticating the user and proceeds into the Main Window.*/
     private void LoginButtonFunction(ActionEvent evt) {
 
         String username = userInput.getText();
@@ -703,6 +722,7 @@ public class PRMSLogin extends JFrame {
         }
     }
     
+    // Method in calling the Registration Window.
     private void registerButtonFunction(ActionEvent evt) {
         
         PRMSRegister Launch = new PRMSRegister();
@@ -710,6 +730,7 @@ public class PRMSLogin extends JFrame {
         
     }
 
+    // Authenticates the User when Username and Password is True and is available in the database. 
     private void LoginAuthentication(String username, String password) {
         Connection dbconn = DBConnection.connectDB();
         if (dbconn != null) {
@@ -822,7 +843,13 @@ public class PRMSLogin extends JFrame {
                                                 Please Check your JDBC Connector!""", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    
+    // Sets the Icon of the JFrame and the TaskBar Icon of the Program, instead of a Java Icon.
+    private void setIconImage() {
+                setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("BTSLogo.png")));
+    }
+    
+    // The First one to execute. This is the only class that has a Main Method. This is the Parent Class.
     public static void main(String[] args) throws IOException, LineUnavailableException, UnsupportedAudioFileException {
 
         try {

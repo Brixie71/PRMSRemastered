@@ -1,6 +1,7 @@
-
+// Package, sets the Directory path of the class and its Dependencies.
 package PRMSClasses;
 
+// Swing, IO, AWT, SQL, and util imports of the Java Program.
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -50,6 +51,8 @@ import net.proteanit.sql.DbUtils;
 
 public class PRMSPrint extends JFrame {
     
+    // Component Declarations.
+    
     JPanel PrintBackground, Document;
     
     JLabel  PrintLabel, PrintSearchLabel,
@@ -90,7 +93,7 @@ public class PRMSPrint extends JFrame {
     int xMouse;
     int yMouse;
     
-    
+    // Calling Method
     public PRMSPrint(){
         
         SetComponentLookAndFeel();
@@ -99,8 +102,11 @@ public class PRMSPrint extends JFrame {
         
         GetDataFromDatabase();
         
+        setIconImage();
+        
     }
     
+    // Component Instantiations and Decorations. The UI (Java Swing) design of the class.
     private void PrintComponents() {
         
         
@@ -1251,6 +1257,7 @@ public class PRMSPrint extends JFrame {
     
     // CLASS FUNCTIONS
     
+    /* Gets the data that is stored from the Database and Displays it into the JTable. */
     private void GetDataFromDatabase() {
         Connection dbconn = DBConnection.connectDB();
         String sqlQuery = "SELECT * FROM prmscriminalrecords";
@@ -1290,6 +1297,8 @@ public class PRMSPrint extends JFrame {
         }
     }
     
+    /* This method sets the JTable and the JScrollPane's Decoration Properties. at User click in the Row of Cell, it will display the
+       Record in the JTextField Above it as well as the Picture of the Person. It uses Mouse event */
     private void PoliceRecordsFunction(MouseEvent evt){
         
         PoliceDatabase.setCellSelectionEnabled(false);
@@ -1338,6 +1347,8 @@ public class PRMSPrint extends JFrame {
         
     }
     
+    /* This method sets the Function of the JTextField. as the user inputs the text, the row will be sorted based on the text inputted and hides the 
+       other records that doesn't include what the User has inputted. It uses Key Event. */
     private void SearchBarKeyPressed(KeyEvent evt) {
 
         DefaultTableModel table = (DefaultTableModel) PoliceDatabase.getModel();
@@ -1349,6 +1360,7 @@ public class PRMSPrint extends JFrame {
 
     }
     
+    /* This method sets the Function of the Clear Button. It Clears the Fields above the JTable where the Person's information is Displayed. */
     private void ClearButtonFunction(ActionEvent evt) {
         
         
@@ -1370,12 +1382,14 @@ public class PRMSPrint extends JFrame {
         
     }
     
+    // This Method set the Function of The Print Button. At Click, A popup window will Appear asking the user on the preferences of the PDF.
     private void PrintButtonFunction(ActionEvent evt){
         
         PrintRecord(Document);
         
     }
     
+    // This Method sets the Printing settings of the JPanel (THE DOCUMENT) that is Printed.
     private void PrintRecord(JPanel PDFCreator){
         
        // create printer job
@@ -1417,10 +1431,12 @@ public class PRMSPrint extends JFrame {
        }
     }
     
+    // This Method sets the Back Button function. (Disposes the JFrame Window)
     private void BackButtonFunction(ActionEvent evt){
         dispose();
     }   
     
+    // Sets the Component Look and Feel ex. Nimbus, Windows, Default.
     private void SetComponentLookAndFeel() {
 
         try {
@@ -1433,5 +1449,10 @@ public class PRMSPrint extends JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }/*/ /*/
+    }
+    
+    // Sets the Icon of the JFrame and the TaskBar Icon of the Program, instead of a Java Icon.
+    private void setIconImage() {
+                setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("BTSLogo.png")));
     }
 }

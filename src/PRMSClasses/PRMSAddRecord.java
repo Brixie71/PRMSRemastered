@@ -1,5 +1,7 @@
+// Package, sets the Directory path of the class and its Dependencies.
 package PRMSClasses;
 
+// Swing, IO, AWT, SQL, and util imports of the Java Program.
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,6 +23,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -40,10 +43,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PRMSAddRecord extends JFrame {
+    
+    // Component Declarations.
 
     JPanel AddRecordBackground;
 
-    JLabel AddRecordLabel, AddMugShot, LastNameLabel, FirstNameLabel, MiddleNameLabel, HomeAddressLabel, AgeLabel, GenderLabel, OriginLabel, DOALabel, DORLabel, ReasonListLabel;
+    JLabel AddRecordLabel, AddMugShot, LastNameLabel, FirstNameLabel, MiddleNameLabel, HomeAddressLabel, AgeLabel, GenderLabel, 
+            OriginLabel, DOALabel, DORLabel, ReasonListLabel;
 
     JTextField LastNameField, FirstNameField, MiddleNameField, HomeAddressField;
 
@@ -59,14 +65,18 @@ public class PRMSAddRecord extends JFrame {
     
     Font IronShark, Quicksand, Gepestev;
 
+    // Calling Method
     public PRMSAddRecord() {
         
         SetComponentLookAndFeel();
 
         RegisterComponents();
+        
+        setIconImage();
 
     }
 
+    // Component Instantiations and Decorations. The UI (Java Swing) design of the class.
     private void RegisterComponents() {
 
         // <editor-fold defaultstate="collapsed" desc="<<< Component Instantiations.">
@@ -722,6 +732,8 @@ public class PRMSAddRecord extends JFrame {
     }
 
     // PRMSAddRecord CLASS FUNCTIONS.
+    
+    // This uses a Exception Handling in getting a Picture.
     private void BrowsePictureButtonFunction(ActionEvent evt) {
         // USER PICTURE
         JFileChooser pictureChooser = new JFileChooser();
@@ -746,9 +758,10 @@ public class PRMSAddRecord extends JFrame {
         } else if (fileState == JFileChooser.CANCEL_OPTION) {
             JOptionPane.showMessageDialog(this, "No Image Selected! Please Fill up the form properly.", "POLICE DATABASE", JOptionPane.ERROR_MESSAGE);
         }
-    }
+    }     
 
-    public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date) {
+    // Converts the Util date into SQL date that is used in the Database.
+    public static java.sql.Date convertUtilDateToSqlDate(Date date) {
 
         if (date != null) {
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -757,8 +770,11 @@ public class PRMSAddRecord extends JFrame {
 
         return null;
 
-    }
+    } 
 
+    /* This Method adds the Records that were inputted by the User. as well as establishes the connection between the 
+       Class and the Database. If the Forms are Complete, the program will show a Dialog box showing that the record
+       has been added into the database. */
     private void AddRecordToDatabaseFunction(String Lname, String Fname, String Mname, String rAddress) throws FileNotFoundException {
 
         java.util.Date date1 = DateOfArrestChooser.getDate();
@@ -809,7 +825,11 @@ public class PRMSAddRecord extends JFrame {
                     + "Please Check your JDBC Connector!", "POLICE DATABASE", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    
+    
+    /* This sets the Function of the JButton where if the JTextfields are empty, the program will show a Dialog box warning the user. 
+       that the form is incomplete either because the Fields, Last name, Middle name, First name, Home Address and the ImagePath is null or has no data
+       inputted. */
     private void AddRecordButtonFunction(ActionEvent evt) {
         //NAME
         String Lname = LastNameField.getText();
@@ -828,6 +848,7 @@ public class PRMSAddRecord extends JFrame {
         }
     }
 
+    // Clears all of the JTextField and JLabels that are used by the user.
     private void ClearFieldsButtonFunction(ActionEvent evt) {
 
         LastNameField.setText("");
@@ -846,9 +867,12 @@ public class PRMSAddRecord extends JFrame {
         ImageIcon myPicture = new ImageIcon(resizeImage);
         AddMugShot.setIcon(myPicture);
     }
-
+    
+    /* Sets that the ImagePath of the JLabel is null, meaning it is incomplete, if user sets the Image path by browsing the Image (Method: 
+       BrowsePictureButtonFunction), it will set the Imagepath by that picture and will proceed in adding a record. */
     String ImagePath = null;
 
+    // Fits the Image inside the JLabel (2x2).
     public ImageIcon ResizePicture(String picPath) {
 
         ImageIcon ProfilePicture = new ImageIcon(picPath);
@@ -858,10 +882,12 @@ public class PRMSAddRecord extends JFrame {
         return myPicture;
     }
 
+    // Disposes the Window.
     private void BackButtonFunction(ActionEvent evt) {
         dispose();
     }
     
+    // Sets the Component Look and Feel ex. Nimbus, Windows, Default.
     private void SetComponentLookAndFeel() {
 
         try {
@@ -874,5 +900,10 @@ public class PRMSAddRecord extends JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }/*/ /*/
+    }
+    
+    // Sets the Icon of the JFrame and the TaskBar Icon of the Program, instead of a Java Icon.
+    private void setIconImage() {
+                setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("BTSLogo.png")));
     }
 }

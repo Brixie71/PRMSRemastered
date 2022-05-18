@@ -1,6 +1,7 @@
-
+// Package, sets the Directory path of the class and its Dependencies.
 package PRMSClasses;
 
+// Swing, IO, AWT, SQL, and util imports of the Java Program.
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,7 +9,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -44,6 +44,8 @@ import net.proteanit.sql.DbUtils;
 
 public class PRMSRegister extends JFrame {
     
+    // Component Declarations
+    
     JPanel RegisterBackground;
     
     JLabel RegTitleLabel, RegPoliceID, RegPolicePicture, RegFirstNameLabel, RegMiddleNameLabel, RegLastNameLabel,
@@ -70,6 +72,7 @@ public class PRMSRegister extends JFrame {
     int xMouse;
     int yMouse;
     
+    // Calling Method
     public PRMSRegister(){
         
         SetComponentLookAndFeel();
@@ -78,8 +81,11 @@ public class PRMSRegister extends JFrame {
         
         GetDataFromDatabase();
         
+        setIconImage();
+        
     }
     
+    // // Component Instantiations and Decorations. The UI (Java Swing) design of the class.
     private void RegisterComponents() {
         
         // <editor-fold defaultstate="collapsed" desc="<<< JFrame Container.">
@@ -917,14 +923,18 @@ public class PRMSRegister extends JFrame {
     
     // PRMSRegister CLASS FUNCTIONS
     
+    // This Method sets the Back Button function. (Disposes the JFrame Window)
     private void RegBackButtonFunction(ActionEvent evt) {
         
         dispose();
         
     }
     
+    /* Sets that the ImagePath of the JLabel is null, meaning it is incomplete, if user sets the Image path by browsing the Image (Method: 
+       BrowsePictureButtonFunction), it will set the Imagepath by that picture and will proceed in adding a record. */
     String ImagePath = null;
     
+    // Fits the Image inside the JLabel (2x2).
     public ImageIcon ResizePicture(String picPath) {
 
         ImageIcon ProfilePicture = new ImageIcon(picPath);
@@ -935,6 +945,7 @@ public class PRMSRegister extends JFrame {
         
     }
     
+    // This uses a Exception Handling in getting a Picture.
     private void RegBrowseButtonFunction(ActionEvent evt) {
         
         // USER PICTURE 
@@ -963,6 +974,7 @@ public class PRMSRegister extends JFrame {
         
     }
     
+    /* Gets the data that is stored from the Database and Displays it into the JTable. */
     private void GetDataFromDatabase(){
         
         Connection dbconn = DBConnection.connectDB();
@@ -1008,6 +1020,9 @@ public class PRMSRegister extends JFrame {
             }
     }
     
+    /* This sets the Function of the "Create Account" JButton where if the JTextfields are empty, the program will show a Dialog box warning the user. 
+       that the form is incomplete either because the Fields, Last name, Middle name, First name, Home Address and the ImagePath is null or has no data
+       inputted. It is associated with the method "createAccount()" */
     private void RegCreateAccountButtonFunction(ActionEvent evt) {
         
         String fName = RegFNField.getText();
@@ -1044,8 +1059,10 @@ public class PRMSRegister extends JFrame {
         
     }
     
-    // CREATE ACCOUNT DATABASE
-    private void createAccount(String fName, String mName, String lName, String userAge, String conNum, String userAddress, String polStation, String polRank, String username, String password) throws FileNotFoundException, SQLException {
+    // Creates a new User Data on the Database based on the user input in the Fields.
+    private void createAccount(String fName, String mName, String lName, String userAge, String conNum, 
+            String userAddress, String polStation, String polRank, String username, String password) 
+            throws FileNotFoundException, SQLException {
         Connection dbconn = DBConnection.connectDB();
         if(dbconn != null){ 
             try {
@@ -1093,8 +1110,10 @@ public class PRMSRegister extends JFrame {
         }     
     }
     
-    // UPDATE DATABASE
-    private void updateAccount(String fName, String mName, String lName, String userAge, String conNum, String userAddress, String polStation, String polRank, String username, String password, String userID) throws FileNotFoundException {
+    // Updates the User Data on the Database based on the user input in the Fields.
+    private void updateAccount(String fName, String mName, String lName, String userAge, String conNum, 
+            String userAddress, String polStation, String polRank, String username, String password, String userID) 
+            throws FileNotFoundException {
         Connection dbconn = DBConnection.connectDB();
         if(dbconn != null){ 
             try {
@@ -1147,7 +1166,9 @@ public class PRMSRegister extends JFrame {
         }     
     }
     
-    
+    /* This sets the Function of the "Update Account" JButton where if the JTextfields are empty, the program will show a Dialog box warning the user. 
+       that the form is incomplete either because the Fields, Last name, Middle name, First name, Home Address and the ImagePath is null or has no data
+       inputted. It is associated with the method "updateAccount()" */
     private void RegUpdateAccountButtonFunction(ActionEvent evt) {
         
         String fName = RegFNField.getText();
@@ -1186,6 +1207,8 @@ public class PRMSRegister extends JFrame {
         
     }
     
+    /* This sets the Function of the "Delete Button" JButton where it deletes the selected User in the JTable (RegAccountTableFunction()) and Updates 
+       the database.*/
     private void RegDeleteAccountButtonFunction(ActionEvent evt) {
         
         String fName = RegFNField.getText();
@@ -1254,6 +1277,7 @@ public class PRMSRegister extends JFrame {
         }
     }
     
+    // Clears all of the JTextField and JLabels that are used by the user.
     private void RegClearFieldsButtonFunction(ActionEvent evt) {
         
         RegFNField.setText("");
@@ -1276,6 +1300,8 @@ public class PRMSRegister extends JFrame {
         
     }
     
+    /* Sets the Function of the JTable where if the user Clicks the data displayed on the Table it will fill up the Forms in the Registration.
+       Here the user can Update and Delete Specific data in the Database using the Program.*/
     public void RegAccountTableFunction(MouseEvent evt) {
         
         RegAccountTable.setCellSelectionEnabled(false);
@@ -1322,6 +1348,7 @@ public class PRMSRegister extends JFrame {
         
     }
     
+    // Sets the Component Look and Feel ex. Nimbus, Windows, Default.
     private void SetComponentLookAndFeel() {
 
         try {
@@ -1334,5 +1361,10 @@ public class PRMSRegister extends JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }/*/ /*/
+    }
+    
+    // Sets the Icon of the JFrame and the TaskBar Icon of the Program, instead of a Java Icon.
+    private void setIconImage() {
+                setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("BTSLogo.png")));
     }
 }
