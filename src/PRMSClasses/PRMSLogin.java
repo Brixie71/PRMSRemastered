@@ -916,7 +916,7 @@ public class PRMSLogin extends JFrame {
         try {
 
             Thread.sleep(2 * 1000);
-            Execute.setVisible(false);
+//            Execute.setVisible(false);
             Launch.setTitle("Brion Tactical Systems : PRMS DATABASE");
             Launch.setVisible(true);
             Launch.setOpacity(0.98f);
