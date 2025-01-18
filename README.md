@@ -3,7 +3,7 @@ This is a completely different project manually coded without the Java Swing Bui
 The PRMS Remastered is a visual improvement of the original Police Record Management System. Still similar to the original Software. 
 
 # Role
-I was the Lead developer of the software from the Front-End to the BackEnd Database.
+I was the Lead developer of the software from the Front-End to the BackEnd Database. Improvements of the UI via Manual Coding of the Graphical User Interface Components.
 
 # Learnings 
 - Manual Coding of Graphical User Interface
